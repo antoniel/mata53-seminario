@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
 This is BibTeX, Version 0.99d
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
@@ -46,3 +48,62 @@ warning$ -- 0
 while$ -- 8
 width$ -- 5
 write$ -- 45
+=======
+This is BibTeX, Version 0.99d (TeX Live 2024)
+=======
+This is BibTeX, Version 0.99d
+>>>>>>> 09b2ce0 ()
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: plain.bst
+Reallocating 'name_of_file' (item size: 1) to 13 items.
+Database file #1: Bibliografia.bib
+You've used 3 entries,
+            2118 wiz_defined-function locations,
+            514 strings with 4383 characters,
+and the built_in function-call counts, 677 in all, are:
+= -- 64
+> -- 27
+< -- 0
++ -- 11
+- -- 8
+* -- 32
+:= -- 133
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 12
+chr.to.int$ -- 0
+cite$ -- 3
+duplicate$ -- 31
+empty$ -- 54
+format.name$ -- 8
+if$ -- 134
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 3
+newline$ -- 18
+num.names$ -- 6
+pop$ -- 16
+preamble$ -- 1
+purify$ -- 10
+quote$ -- 0
+skip$ -- 19
+stack$ -- 0
+substring$ -- 15
+swap$ -- 3
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 10
+warning$ -- 0
+<<<<<<< HEAD
+while$ -- 16
+width$ -- 9
+write$ -- 82
+>>>>>>> 514f4f3 (adding stuff)
+=======
+while$ -- 6
+width$ -- 4
+write$ -- 34
+>>>>>>> 09b2ce0 ()

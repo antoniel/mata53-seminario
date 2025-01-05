@@ -1,0 +1,510 @@
+%  #region preâmbulo
+\documentclass[12pt, a4paper]{report}
+\usepackage[top=3cm,left=3cm,right=2cm,bottom=2cm]{geometry}
+\linespread{1.3}
+\setlength{\parindent}{1.25cm}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multicol}
+\usepackage[normalem]{ulem}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{fancybox}
+\usepackage[pdfstartview=FitH]{hyperref}
+\usepackage{subfigure}
+\bibliographystyle{plain}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{float}
+
+
+\graphicspath{{Figuras/}}
+
+\renewcommand{\theenumii}{\alph{enumii}}
+\DeclareMathOperator{\sen}{sen}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\arctg}{arctg}
+\DeclareMathOperator{\cotg}{cotg}
+\DeclareMathOperator{\agm}{agm}
+
+\newtheorem{thm}{Teorema}[section]
+\newtheorem{dfn}{Definição}[section]
+\newtheorem{prob}{Problema}[section]
+\newtheorem{cor}{Corolário}[section]
+\newtheorem{prop}{Proposição}[section]
+\newtheorem{lem}{Lema} [section]
+
+\newcounter{contar}
+%  #endregion preâmbulo
+
+% #region Variáveis 
+\newcommand{\nomeUniversidade}{Universidade Federal da Bahia}
+\newcommand{\nomeInstituto}{Instituto de Computação}
+\newcommand{\nomeCurso}{MATA53 - Teoria dos grafos}
+\newcommand{\nomeProfessor}{Islame Felipe da Costa Fernandes}
+\newcommand{\nomeGrupo}{\sc{\large{Antoniel Magalhães}} \\
+\sc{\large{João Leahy}} \\
+\sc{\large{Luis Felipe}}}
+\newcommand{\titulo}{\sc{\Large{Relatório: Problema do caixeiro viajante com bônus e passageiros}}}
+% #endregion Variáveis 
+
+\begin{document}
+
+% #region capa
+\pagestyle{empty}
+\begin{center}
+\includegraphics[height=2.5cm]{UFBA.jpg}
+\hspace{2cm}
+\end{center}
+
+\begin{center}
+\sc{\large{\nomeUniversidade}} \\
+\sc{\large{\nomeInstituto}} \\
+\sc{\small{\nomeCurso}} \\
+
+\vspace{4cm}
+
+\titulo
+
+\vspace{4.5cm}
+
+\nomeGrupo
+
+
+\vspace{5.5cm}
+
+\textbf{Salvador - Bahia} \\
+\today
+\end{center}
+% #endregion capa
+
+% #region folha de rosto
+\newpage
+\begin{center}
+\titulo
+
+\vspace{4cm}
+
+\nomeGrupo
+\end{center}
+
+\vspace{4cm}
+
+\begin{flushright}
+\begin{minipage}{8.6cm}
+Estudo dirigido entregue ao professor \nomeProfessor\ 
+como método avaliativo da disciplina \nomeCurso
+
+
+\end{minipage}
+\end{flushright}
+ 
+\vspace{8cm}
+
+
+\begin{center}
+\textbf{Salvador - Bahia} \\
+\today
+\end{center}
+
+% #endregion folha de rosto
+
+% #region Índice
+\newpage
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+\setcounter{page}{1}
+\pagestyle{plain}
+% #endregion Índice
+
+
+\section*{Introdução}
+
+O \textbf{Problema do Caixeiro Viajante com Coleta Opcional de Bônus e Passageiros (TSP-OBP)}, também referenciado na literatura como \textbf{Problema do Caixeiro Viajante com Coleta de Prêmios (PCVCP)}, é uma extensão do clássico Problema do Caixeiro Viajante (PCV). Este problema combina a necessidade de coletar \textbf{bônus ou prêmios} em determinados locais, o transporte de \textbf{passageiros} e a otimização de rotas, excluindo o tempo de coleta, o que o torna relevante para aplicações como \textbf{logística, sistemas de entrega e serviços de transporte compartilhado}. Estudos como o de \textbf{Lopes Filho \cite{lopesfilho2019}} e \textbf{Carvalho \cite{carvalho2022}} destacam a importância do TSP-OBP e suas variantes na otimização de recursos e melhoria da eficiência operacional em sistemas complexos. Embora a tese de Lopes Filho \cite{lopesfilho2019} inclua o tempo de coleta, o presente trabalho foca na variante sem esta restrição.
+
+A complexidade inerente ao TSP-OBP advém da necessidade de equilibrar objetivos conflitantes: \textbf{maximizar a coleta de bônus ou prêmios, minimizar a distância total percorrida e satisfazer as restrições de transporte de passageiros}, tais como a capacidade do veículo. Esta natureza multiobjetivo, juntamente com as restrições combinatórias, torna o problema \textbf{NP-difícil}, requerendo abordagens computacionais sofisticadas para sua resolução.
+
+No contexto atual, onde a otimização de recursos e a eficiência operacional são cruciais, o TSP-OBP emerge como uma ferramenta essencial para modelar e resolver problemas complexos de roteamento. As aplicações do TSP-OBP abrangem desde sistemas de entrega com incentivos até serviços de transporte sob demanda, onde a flexibilidade na coleta de bônus e a gestão eficiente de passageiros são fundamentais. Esta modelagem é relevante em situações de logística, transporte de pessoas,  e outros sistemas de roteamento que necessitem de coleta seletiva com passageiros.
+
+Este relatório tem como objetivo apresentar uma análise do problema, incluindo suas variantes, a modelagem matemática, os métodos de resolução (heurísticas, meta-heurísticas, algoritmos híbridos) e suas aplicações práticas. Além disso, exploraremos as contribuições teóricas e práticas que o TSP-OBP oferece para a pesquisa em otimização combinatória, com foco na variante sem tempo de coleta. A estrutura do trabalho está organizada para proporcionar uma compreensão progressiva do tema, desde os fundamentos teóricos até as aplicações e perspectivas futuras.
+
+
+\section{Contextualização e Relevância}
+
+O TSP-OBP surge como uma resposta natural à evolução dos sistemas de transporte e logística modernos, onde a simples otimização de rotas já não é suficiente para atender às demandas complexas do mercado. A incorporação de bônus e passageiros ao problema clássico do caixeiro viajante reflete a necessidade de modelos mais sofisticados, capazes de capturar a realidade multifacetada dos sistemas de transporte contemporâneos.
+
+Em termos práticos, o problema encontra aplicações em diversos cenários:
+\begin{itemize}
+    \item Sistemas de compartilhamento de viagens, onde motoristas podem coletar passageiros e bônus ao longo de suas rotas;
+    \item Serviços de entrega com incentivos por coleta ou entrega em determinados pontos;
+    \item Planejamento de roteiros turísticos com pontos de interesse prioritários;
+    \item Otimização de rotas para veículos de transporte público sob demanda.
+\end{itemize}
+
+\section{Objetivos e Escopo}
+O presente trabalho tem como objetivos específicos:
+\begin{itemize}
+    \item Analisar a estrutura matemática do TSP-OBP e suas propriedades fundamentais;
+    \item Investigar os métodos de resolução existentes e suas aplicabilidades;
+    \item Avaliar o impacto das diferentes abordagens na qualidade das soluções obtidas;
+    \item Discutir as implicações práticas e teóricas das variantes do problema;
+\end{itemize}
+
+O escopo do trabalho abrange desde a fundamentação teórica até as aplicações práticas. São consideradas tanto as abordagens exatas quanto as heurísticas, bem como as implicações de diferentes estruturas de dados e algoritmos na eficiência das soluções propostas.
+
+\chapter{Fundamentação Teórica}
+
+\section{Problema do Caixeiro Viajante (TSP)}
+O \textbf{Problema do Caixeiro Viajante (PCV)}, ou Traveling Salesman Problem (TSP), consiste em encontrar o ciclo hamiltoniano de menor custo em um grafo ponderado, onde o ciclo visita cada vértice (cidade) exatamente uma vez e retorna ao vértice de origem \cite{goldbarg2012}. Este problema é um dos clássicos da otimização combinatória e tem sido amplamente estudado na teoria da computação devido à sua complexidade e aplicabilidade. Como apontam \cite{goldbarg2012, lopesfilho2019}, a introdução de variáveis adicionais como \textbf{bônus} e \textbf{passageiros}, no \textbf{Problema do Caixeiro Viajante com Coleta Opcional de Bônus e Passageiros (TSP-OBP)}, aumenta significativamente a complexidade do problema original, exigindo novas abordagens de modelagem e solução.
+
+Matematicamente, o TSP pode ser representado como um grafo completo $G = (N, M)$, onde $N$ é o conjunto de vértices (cidades) e $M$ é o conjunto de arestas (conexões entre cidades). Cada aresta $(i, j) \in M$ possui um custo associado $c_{ij}$, que representa a distância ou o tempo de viagem entre as cidades $i$ e $j$ \cite{goldbarg2012}. O objetivo é encontrar um \textbf{ciclo hamiltoniano} de custo mínimo, ou seja, um caminho que visite todos os vértices exatamente uma vez e retorne ao ponto inicial. 
+
+A natureza \textbf{NP-difícil} do TSP implica que não existe um algoritmo conhecido que possa resolver o problema em tempo polinomial para todas as instâncias \cite{goldbarg2012, carnielli}.  Essa característica fundamental do problema base apresenta desafios significativos para sua resolução, que são amplificados quando consideramos extensões como o TSP-OBP, onde a coleta de bônus e o transporte de passageiros introduzem novas dimensões de complexidade combinatória e decisões a serem tomadas \cite{lopesfilho2019, carvalho2022}. O livro de Goldbarg detalha vários algoritmos para o PCV, incluindo heurísticas e métodos de aproximação, que podem servir como ponto de partida para a compreensão de problemas mais complexos, como o TSP-OBP.
+
+\section{Extensões do TSP}
+As extensões do TSP, como o TSP com Bônus e o TSP-OBP, introduzem novas dimensões ao problema original, exigindo a consideração de múltiplos objetivos e restrições. Essas variações são fundamentais para capturar a complexidade de cenários reais, onde decisões de roteamento devem equilibrar custos, prêmios e restrições de passageiros \cite{carvalho2022}.
+
+Entre as principais extensões, podemos destacar:
+
+\begin{itemize}
+    \item \textbf{TSP com Prêmios (PTSP)}: Incorpora valores de bônus associados à visita de determinados vértices;
+    \item \textbf{TSP com Janelas de Tempo (TSPTW)}: Adiciona restrições temporais para a visita aos vértices;
+    \item \textbf{TSP com Coleta e Entrega (PDTSP)}: Inclui operações de coleta e entrega de itens entre vértices;
+    \item \textbf{TSP com Múltiplos Veículos (mTSP)}: Considera uma frota de veículos para realizar as visitas.
+\end{itemize}
+
+O TSP-OBP combina elementos dessas diferentes variantes, incorporando tanto aspectos de coleta de bônus quanto o gerenciamento de passageiros, o que resulta em um problema significativamente mais complexo.
+
+\section{Definição Formal do Problema}
+O TSP-OBP pode ser formalizado como um problema de otimização em grafos, onde o objetivo é maximizar a coleta de bônus e minimizar o custo total de deslocamento, respeitando as restrições de passageiros. Esta definição formal permite a aplicação de técnicas avançadas de otimização para encontrar soluções eficientes.
+
+Formalmente, o TSP-OBP pode ser definido como:
+
+\begin{itemize}
+    \item \textbf{Grafo}: $G = (V, E)$, onde $V$ é o conjunto de vértices e $E$ o conjunto de arestas;
+    \item \textbf{Custos}: $c_{ij}$ representa o custo de viagem entre os vértices $i$ e $j$;
+    \item \textbf{Bônus}: $b_i$ é o valor do bônus associado ao vértice $i \in V$;
+    \item \textbf{Passageiros}: P é o conjunto de passageiros, onde cada p $\in$ P possui:
+    \begin{itemize}
+        \item origem $o_p$ e destino $d_p$
+        \item janela de tempo [$t_{p\_inicio}$, $t_{p\_fim}$] para embarque
+        \item tempo máximo de viagem $t_{max\_p}$
+    \end{itemize}
+\end{itemize}
+
+A função objetivo do TSP-OBP pode ser expressa como uma combinação ponderada entre a maximização dos bônus coletados e a minimização dos custos de viagem:
+
+\begin{equation}
+    \text{max} \sum_{i \in V} b_i x_i - \alpha \sum_{(i,j) \in E} c_{ij} y_{ij}
+\end{equation}
+
+onde $x_i$ é uma variável binária que indica se o vértice $i$ é visitado, $y_{ij}$ indica se a aresta $(i,j)$ é utilizada na solução, e $\alpha$ é um parâmetro de balanceamento entre os objetivos \cite{lopesfilho2019}.
+
+\section{Complexidade Computacional}
+A análise de complexidade do TSP-OBP revela que o problema é NP-difícil, uma vez que contém o TSP clássico como caso especial. Além disso, a adição de restrições de passageiros e bônus introduz novas dimensões de complexidade, tornando o problema ainda mais desafiador do ponto de vista computacional \cite{carvalho2022}.
+
+Alguns aspectos que contribuem para a complexidade do problema incluem:
+
+\begin{itemize}
+    \item Natureza combinatória da seleção de vértices para visita;
+    \item Interdependência entre as decisões de roteamento e coleta de bônus;
+    \item Restrições temporais e de capacidade relacionadas aos passageiros;
+    \item Necessidade de coordenação entre múltiplos objetivos conflitantes.
+\end{itemize}
+
+Esta complexidade inerente motiva o desenvolvimento de diferentes abordagens de solução, desde métodos exatos para instâncias pequenas até heurísticas e metaheurísticas para problemas de maior escala.
+
+\chapter{Modelagem Matemática}
+
+\section{Variáveis de Decisão}
+A modelagem matemática do TSP-OBP envolve a definição de variáveis de decisão que capturam a complexidade do problema. Além das variáveis tradicionais do TSP, o TSP-OBP requer a consideração de variáveis que representam a coleta de bônus e o transporte de passageiros. Este aumento na complexidade demanda o uso de algoritmos avançados para encontrar soluções eficientes \cite{carvalho2022}.
+
+As principais variáveis de decisão do modelo são:
+
+\begin{itemize}
+    \item $x_{ij}$: Variável binária que indica se a aresta (i,j) é utilizada na solução
+    \begin{equation}
+        x_{ij} = \begin{cases}
+            1, \text{ se o arco (i,j) é utilizado na rota} \\
+            0, \text{ caso contrário}
+        \end{cases}
+    \end{equation}
+
+    \item $y_i$: Variável binária que indica se o vértice i é visitado
+    \begin{equation}
+        y_i = \begin{cases}
+            1, \text{ se o vértice i é visitado} \\
+            0, \text{ caso contrário}
+        \end{cases}
+    \end{equation}
+
+    \item $t_i$: Variável contínua que representa o instante de chegada no vértice i
+
+    \item $p_{ik}$: Variável binária que indica se o passageiro k está no veículo ao visitar o vértice i
+\end{itemize}
+
+\section{Função Objetivo}
+A função objetivo do TSP-OBP é maximizar a soma dos bônus coletados e minimizar o custo total de viagem. Esta função deve ser cuidadosamente balanceada para garantir que as soluções propostas sejam viáveis e otimizadas em termos de custo-benefício.
+
+A formulação matemática da função objetivo pode ser expressa como:
+
+\begin{equation}
+    \text{max} \sum_{i \in V} b_i y_i - \alpha \sum_{(i,j) \in E} c_{ij} x_{ij}
+\end{equation}
+
+onde:
+\begin{itemize}
+    \item $b_i$ é o valor do bônus associado ao vértice i
+    \item $c_{ij}$ é o custo de viagem entre os vértices i e j
+    \item $\alpha$ é o parâmetro de balanceamento entre bônus e custos
+\end{itemize}
+
+\section{Restrições de Fluxo}
+\begin{align}
+    \sum_{j \in V} x_{ij} &= y_i & \forall i \in V \label{eq:fluxo_saida} \\
+    \sum_{i \in V} x_{ij} &= y_j & \forall j \in V \label{eq:fluxo_entrada}
+\end{align}
+
+A \textbf{Equação \eqref{eq:fluxo_saida}} garante que, para cada vértice $i$, se ele está na solução ($y_i=1$), então existe uma aresta saindo de $i$. Já a \textbf{Equação \eqref{eq:fluxo_entrada}} assegura que, se o vértice $j$ está na solução ($y_j=1$), então há uma aresta chegando em $j$. Essas restrições são fundamentais para garantir a continuidade da rota.
+
+Essas restrições são chamadas de \textbf{restrições de atribuição} \cite{lopesfilho2019,carvalho2022}. As variáveis $x_{ij}$ são \textbf{binárias}, indicando se a aresta $(i,j)$ faz parte da rota. As variáveis $y_i$ também são \textbf{binárias}, representando se o vértice $i$ está na rota ou não.
+
+% #region restricao_conectividade
+\section{Restrições de Conectividade}
+
+\subsection*{Eliminação de Subciclos com Miller-Tucker-Zemlin (MTZ)}
+Para garantir que a solução seja um único ciclo Hamiltoniano, e não múltiplos subciclos desconexos, utilizamos as restrições propostas por Miller, Tucker e Zemlin (MTZ). Estas restrições são formuladas como:
+\begin{equation}
+    u_i - u_j + n x_{ij} \leq n-1 \quad \forall i,j \in V, i \neq j
+\end{equation}
+onde:
+\begin{itemize}
+    \item $u_i$ é uma variável auxiliar \textbf{inteira} que representa a ordem de visita do vértice $i$ na rota.
+    \item $n$ representa o número total de vértices no grafo.
+     \item $x_{ij}$ é uma variável \textbf{binária} que indica se a aresta que conecta diretamente o vértice $i$ ao vértice $j$ faz parte da solução. Se $x_{ij} = 1$, a aresta está na rota; caso contrário, $x_{ij} = 0$.
+    \item $V$ representa o conjunto de todos os vértices no grafo.
+\end{itemize}
+
+\subsection*{Explicação Detalhada}
+\noindent O objetivo principal dessas restrições é \textbf{eliminar a formação de subciclos} que não incluem todos os vértices do grafo. A ideia central é que, se um ciclo Hamiltoniano é formado, os valores de $u_i$ devem representar uma sequência coerente de visitas aos vértices.
+
+% #endregion restricao_conectividade
+
+\subsection{Restrições de Passageiros}
+As restrições de passageiros visam garantir a viabilidade e a conformidade do roteiro em relação aos passageiros e suas demandas.
+
+\begin{itemize}
+    \item \textbf{Restrição de Atendimento Único:}
+    \begin{equation}
+        \sum_{i \in V} p_{ik} \leq 1 \quad \forall k \in P
+    \end{equation}
+    Essa restrição garante que cada passageiro $k$ no conjunto de passageiros $P$ seja atendido no máximo uma vez. A variável binária $p_{ik}$ indica se o passageiro $k$ foi embarcado no vértice $i$. A soma de todas as localizações de embarque de um passageiro deve ser menor ou igual a 1, garantindo que um passageiro não será embarcado em mais de um vértice.
+
+    \item \textbf{Restrição de Tempo de Chegada (Sequência Temporal):}
+    \begin{equation}
+        t_i + s_i + c_{ij} - M(1-x_{ij}) \leq t_j \quad \forall i,j \in V
+    \end{equation}
+    Essa restrição assegura a \textbf{sequência temporal} da rota, onde:
+    \begin{itemize}
+        \item $t_i$ é o tempo de chegada no vértice $i$.
+        \item $s_i$ é o tempo de serviço ou coleta no vértice $i$.
+        \item $c_{ij}$ é o tempo de deslocamento da aresta entre o vértice $i$ e o vértice $j$.
+        \item $x_{ij}$ é uma variável binária que indica se a aresta $(i, j)$ faz parte da rota.
+         \item $M$ é uma constante suficientemente grande.
+    \end{itemize}
+    Se a aresta $(i, j)$ é utilizada ($x_{ij} = 1$), a restrição garante que o tempo de chegada no vértice $j$ ($t_j$) seja maior ou igual ao tempo de chegada no vértice $i$ ($t_i$), somado ao tempo de serviço em $i$ ($s_i$) e ao tempo de deslocamento de $i$ para $j$ ($c_{ij}$).  O termo $M(1-x_{ij})$ desativa a restrição caso a aresta ($i,j$) não seja utilizada ($x_{ij} = 0$). Essa restrição é similar à utilizada para eliminar subciclos.
+
+     \item \textbf{Restrição de Janela de Tempo - Limite Inferior:}
+    \begin{equation}
+        t_i \geq e_i \quad \forall i \in V
+    \end{equation}
+    Essa restrição garante que o tempo de chegada no vértice $i$ ($t_i$) deve ser maior ou igual ao limite inferior da janela de tempo do vértice $i$ ($e_i$). Ela assegura que o serviço em um vértice ou embarque de um passageiro ocorra depois de um determinado tempo limite.
+
+    \item \textbf{Restrição de Janela de Tempo - Limite Superior:}
+     \begin{equation}
+        t_i \leq l_i \quad \forall i \in V
+    \end{equation}
+    Essa restrição garante que o tempo de chegada no vértice $i$ ($t_i$) não deve ultrapassar o limite superior da janela de tempo do vértice $i$ ($l_i$). Ela assegura que o serviço em um vértice ou embarque de um passageiro em um vértice ocorra antes de um determinado tempo limite. Combinadas, as restrições de janela de tempo (limite inferior e superior) garantem que o serviço ou embarque ocorram dentro de um intervalo de tempo aceitável para o vértice $i$.
+\end{itemize}
+
+\textbf{Variáveis e Parâmetros:}
+
+\begin{itemize}
+    \item  $s_i$: Tempo de serviço/coleta no vértice $i$.
+    \item $e_i$: Limite inferior da janela de tempo para o vértice $i$.
+    \item  $l_i$: Limite superior da janela de tempo para o vértice $i$.
+    \item  $M$: Constante suficientemente grande.
+     \item $p_{ik}$: Variável binária que indica se o passageiro $k$ foi embarcado no vértice $i$.
+    \item $t_i$: Tempo de chegada no vértice $i$.
+      \item $c_{ij}$: Custo ou tempo de deslocamento entre os vértices $i$ e $j$.
+    \item $x_{ij}$: Variável binária que indica se a aresta $(i, j)$ faz parte da rota.
+      \item $P$: Conjunto de passageiros.
+    \item $V$: Conjunto de vértices.
+\end{itemize}
+
+\chapter{Métodos de Resolução}
+
+\section{Introdução}
+Para abordar o problema de forma acessível e eficaz, optou-se por utilizar dois métodos principais: \textbf{GRASP (Greedy Randomized Adaptive Search Procedure)} e \textbf{Atribuição Heurística de Passageiros}. Estes métodos foram escolhidos por sua simplicidade conceitual e capacidade de gerar soluções de alta qualidade em tempo computacional reduzido.
+
+\section{Métodos Utilizados}
+
+\section*{GRASP (Greedy Randomized Adaptive Search Procedure)}
+O GRASP é uma meta-heurística com duas fases principais: uma fase de construção semi-gulosa e uma fase de busca local. Seu objetivo é equilibrar a \textbf{exploração} (buscar soluções diversas) e a \textbf{intensificação} (refinar as soluções mais promissoras), de modo a produzir boas soluções para problemas de otimização combinatória em um tempo razoável.
+
+\subsection*{Fase de Construção Semi-Gulosa}
+
+A fase de construção do GRASP gera uma solução inicial de forma rápida, misturando elementos gulosos e aleatoriedade controlada. No contexto do problema de roteamento com bônus (PCVP-BoTc), isso envolve decidir em cada passo como construir uma rota que considere (ou não) passageiros em função do ganho (bônus) e do custo (distância e tempo) para inseri-los.
+
+\subsubsection*{Lista de Candidatos (LCD)}
+\begin{itemize}
+\item \textbf{Composição}: A LCD é formada por todos os vértices que podem ser adicionados à rota sem violar restrições de capacidade e tempo, incluindo passageiros (para coleta/entrega) e pontos obrigatórios (por exemplo, ponto inicial).
+\item \textbf{Avaliação de cada vértice candidato}: Para cada vértice $i$ que pode seguir o vértice atual $j$, definem-se duas opções de custo:
+\begin{align*}
+D1_{ij} &= c_{ij} + c_{j1} - b_j \quad &\text{(incluindo o bônus)},\
+D2_{ij} &= c_{ij} + c_{j1} \quad &\text{(sem considerar o bônus)}.
+\end{align*}
+Aqui, $c_{ij}$ é o custo de ir de $i$ a $j$, $c_{j1}$ o custo de ir de $j$ de volta ao ponto inicial, e $b_j$ o bônus do vértice $j$.
+\end{itemize}
+
+\subsubsection*{Lista Restrita de Candidatos (LRC)}
+\begin{itemize}
+\item \textbf{Seleção de Melhores Candidatos}: A LRC é formada pelos vértices mais promissores da LCD, filtrados por um parâmetro $\alpha$. Define-se um valor-limite
+\begin{equation}
+e_{\text{limite}} = e_{\max} - \alpha (e_{\max} - e_{\min}),
+\end{equation}
+onde $e_{\max}$ e $e_{\min}$ são os valores de "economia" (ou potencial de melhoria) do melhor e do pior candidato, respectivamente.
+\item \textbf{Seleção Aleatória}: Dentro dessa LRC, escolhe-se um vértice de forma aleatória. Essa etapa adiciona diversidade ao processo, pois nem sempre o "melhor" candidato é selecionado.
+\end{itemize}
+
+\subsubsection*{Construção Iterativa da Solução}
+\begin{itemize}
+\item \textbf{Inserção de Vértices}: Em cada iteração, um vértice é escolhido da LRC e adicionado à solução, decidindo também se a coleta do bônus será aproveitada (opção 1) ou não (opção 2).
+\item \textbf{Viabilidade da Rota}: A função \texttt{embarcarPass()} atualiza a rota, garantindo que as restrições de capacidade e tempo sejam respeitadas.
+\item \textbf{Atualização das Listas}: Tanto a LCD quanto a LRC são atualizadas a cada inserção, até que a rota não possa receber mais vértices ou seja concluída.
+\end{itemize}
+
+\subsection*{Fase de Busca Local com VND}
+
+Após construída a solução inicial, o GRASP faz a \textbf{intensificação} por meio de uma busca local, aqui realizada pelo \emph{Variable Neighborhood Descent} (VND). O foco dessa fase é refinar a solução, explorando diferentes vizinhanças.
+
+\subsubsection*{Variable Neighborhood Descent (VND)}
+
+\begin{itemize}
+\item \textbf{Exploração Gradual}: O VND utiliza diferentes estruturas de vizinhança, ordenadas por complexidade (ou custo computacional). Ele inicia na vizinhança mais simples e só avança para a seguinte caso não encontre melhoria.
+\item \textbf{Movimentos na Vizinhança}: Exemplos de movimentos incluem:
+\begin{itemize}
+\item \textbf{Pass1}: Seleciona um passageiro sem origem/destino de maior bônus e tenta reinseri-lo em outro local da rota.
+\item \textbf{Pass2}: Remove um passageiro sem destino/origem de maior bônus, se isso puder gerar economia de custo.
+\item \textbf{Pass3}: Tenta trocar a posição de dois passageiros, buscando melhorar o custo total (ou aumentar a coleta de bônus).
+\end{itemize}
+\item \textbf{Reinício da Busca}: Sempre que ocorre melhoria em alguma vizinhança, o processo retorna à primeira vizinhança. Isso permite uma “exploração fina” ao redor da nova solução encontrada.
+\end{itemize}
+
+\subsubsection*{Critérios de Parada}
+A busca local termina quando:
+\begin{itemize}
+\item \textbf{Número máximo de avaliações da função objetivo} é atingido ($maxFc$).
+\item \textbf{Número máximo de iterações sem melhoria} é atingido ($maxConv$).
+\end{itemize}
+
+\subsection*{Integração com o GVND}
+O GRASP pode ser combinado com o \emph{Greedy Variable Neighborhood Descent} (GVND), uma versão adaptada do VND que explora múltiplas vizinhanças de forma gulosa. Essa integração alia a \textbf{diversidade} do GRASP à \textbf{intensificação} do GVND, resultando em soluções potencialmente mais robustas.
+
+\begin{algorithm}[H]
+\caption{GRASP Genérico}
+\begin{algorithmic}[1]
+\Require nomeInstancia, maxFc, maxConv
+\State $G \gets leituraInst(nomeInstancia)$
+\State $S \gets \emptyset$ \Comment{Solução inicial vazia}
+\State $f(S) \gets \infty$ \Comment{Valor da solução inicial}
+\State $numCh \gets 0$ \Comment{Contador de chamadas à função objetivo}
+\State $conv \gets 0$ \Comment{Contador de iterações sem melhoria}
+\While{$(numCh \leq maxFc)$ \textbf{e} $(conv \leq maxConv)$}
+\State $S^* \gets constrSolucao()$ \Comment{Constrói solução semi-gulosa}
+\State $S^* \gets VND(S^)$ \Comment{Aplica busca local VND}
+\If{$f(S^) < f(S)$}
+\State $S \gets S^*$ \Comment{Atualiza melhor solução}
+\State $conv \gets -1$ \Comment{Reseta contador sem melhoria}
+\EndIf
+\State $conv \gets conv + 1$ \Comment{Incrementa contador sem melhoria}
+\EndWhile
+\State \textbf{return} $S$ \Comment{Retorna melhor solução encontrada}
+\end{algorithmic}
+\end{algorithm}
+
+\chapter{Resultados e Discussão}
+
+\section{Resultados Computacionais}
+
+A partir da implementação do \emph{GRASP} com busca local via \emph{VND} (Variable Neighborhood Descent), foi possível gerar soluções de forma relativamente rápida e com boa qualidade para instâncias de pequeno e médio porte do TSP-OBP. Vale ressaltar, entretanto, que, no âmbito deste trabalho, \textbf{não foi realizada uma análise comparativa detalhada com outros métodos}, em função de o foco ter permanecido na implementação e experimentação de \emph{apenas uma abordagem meta-heurística}.
+
+O código-fonte referente à implementação deste método encontra-se disponível em: 
+\[
+\texttt{https://github.com/antoniel/mata53-seminario}
+\]
+Neste repositório, pode-se observar todo o processo de construção da solução, abrangendo a fase de construção gulosa (com elementos de aleatoriedade controlada), a etapa de busca local e o modo como passageiros e bônus foram tratados no contexto do TSP-OBP.
+
+\subsection{Processo de Construção da Solução}
+
+A construção inicial segue o paradigma do \textbf{GRASP}, compondo:
+\begin{enumerate}
+    \item \textbf{Fase de Construção Semi-Gulosa}: Gera uma rota inicial ao escolher iterativamente vértices e passageiros segundo um critério de ganho líquido (bônus menos custo), com pequena aleatoriedade para aumentar a diversidade das soluções.
+    \item \textbf{Fase de Busca Local (VND)}: Explora vizinhanças específicas, como \emph{remoção}, \emph{reinserção} e \emph{troca} de passageiros na rota, visando reduzir a função objetivo (distância total subtraída do bônus coletado).
+\end{enumerate}
+
+Embora essa abordagem seja efetiva em \emph{práticas} de prototipação rápida, \textbf{não realizamos} a calibração aprofundada de parâmetros nem a comparação rigorosa com outros métodos (por exemplo, \emph{Branch \& Cut}, \emph{Heurísticas Construtivas} ou variações de \emph{GRASP} e \emph{VND}). Ainda assim, os experimentos iniciais evidenciam que a meta-heurística implementada consegue resolver instâncias de tamanho moderado em tempo razoável, produzindo soluções com qualidade satisfatória em termos de distância percorrida e bônus coletado.
+
+\section{Discussão}
+
+A análise dos resultados indica que a implementação do \emph{GRASP + VND} funciona como \textbf{prova de conceito} para aplicação de meta-heurísticas ao TSP-OBP. Em particular, pudemos verificar:
+
+\begin{itemize}
+    \item \textbf{Simplicidade de Extensão}: A inclusão de novos passageiros ou bônus é acomodada pela fase de construção gulosa, ajustando o critério de seleção de vértices.
+    \item \textbf{Limitação na Exploração de Vizinhanças}: Como não há uma etapa de reordenação completa da rota (por exemplo, via \emph{2-opt} ou \emph{3-opt}), certas instâncias podem estagnar em soluções subótimas.
+    \item \textbf{Potencial de Melhoria}: A adoção de estruturas de vizinhança mais complexas (inserção de pares origem–destino em diferentes posições, inversões de subcaminhos etc.) pode aumentar a capacidade de explorar o espaço de soluções.
+\end{itemize}
+
+Futuramente, \textbf{uma análise comparativa} com heurísticas construtivas básicas ou com métodos exatos para instâncias pequenas possibilitará quantificar o desempenho do algoritmo. Além disso, \textbf{parâmetros} como a intensidade da aleatoriedade na construção ou o número de vizinhanças no \emph{VND} podem ser ajustados para buscar melhores equilíbrios entre tempo de execução e qualidade da solução.
+
+\subsection{Limitações e Desafios}
+
+Em linha com as considerações gerais do problema, destacam-se:
+\begin{itemize}
+    \item \textbf{Escalabilidade}: Apesar de a heurística lidar bem com instâncias moderadas, problemas de maior escala requerem estratégias mais elaboradas para a busca local.
+    \item \textbf{Qualidade das Soluções}: Sem uma etapa de reordenação mais agressiva (\emph{2-opt}, \emph{3-opt}, \emph{K-opt}), a rota resultante pode permanecer distante do ótimo.
+    \item \textbf{Integração de Passageiros e Janelas de Tempo}: Em cenários mais complexos, a checagem e a simulação do horário de embarque/desembarque podem demandar modificações adicionais no modelo.
+\end{itemize}
+
+\noindent Em suma, embora o método desenvolvido cumpra o papel de apresentar uma meta-heurística funcional, \textbf{não constitui} uma comparação exaustiva entre diferentes algoritmos, ficando evidente a necessidade de testes adicionais e melhorias de vizinhanças para ampliar o espectro de soluções viáveis.
+
+\chapter{Conclusão}
+
+Este trabalho apresentou uma análise abrangente do Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP), evidenciando sua relevância prática em cenários de transporte e logística. A incorporação de restrições como a coleta de bônus e o transporte de passageiros ampliou significativamente a complexidade do problema em relação ao TSP clássico, exigindo abordagens mais robustas para produzir soluções de qualidade em tempo factível. 
+
+Ao longo do texto, foram discutidos desde os aspectos teóricos e a modelagem matemática até os desafios de implementação e a escolha de métodos de resolução. A explanação de heurísticas e metaheurísticas, em particular a abordagem baseada em \emph{GRASP} e \emph{VND}, demonstrou como é possível combinar fases de construção gulosa com busca local para lidar com esse tipo de problema de maneira eficiente.
+
+\section{Considerações Finais}
+
+O TSP-OBP representa um avanço significativo na modelagem de problemas complexos de roteamento, incorporando aspectos práticos essenciais como a coleta de bônus e o transporte de passageiros. A análise realizada demonstra que, apesar dos desafios computacionais, existem métodos eficazes para sua resolução, especialmente quando se consideram abordagens híbridas e metaheurísticas avançadas \cite{lopesfilho2019, carvalho2022}.
+
+Em termos de aplicações, a variedade de cenários em que o TSP-OBP pode ser empregado — como logística urbana ou roteirização de veículos com incentivos — ressalta a importância de investir em técnicas de otimização capazes de equilibrar múltiplos objetivos, como minimização de custo, maximização de bônus e respeito a restrições de capacidade e tempo.
+
+Por fim, vale ressaltar que, apesar de a formulação geral do TSP-OBP possuir aplicações práticas, a riqueza do problema também está em sua relação profunda com conceitos fundamentais de grafos. Da perspectiva teórica, a complexidade e as dificuldades de resolução se tornam campos férteis para pesquisa, ligando-se de forma intrínseca aos estudos sobre ciclos hamiltonianos. Pesquisas futuras podem investigar melhorias nas estruturas de vizinhança, heurísticas híbridas e a aplicação de técnicas de aprendizado de máquina para aprimorar a seleção e o ajuste de parâmetros em meta-heurísticas, tornando o TSP-OBP cada vez mais relevante no cenário de otimização combinatória e operações. 
+
+%-------------Bibliografia------------------
+\newpage
+\renewcommand{\refname}{Referências Bibliográficas}
+\addcontentsline{toc}{chapter}{Referências Bibliográficas}
+\bibliography{Bibliografia}
+\nocite{lopesfilho2019, carvalho2022, carnielli}
+
+\end{document}

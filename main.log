@@ -1,16 +1,69 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2025.1.5)  7 JAN 2025 23:21
+=======
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2025.1.5)  5 JAN 2025 12:39
+>>>>>>> bdced56 (first commit)
+=======
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2025.1.5)  5 JAN 2025 13:21
+>>>>>>> 880426d ()
+=======
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2025.1.5)  5 JAN 2025 13:28
+>>>>>>> d4291a5 ()
+=======
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2025.1.5)  5 JAN 2025 13:56
+>>>>>>> c129bce ()
+=======
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.22)  5 JAN 2025 16:59
+>>>>>>> 514f4f3 (adding stuff)
+=======
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2025.1.5)  5 JAN 2025 21:46
+>>>>>>> 09b2ce0 ()
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 **"/Users/antonielmagalhaes/d/acad/grafos/Semina^^cc^^81rio Grafos/main.tex"
 (/Users/antonielmagalhaes/d/acad/grafos/Semina^^cc^^81rio Grafos/main.tex
+=======
+**"/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.tex"
+(/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.tex
+>>>>>>> bdced56 (first commit)
+=======
+**"/Users/antonielmagalhaes/d/acad/grafos/Semina^^cc^^81rio Grafos/main.tex"
+(/Users/antonielmagalhaes/d/acad/grafos/Semina^^cc^^81rio Grafos/main.tex
+>>>>>>> c129bce ()
+=======
+**"/Users/antonielmagalhaes/d/acad/grafos/Semina^^cc^^81rio Grafos/main.tex"
+(/Users/antonielmagalhaes/d/acad/grafos/Semina^^cc^^81rio Grafos/main.tex
+>>>>>>> 09b2ce0 ()
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-12-09>
 (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/base/report.cls
 Document Class: report 2024/06/29 v1.4n Standard LaTeX document class
 (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/base/size12.clo
 File: size12.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+<<<<<<< HEAD
+=======
+**main.tex
+(./main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+>>>>>>> 514f4f3 (adding stuff)
+=======
+>>>>>>> 09b2ce0 ()
 )
 \c@part=\count196
 \c@chapter=\count197
@@ -415,9 +468,12 @@ Package: subfigure 2002/07/30 v2.1.4 subfigure package
 ****************************************
 * Local config file subfigure.cfg used *
 ****************************************
+<<<<<<< HEAD
+<<<<<<< HEAD
 (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/subfigure/subfigure.cfg)
 \subfig@top=\skip65
 \subfig@bottom=\skip66
+<<<<<<< HEAD
 ) (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/algorithms/algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
  (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/float/float.sty
@@ -483,6 +539,72 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
+=======
+=======
+(/usr/local/texlive/2024/texmf-dist/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip64
+\subfig@bottom=\skip65
+>>>>>>> 514f4f3 (adding stuff)
+=======
+(/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip65
+\subfig@bottom=\skip66
+>>>>>>> 09b2ce0 ()
+)
+\c@thm=\count318
+\c@dfn=\count319
+\c@prob=\count320
+\c@cor=\count321
+\c@prop=\count322
+\c@lem=\count323
+\c@contar=\count324
+ (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count325
+\l__pdf_internal_box=\box106
+) (main.aux)
+\openout1 = `main.aux'.
+
+<<<<<<< HEAD
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+>>>>>>> bdced56 (first commit)
+=======
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+>>>>>>> 09b2ce0 ()
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -520,6 +642,9 @@ LaTeX Font Info:    ... okay on input line 58.
 
 (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 \scratchcounter=\count335
 \scratchdimen=\dimen191
 \scratchbox=\box109
@@ -531,13 +656,47 @@ LaTeX Font Info:    ... okay on input line 58.
 \MPnumerator=\count339
 \makeMPintoPDFobject=\count340
 \everyMPtoPDFconversion=\toks42
+=======
+=======
+>>>>>>> 09b2ce0 ()
+\scratchcounter=\count326
+\scratchdimen=\dimen191
+\scratchbox=\box107
+\nofMPsegments=\count327
+\nofMParguments=\count328
+<<<<<<< HEAD
+=======
+\scratchcounter=\count318
+\scratchdimen=\dimen190
+\scratchbox=\box106
+\nofMPsegments=\count319
+\nofMParguments=\count320
+>>>>>>> 514f4f3 (adding stuff)
+=======
+>>>>>>> 09b2ce0 ()
+\everyMPshowfont=\toks38
+\MPscratchCnt=\count329
+\MPscratchDim=\dimen192
+\MPnumerator=\count330
+\makeMPintoPDFobject=\count331
+\everyMPtoPDFconversion=\toks39
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> bdced56 (first commit)
 ) (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/epstopdf-pkg/epstopdf-base.sty
+=======
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+>>>>>>> 514f4f3 (adding stuff)
+=======
+) (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/epstopdf-pkg/epstopdf-base.sty
+>>>>>>> 09b2ce0 ()
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/00miktex/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package caption Info: Begin \AtBeginDocument code.
+<<<<<<< HEAD
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: subfigure package is loaded.
@@ -551,27 +710,102 @@ Package hyperref Info: Link coloring OFF on input line 58.
 File: Figuras/UFBA.jpg Graphic file (type jpg)
 <use Figuras/UFBA.jpg>
 Package pdftex.def Info: Figuras/UFBA.jpg  used on input line 63.
+=======
+Package caption Info: hyperref package is loaded.
+Package caption Info: subfigure package is loaded.
+Package caption Info: End \AtBeginDocument code.
+Package hyperref Info: Link coloring OFF on input line 54.
+ (main.out) (main.out)
+\@outlinefile=\write4
+\openout4 = `main.out'.
+
+<Figuras/UFBA.jpg, id=178, 289.3209pt x 446.1468pt>
+File: Figuras/UFBA.jpg Graphic file (type jpg)
+<use Figuras/UFBA.jpg>
+<<<<<<< HEAD
+Package pdftex.def Info: Figuras/UFBA.jpg  used on input line 58.
+>>>>>>> bdced56 (first commit)
+=======
+Package pdftex.def Info: Figuras/UFBA.jpg  used on input line 59.
+>>>>>>> 09b2ce0 ()
 (pdftex.def)             Requested size: 46.12453pt x 71.13188pt.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
+<<<<<<< HEAD
+<<<<<<< HEAD
 (Font)              using `OT1/cmr/bx/n' instead on input line 83.
-
-
+=======
+(Font)              using `OT1/cmr/bx/n' instead on input line 78.
+>>>>>>> bdced56 (first commit)
 
 [1
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 {/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/fonts/map/pdftex/pdftex.map} <./Figuras/UFBA.jpg>]
 LaTeX Font Info:    Trying to load font information for U+msa on input line 106.
  (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 106.
+=======
+{/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/fonts/map/pdftex/pdftex.map} </Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/Figuras/UFBA.jpg>]
+=======
+{/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/fonts/map/pdftex/pdftex.map} <./Figuras/UFBA.jpg>]
+>>>>>>> c129bce ()
+LaTeX Font Info:    Trying to load font information for U+msa on input line 101.
+ (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 101.
+>>>>>>> bdced56 (first commit)
  (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsb.fd
+=======
+{/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Figur
+as/UFBA.jpg>]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 101
+.
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 101
+.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
+>>>>>>> 514f4f3 (adding stuff)
+=======
+(Font)              using `OT1/cmr/bx/n' instead on input line 79.
+
+
+
+[1
+
+{/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/fonts/map/pdftex/pdftex.map} <./Figuras/UFBA.jpg>]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 102.
+ (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 102.
+ (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsb.fd
+>>>>>>> 09b2ce0 ()
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
+[2] (main.toc
+
+[3
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 [2] (main.toc)
+=======
+[2] (/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.toc)
+>>>>>>> bdced56 (first commit)
+=======
+[2] (main.toc)
+>>>>>>> c129bce ()
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
@@ -580,27 +814,90 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [3
 
 ]
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 880426d ()
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 l.143 
        [1]
+=======
+l.136 \subsubsection
+=======
+l.135 \subsubsection
+>>>>>>> d4291a5 ()
+                    *{M^^c3^^a9todos Heur^^c3^^adsticos} [1]
+>>>>>>> 880426d ()
+=======
+l.145     \item N
+                 o \textbf{Cap^^c3^^adtulo 3}, abordamos o \textit{TSP com B... [1]
+>>>>>>> c129bce ()
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 l.163 \chapter
               {Fundamenta^^c3^^a7^^c3^^a3o Te^^c3^^b3rica} [2]
 Cap\'{\i }tulo 1.
 
+=======
+l.143 
+=======
+l.142 
+>>>>>>> d4291a5 ()
+       [2]
+>>>>>>> 880426d ()
+=======
+l.153 \chapter
+              {Fundamenta^^c3^^a7^^c3^^a3o Te^^c3^^b3rica} [2]
+=======
+])
+\tf@toc=\write5
+\openout5 = `main.toc'.
+
+<<<<<<< HEAD
+ [4]
+>>>>>>> 514f4f3 (adding stuff)
+=======
+
+
+[4]
+>>>>>>> 09b2ce0 ()
+Cap\'{\i }tulo 1.
+
+Overfull \hbox (3.33708pt too wide) in paragraph at lines 129--130
+[]\OT1/cmr/m/n/12 A com-ple-xi-dade ine-rente ao TSP-OBP adv^^Sem da ne-ces-si-dade de equi-li-brar m^^Sultiplos
+ []
+
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+LaTeX Warning: Citation `carnielli' on page 3 undefined on input line 162.
+
+
+LaTeX Warning: Citation `machado' on page 3 undefined on input line 167.
+
+
+>>>>>>> c129bce ()
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 l.174 
        [3
 
@@ -667,6 +964,164 @@ Cap\'{\i }tulo 5.
 [19
 
 ] (main.aux)
+=======
+=======
+l.145 \chapter
+=======
+l.144 \chapter
+>>>>>>> d4291a5 ()
+              {Fundamenta^^c3^^a7^^c3^^a3o Te^^c3^^b3rica} [3]
+>>>>>>> 880426d ()
+Cap\'{\i }tulo 1.
+
+
+[4
+=======
+l.170 
+       [3
+>>>>>>> c129bce ()
+=======
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+=======
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+>>>>>>> 09b2ce0 ()
+<to be read again> 
+                   \relax 
+l.138 
+       [1
+>>>>>>> 514f4f3 (adding stuff)
+
+]
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.160 \chapter
+              {Fundamenta^^c3^^a7^^c3^^a3o Te^^c3^^b3rica} [2]
+Cap\'{\i }tulo 2.
+
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.175     \item \textbf
+                       {TSP com Pr^^c3^^aamios (PTSP)}: Incorpora valores de... [3
+
+]
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.207 
+       [4]
+
+[5]
+Cap\'{\i }tulo 3.
+
+
+[6
+
+]
+
+[7]
+
+[8]
+Cap\'{\i }tulo 4.
+
+
+[9
+
+]
+Overfull \hbox (2.21051pt too wide) in paragraph at lines 384--385
+[]\OT1/cmr/m/n/12 Metaheur^^S^^Psticas, como Al-go-rit-mos Gen^^Seticos e Si-mu-la-ted An-ne-a-ling, ofe-re-cem abor-
+ []
+
+
+
+[10]
+
+[11]
+Overfull \hbox (0.90038pt too wide) in paragraph at lines 455--456
+[]\OT1/cmr/bx/n/12 Hibridiza^^Xc~ao de Me-taheur^^S^^Psticas\OT1/cmr/m/n/12 : Com-bina^^Xc~ao de di-fe-ren-tes es-trat^^Segias de busca 
+ []
+
+
+Overfull \hbox (2.76413pt too wide) in paragraph at lines 456--457
+[]\OT1/cmr/bx/n/12 Decomposi^^Xc~ao e Re-com-bina^^Xc~ao\OT1/cmr/m/n/12 : Di-vis~ao do pro-blema em sub-pro-ble-mas trat^^Saveis 
+ []
+
+
+
+[12]
+Cap\'{\i }tulo 5.
+
+
+[13
+
+]
+
+[14]
+
+[15]
+
+[16]
+Cap\'{\i }tulo 6.
+
+
+[17
+
+]
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+[12
+
+]
+
+[13]
+No file main.bbl.
+
+LaTeX Warning: Citation `gomes2016' undefined on input line 266.
+
+
+LaTeX Warning: Citation `gomes2018' undefined on input line 266.
+
+
+LaTeX Warning: Citation `salvador' undefined on input line 266.
+
+
+LaTeX Warning: Citation `machado' undefined on input line 266.
+
+
+LaTeX Warning: Citation `ramos' undefined on input line 266.
+
+
+LaTeX Warning: Citation `carnielli' undefined on input line 266.
+
+<<<<<<< HEAD
+(/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.aux)
+>>>>>>> bdced56 (first commit)
+=======
+(main.aux)
+>>>>>>> c129bce ()
+=======
+] (./main.aux)
+>>>>>>> 514f4f3 (adding stuff)
+=======
+[18]
+
+[19] (main.bbl)
+
+[20
+
+] (main.aux)
+>>>>>>> 09b2ce0 ()
  ***********
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-12-09>
@@ -675,6 +1130,8 @@ L3 programming layer <2024-12-09>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 974E8DD1836B950B061ED1983B53AE5B;4050.
  ) 
@@ -692,4 +1149,58 @@ PDF statistics:
  352 PDF objects out of 1000 (max. 8388607)
  76 named destinations out of 1000 (max. 500000)
  198 words of extra memory for PDF output out of 10000 (max. 10000000)
+=======
+
+LaTeX Warning: There were undefined references.
+
+=======
+>>>>>>> 514f4f3 (adding stuff)
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 0DD943E4207ADF4B1F1F7987EE0B8B94;7132.
+ ) 
+Here is how much of TeX's memory you used:
+ 13591 strings out of 473577
+ 222083 string characters out of 5701961
+ 632075 words of memory out of 5000000
+ 36511 multiletter control sequences out of 15000+600000
+ 566832 words of font info for 68 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 75i,10n,79p,629b,595s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmbx12.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi12.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi8.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr12.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr8.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy8.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on main.pdf (24 pages, 510574 bytes).
+PDF statistics:
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+ 192 PDF objects out of 1000 (max. 8388607)
+ 31 named destinations out of 1000 (max. 500000)
+ 142 words of extra memory for PDF output out of 10000 (max. 10000000)
+>>>>>>> bdced56 (first commit)
+=======
+ 204 PDF objects out of 1000 (max. 8388607)
+ 38 named destinations out of 1000 (max. 500000)
+ 134 words of extra memory for PDF output out of 10000 (max. 10000000)
+>>>>>>> 880426d ()
+=======
+ 208 PDF objects out of 1000 (max. 8388607)
+ 38 named destinations out of 1000 (max. 500000)
+ 142 words of extra memory for PDF output out of 10000 (max. 10000000)
+>>>>>>> d4291a5 ()
+=======
+ 235 PDF objects out of 1000 (max. 8388607)
+ 40 named destinations out of 1000 (max. 500000)
+ 190 words of extra memory for PDF output out of 10000 (max. 10000000)
+>>>>>>> c129bce ()
+=======
+ 455 PDF objects out of 1000 (max. 8388607)
+ 401 compressed objects within 5 object streams
+ 86 named destinations out of 1000 (max. 500000)
+=======
+ 427 PDF objects out of 1000 (max. 8388607)
+ 81 named destinations out of 1000 (max. 500000)
+>>>>>>> 09b2ce0 ()
+ 358 words of extra memory for PDF output out of 10000 (max. 10000000)
+>>>>>>> 514f4f3 (adding stuff)
 
