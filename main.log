@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2025.1.5)  5 JAN 2025 13:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2025.1.5)  5 JAN 2025 13:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.tex"
-(/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.tex
+**"/Users/antonielmagalhaes/d/acad/grafos/Semina^^cc^^81rio Grafos/main.tex"
+(/Users/antonielmagalhaes/d/acad/grafos/Semina^^cc^^81rio Grafos/main.tex
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-12-09>
 (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/base/report.cls
@@ -430,7 +430,7 @@ Package: subfigure 2002/07/30 v2.1.4 subfigure package
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count325
 \l__pdf_internal_box=\box106
-) (/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.aux)
+) (main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
@@ -510,11 +510,11 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: subfigure package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package hyperref Info: Link coloring OFF on input line 53.
- (/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.out) (/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.out)
+ (main.out) (main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-<Figuras/UFBA.jpg, id=71, 289.3209pt x 446.1468pt>
+<Figuras/UFBA.jpg, id=95, 289.3209pt x 446.1468pt>
 File: Figuras/UFBA.jpg Graphic file (type jpg)
 <use Figuras/UFBA.jpg>
 Package pdftex.def Info: Figuras/UFBA.jpg  used on input line 58.
@@ -528,7 +528,7 @@ LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
 
 [1
 
-{/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/fonts/map/pdftex/pdftex.map} </Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/Figuras/UFBA.jpg>]
+{/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/fonts/map/pdftex/pdftex.map} <./Figuras/UFBA.jpg>]
 LaTeX Font Info:    Trying to load font information for U+msa on input line 101.
  (/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -538,7 +538,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 101.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
-[2] (/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.toc)
+[2] (main.toc)
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
@@ -552,72 +552,97 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.135 \subsubsection
-                    *{M^^c3^^a9todos Heur^^c3^^adsticos} [1]
+l.145     \item N
+                 o \textbf{Cap^^c3^^adtulo 3}, abordamos o \textit{TSP com B... [1]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.142 
-       [2]
+l.153 \chapter
+              {Fundamenta^^c3^^a7^^c3^^a3o Te^^c3^^b3rica} [2]
+Cap\'{\i }tulo 1.
+
+Overfull \hbox (16.43771pt too wide) in paragraph at lines 155--155
+[]\OT1/cmr/bx/n/17.28 Caminhos e Ci-clos Eu-le-ri-a-nos: Mo-tiva^^Xc~ao Hist^^Sorica 
+ []
+
+
+LaTeX Warning: Citation `carnielli' on page 3 undefined on input line 162.
+
+
+LaTeX Warning: Citation `machado' on page 3 undefined on input line 167.
+
+
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.144 \chapter
-              {Fundamenta^^c3^^a7^^c3^^a3o Te^^c3^^b3rica} [3]
-Cap\'{\i }tulo 1.
-
-
-[4
+l.170 
+       [3
 
 ]
+
+[4]
 Cap\'{\i }tulo 2.
 
 
 [5
 
 ]
+
+[6]
 Cap\'{\i }tulo 3.
-
-
-[6
-
-]
-Cap\'{\i }tulo 4.
 
 
 [7
 
 ]
+
+[8]
+Cap\'{\i }tulo 4.
+
+
+[9
+
+]
+
+[10]
 Cap\'{\i }tulo 5.
 
 
-[8
+[11
 
 ]
+Cap\'{\i }tulo 6.
+
+
+[12
+
+]
+
+[13]
 No file main.bbl.
 
-LaTeX Warning: Citation `gomes2016' undefined on input line 250.
+LaTeX Warning: Citation `gomes2016' undefined on input line 266.
 
 
-LaTeX Warning: Citation `gomes2018' undefined on input line 250.
+LaTeX Warning: Citation `gomes2018' undefined on input line 266.
 
 
-LaTeX Warning: Citation `salvador' undefined on input line 250.
+LaTeX Warning: Citation `salvador' undefined on input line 266.
 
 
-LaTeX Warning: Citation `machado' undefined on input line 250.
+LaTeX Warning: Citation `machado' undefined on input line 266.
 
 
-LaTeX Warning: Citation `ramos' undefined on input line 250.
+LaTeX Warning: Citation `ramos' undefined on input line 266.
 
 
-LaTeX Warning: Citation `carnielli' undefined on input line 250.
+LaTeX Warning: Citation `carnielli' undefined on input line 266.
 
-(/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.aux)
+(main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-12-09>
@@ -630,20 +655,20 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E0AA4E86C1C1C194FA1B479A8929C9C3;2499.
+(rerunfilecheck)             Checksum: C6CBDAD2EF4D50430856C9B32D55889D;4698.
  ) 
 Here is how much of TeX's memory you used:
- 13503 strings out of 473577
- 221156 string characters out of 5701961
+ 13509 strings out of 473577
+ 220795 string characters out of 5701961
  627974 words of memory out of 5000000
- 36470 multiletter control sequences out of 15000+600000
- 566485 words of font info for 67 fonts, out of 8000000 for 9000
+ 36473 multiletter control sequences out of 15000+600000
+ 566832 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,5n,79p,901b,458s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmbx12.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi12.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi8.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr12.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr8.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "/Users/antonielmagalhaes/d/acad/grafos/Semin^^c3^^a1rio Grafos/main.pdf" (11 pages, 446293 bytes).
+ 75i,5n,79p,674b,532s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmbx12.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi12.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi8.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr12.pfb></Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on main.pdf (16 pages, 436320 bytes).
 PDF statistics:
- 208 PDF objects out of 1000 (max. 8388607)
- 38 named destinations out of 1000 (max. 500000)
- 142 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 235 PDF objects out of 1000 (max. 8388607)
+ 40 named destinations out of 1000 (max. 500000)
+ 190 words of extra memory for PDF output out of 10000 (max. 10000000)
 
