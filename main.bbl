@@ -1,0 +1,25 @@
+\begin{thebibliography}{1}
+
+\bibitem{carnielli}
+W.~Carnielli and R.~Epstein.
+\newblock {\em Computabilidade e Funções Computáveis}.
+\newblock UNESP, 2017.
+
+\bibitem{carvalho2022}
+M.~R. Carvalho.
+\newblock Métodos heurísticos para o tsp-obp.
+\newblock {\em Journal of Combinatorial Optimization}, 2022.
+
+\bibitem{lopesfilho2019}
+José Gomes~Lopes Filho.
+\newblock {\em Problema do Caixeiro Viajante com Coleta Opcional de Bônus,
+  Tempo de Coleta e Passageiros}.
+\newblock Tese de doutorado, Universidade Federal do Rio Grande do Norte,
+  Natal-RN, 2019.
+
+\bibitem{goldbarg2012}
+Marco Goldbarg and Elizabeth Goldbarg.
+\newblock {\em Grafos: Conceitos, algoritmos e aplicações}.
+\newblock Elsevier, Rio de Janeiro, 2012.
+
+\end{thebibliography}
