@@ -1,5 +1,5 @@
 # Fdb version 4
-["bibtex /Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main"] 0 "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.aux" "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.bbl" "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main" 1736091559.13536 0
+["bibtex /Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main"] 0 "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.aux" "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.bbl" "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main" 1736094107.94026 0
   "/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/bibtex/bst/bibtex/plain.bst" 1664737569.07048 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.aux" 0 -1 0 "pdflatex"
   "Bibliografia.bib" 0 -1 0 ""
@@ -7,7 +7,7 @@
   "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.bbl"
   "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.blg"
   (rewritten before read)
-["pdflatex"] 1736091546.50481 "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.tex" "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.pdf" "main" 1736091559.13626 0
+["pdflatex"] 1736094106.69847 "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.tex" "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.pdf" "main" 1736094107.94048 0
   "/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/fonts/map/pdftex/pdftex.map" 1736089119.7567 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1736089122.59081 14064 c4507b80955b004deac0f70e14f91104 ""
   "/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/data/miktex/data/le/pdftex/pdflatex.fmt" 1736089106.54114 12008076 d7d05f745223cab067eb76138ab5a9d3 ""
@@ -112,11 +112,11 @@
   "/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/url/url.sty" 1664737594.52783 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/Users/antonielmagalhaes/Library/Application Support/MiKTeX/texmfs/install/tex/latex/wrapfig/wrapfig.sty" 1736089111.6848 26220 3701aebf80ccdef248c0c20dd062fea9 ""
   "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/Figuras/UFBA.jpg" 1736097480 297685 375ac1ce62e0babe3d6208540f4b7a51 ""
-  "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.aux" 1736091550.35402 3075 ad1c053776ee3325181dfba0f59a6f0c "pdflatex"
+  "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.aux" 1736094107.23937 2879 7e949f6be1158c2b55bac8f7ad4b5bd1 "pdflatex"
   "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.bbl" 0 -1 0 "bibtex /Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main"
-  "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.out" 1736091550.7073 2498 d80d30a650c9c95551fae562ef0d8ccd "pdflatex"
-  "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.tex" 1736091545.25497 7869 b93cf894c57317bb1308cc5a999ebe5d ""
-  "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.toc" 1736091550.71775 1493 3e62827028ff8565e9c88c8e645adec6 "pdflatex"
+  "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.out" 1736094107.24094 2398 cd776eeb3853f979c168c62ebd509247 "pdflatex"
+  "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.tex" 1736094104.74032 12559 4b02909eaef94fbe6478649f59930c5e ""
+  "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.toc" 1736094107.24123 1413 eafd06d60928c186dd330def666d6205 "pdflatex"
   (generated)
   "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.aux"
   "/Users/antonielmagalhaes/d/acad/grafos/Seminário Grafos/main.log"

@@ -118,12 +118,28 @@ como método avaliativo da disciplina \nomeCurso
 % #endregion Índice
 
 
-% Capítulo 1: Introdução
-\chapter{Introdução}
 
-O **Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP)** é uma extensão do clássico Problema do Caixeiro Viajante (TSP). Ele combina aspectos de coleta de prêmios, transporte de passageiros e otimização de rotas, tornando-se relevante em diversas aplicações, como logística, turismo e transporte público.
-
-Este relatório tem como objetivo apresentar uma análise detalhada do problema, sua modelagem matemática, métodos de resolução e aplicações práticas.
+% #endregion Introdução
+\newpage
+\setcounter{page}{1}
+\section*{Introdução}
+O Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP) é uma variação do clássico Problema do Caixeiro Viajante (TSP). Ele se distingue pela incorporação de coleta de bônus opcionais e pelo transporte de passageiros, adicionando complexidade ao problema original. O TSP clássico busca a rota mais curta para visitar um conjunto de cidades e retornar ao ponto de partida, enquanto o TSP-OBP estende essa ideia, permitindo a coleta de bônus em locais específicos e o transporte de passageiros entre pontos predeterminados.
+\subsection*{Componentes do TSP-OBP}
+\begin{itemize} \item \textbf{Coleta de bônus:} O caixeiro pode escolher visitar nós opcionais para coletar bônus, o que pode aumentar o lucro total, apesar de potencialmente aumentar a distância percorrida. Existe um equilíbrio entre o custo da viagem e o lucro obtido pelos bônus. \item \textbf{Transporte de passageiros:} O problema inclui a restrição de pegar e deixar passageiros em locais predefinidos, adicionando uma camada extra de complexidade ao planejamento da rota. Os passageiros devem ser transportados dentro de janelas de tempo específicas, garantindo que sua inclusão na rota não cause grandes interrupções no itinerário. \end{itemize}
+\subsection*{Aplicações e Benefícios}
+O TSP-OBP possui aplicações relevantes na otimização de serviços de entrega de última milha, com benefícios como redução de custos e aumento da satisfação do cliente. Em 2025, a entrega de última milha é responsável por até 41% dos custos totais de logística, tornando a otimização de rotas crucial. A integração do TSP-OBP permite reduzir o consumo de combustível, o tempo de deslocamento e os custos gerais de entrega. Espera-se que o mercado de soluções de entrega de última milha cresça significativamente, de $725.01 milhões em 2024 para $2092.95 milhões em 2031. Ao incorporar o TSP-OBP, empresas podem otimizar suas rotas de entrega, garantindo eficiência e pontualidade. O TSP-OBP também aborda desafios como congestionamento de tráfego e flutuações na demanda de entrega.
+\subsection*{Integração com Dados em Tempo Real}
+A integração de dados em tempo real, como atualizações de tráfego e solicitações inesperadas de passageiros, é fundamental para a otimização de rotas. A otimização dinâmica de rotas adapta-se a mudanças súbitas no tráfego, condições climáticas e pedidos de última hora. Utilizando algoritmos avançados e dados em tempo real, as empresas podem reduzir custos, minimizar o impacto ambiental e aumentar a satisfação do cliente.
+\subsection*{Abordagens de Solução}
+\subsubsection*{Programação Linear Inteira Mista (MILP)}
+O TSP pode ser formulado usando Programação Linear Inteira Mista (MILP) para incorporar restrições adicionais, como coleta de bônus e passageiros. A formulação MILP envolve a definição de restrições de correspondência para assegurar que cada vértice tenha grau dois no ciclo, juntamente com restrições de eliminação de subtour (SECs) para manter a conectividade. No entanto, devido ao número exponencial de SECs, formulações alternativas, como a abordagem de Miller-Tucker-Zemlin (MTZ), são utilizadas. As vantagens do MILP incluem flexibilidade e capacidade de produzir soluções ótimas ou quase ótimas para instâncias de tamanho moderado. As desvantagens incluem complexidade computacional e crescimento exponencial do problema com o aumento do número de cidades.
+\subsubsection*{Métodos Heurísticos}
+Métodos heurísticos são cruciais para resolver o TSP com coleta de bônus e passageiros. O Método de Agrupamento (G-M) é usado para lidar com o Problema de Coleta e Entrega de Passageiros (PPDP), minimizando custos de viagem e satisfazendo restrições de passageiros. Sistemas de Colônia de Formigas (ACS) otimizam o Problema do Caixeiro Viajante Dinâmico (DTSP), incorporando novas paradas sem reiniciar todo o processo de otimização. A otimização combinatória neural utiliza aprendizado por reforço para resolver problemas como o TSP.
+\subsubsection*{Algoritmos Genéticos (GAs)}
+Algoritmos genéticos (GAs) são técnicas de otimização inspiradas na seleção natural. Eles são eficazes para resolver o TSP, explorando um vasto espaço de soluções e evitando ótimos locais. GAs evoluem uma população de soluções candidatas, selecionando os indivíduos mais aptos para reprodução usando operações de cruzamento e mutação. Em comparação com MILP, os GAs podem lidar com problemas maiores e encontrar soluções aproximadas rapidamente.
+\subsection*{Implementações no Mundo Real}
+O TSP tem aplicações em logística, transporte e manufatura. Implementações incluem otimização de rotas de entrega usando algoritmos avançados e tecnologias como computação em nuvem e processamento paralelo. Projetos utilizam bibliotecas Python como SciPy, NetworkX e Matplotlib para calcular a rota mais curta entre locais de entrega. Outros projetos consideram restrições como janelas de tempo de entrega, capacidades de caminhões e requisitos especiais de pacotes.
+% #endregion Introdução
 
 % Capítulo 2: Fundamentação Teórica
 \chapter{Fundamentação Teórica}
