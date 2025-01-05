@@ -1,0 +1,238 @@
+%  #region preâmbulo
+\documentclass[12pt, a4paper]{report}
+\usepackage[top=3cm,left=3cm,right=2cm,bottom=2cm]{geometry}
+\linespread{1.3}
+\setlength{\parindent}{1.25cm}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multicol}
+\usepackage[normalem]{ulem}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{fancybox}
+\usepackage[pdfstartview=FitH]{hyperref}
+\usepackage{subfigure}
+\bibliographystyle{plain}
+
+\graphicspath{{Figuras/}}
+
+\renewcommand{\theenumii}{\alph{enumii}}
+\DeclareMathOperator{\sen}{sen}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\arctg}{arctg}
+\DeclareMathOperator{\cotg}{cotg}
+\DeclareMathOperator{\agm}{agm}
+
+\newtheorem{thm}{Teorema}[section]
+\newtheorem{dfn}{Definição}[section]
+\newtheorem{prob}{Problema}[section]
+\newtheorem{cor}{Corolário}[section]
+\newtheorem{prop}{Proposição}[section]
+\newtheorem{lem}{Lema} [section]
+
+\newcounter{contar}
+%  #endregion preâmbulo
+
+% Variáveis 
+\newcommand{\nomeUniversidade}{Universidade Federal da Bahia}
+\newcommand{\nomeInstituto}{Instituto de Computação}
+\newcommand{\nomeCurso}{MATA53 - Teoria dos grafos}
+\newcommand{\nomeProfessor}{Islame Felipe da Costa Fernandes}
+\newcommand{\nomeGrupo}{\sc{\large{Antoniel Magalhães}} \\
+\sc{\large{João Leahy}} \\
+\sc{\large{Luis Felipe}}}
+\newcommand{\titulo}{\sc{\Large{Relatório: Problema do caixeiro viajante com bônus e passageiros}}}
+
+\begin{document}
+
+% #region capa
+\pagestyle{empty}
+\begin{center}
+\includegraphics[height=2.5cm]{UFBA.jpg}
+\hspace{2cm}
+\end{center}
+
+\begin{center}
+\sc{\large{\nomeUniversidade}} \\
+\sc{\large{\nomeInstituto}} \\
+\sc{\small{\nomeCurso}} \\
+
+\vspace{4cm}
+
+\titulo
+
+\vspace{4.5cm}
+
+\nomeGrupo
+
+
+\vspace{5.5cm}
+
+\textbf{Salvador - Bahia} \\
+\today
+\end{center}
+% #endregion capa
+
+% #region folha de rosto
+\newpage
+\begin{center}
+\titulo
+
+\vspace{4cm}
+
+\nomeGrupo
+\end{center}
+
+\vspace{4cm}
+
+\begin{flushright}
+\begin{minipage}{8.6cm}
+Estudo dirigido entregue ao professor \nomeProfessor
+como método avaliativo da disciplina \nomeCurso
+
+
+\end{minipage}
+\end{flushright}
+ 
+\vspace{8cm}
+
+
+\begin{center}
+\textbf{Salvador - Bahia} \\
+\today
+\end{center}
+
+% #endregion folha de rosto
+
+% #region Índice
+\newpage
+\tableofcontents
+\thispagestyle{empty}
+% #endregion Índice
+
+
+% Capítulo 1: Introdução
+\chapter{Introdução}
+
+O **Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP)** é uma extensão do clássico Problema do Caixeiro Viajante (TSP). Ele combina aspectos de coleta de prêmios, transporte de passageiros e otimização de rotas, tornando-se relevante em diversas aplicações, como logística, turismo e transporte público.
+
+Este relatório tem como objetivo apresentar uma análise detalhada do problema, sua modelagem matemática, métodos de resolução e aplicações práticas.
+
+% Capítulo 2: Fundamentação Teórica
+\chapter{Fundamentação Teórica}
+
+\section{Problema do Caixeiro Viajante (TSP)}
+O Problema do Caixeiro Viajante consiste em encontrar a menor rota que visita um conjunto de cidades exatamente uma vez e retorna ao ponto de origem. É um problema clássico de otimização combinatória, amplamente estudado na teoria da computação.
+
+\section{Extensões do TSP}
+O TSP-OBP é uma extensão do TSP, incorporando os seguintes elementos:
+\begin{itemize}
+    \item \textbf{Coleta de Bônus}: Cada local visitado oferece um prêmio opcional. O objetivo é maximizar o bônus coletado, respeitando restrições de tempo ou custo.
+    \item \textbf{Passageiros}: O transporte de passageiros pode ser incluído na rota, com cada passageiro contribuindo com uma recompensa adicional.
+\end{itemize}
+
+\section{Definição Formal do Problema}
+Dado um conjunto de nós (cidades) $N$, uma matriz de custos $C = [c_{ij}]$, e bônus $b_i$ associados a cada nó $i$, o objetivo é determinar uma rota $R$ que:
+\begin{itemize}
+    \item Minimiza o custo total de viagem $C(R)$;
+    \item Maximiza a soma dos bônus coletados $B(R)$;
+    \item Satisfaz restrições, como limite de tempo e capacidade para passageiros.
+\end{itemize}
+
+% Capítulo 3: Modelagem Matemática
+\chapter{Modelagem Matemática}
+
+\section{Variáveis de Decisão}
+\begin{itemize}
+    \item $x_{ij} \in \{0, 1\}$: Indica se a aresta $(i, j)$ é percorrida.
+    \item $y_i \in \{0, 1\}$: Indica se o bônus do nó $i$ foi coletado.
+    \item $p_i \in \{0, 1\}$: Indica se um passageiro foi embarcado no nó $i$.
+\end{itemize}
+
+\section{Função Objetivo}
+\[
+\text{Maximizar: } \sum_{i \in N} b_i y_i - \sum_{(i,j) \in E} c_{ij} x_{ij}
+\]
+\section{Restrições}
+\begin{enumerate}
+    \item Cada nó deve ser visitado exatamente uma vez:
+    \[
+    \sum_{j \in N} x_{ij} = 1, \quad \forall i \in N
+    \]
+    \[
+    \sum_{i \in N} x_{ij} = 1, \quad \forall j \in N
+    \]
+    \item Limites de tempo:
+    \[
+    \sum_{(i,j) \in E} c_{ij} x_{ij} \leq T_{\text{máximo}}
+    \]
+    \item Capacidade de transporte:
+    \[
+    \sum_{i \in N} p_i \leq \text{Capacidade}
+    \]
+\end{enumerate}
+
+% Capítulo 4: Métodos de Resolução
+\chapter{Métodos de Resolução}
+
+\section{Métodos Exatos}
+\begin{itemize}
+    \item \textbf{Branch and Bound}: Explora todas as soluções possíveis de forma sistemática.
+    \item \textbf{Programação Linear Inteira (ILP)}: Resolve a formulação matemática do problema usando técnicas de otimização.
+\end{itemize}
+
+\section{Heurísticas}
+\begin{itemize}
+    \item \textbf{Algoritmos Gulosos}: Constroem uma solução passo a passo, escolhendo a melhor opção local em cada etapa.
+    \item \textbf{GRASP (Greedy Randomized Adaptive Search Procedure)}: Combina buscas gulosas com elementos aleatórios.
+\end{itemize}
+
+\section{Metaheurísticas}
+\begin{itemize}
+    \item \textbf{Algoritmos Genéticos}: Inspirados na evolução natural.
+    \item \textbf{Simulated Annealing}: Baseado no recozimento térmico.
+    \item \textbf{Ant Colony Optimization}: Inspirado no comportamento de colônias de formigas.
+\end{itemize}
+
+% Capítulo 5: Resultados e Discussão
+\chapter{Resultados e Discussão}
+
+\section{Resultados Computacionais}
+Apresente os resultados obtidos ao resolver instâncias do problema, comparando diferentes métodos em termos de:
+\begin{itemize}
+    \item Tempo de execução;
+    \item Qualidade da solução;
+    \item Eficiência computacional.
+\end{itemize}
+
+\section{Discussão}
+Discuta os trade-offs entre os métodos utilizados e os impactos práticos dos resultados.
+
+% Capítulo 6: Conclusão
+\chapter{Conclusão}
+Resumo dos principais resultados e contribuições do trabalho. Apresente sugestões para trabalhos futuros, como:
+\begin{itemize}
+    \item Estudo de novas heurísticas para grandes instâncias.
+    \item Extensão do modelo para múltiplos veículos.
+    \item Aplicações em cenários reais, como planejamento logístico.
+\end{itemize}
+
+Neste trabalho visitamos teorias que fundamentam a base da computação, passando primeiro pelo concceito de funções recursivas sua importância e definições. posteriormente discorremos sobre o Lambda-cálculo e sua contextualização, e por fim relacionamos tudo apresentado com Máquinas de Turing que foi o objeto de estudo principal da disciplina.\\
+É importante perceber que embora as Máquinas de Turing seja o modelo de computação preferido para o estudo em computabilidade, existem modelos clássicos dos quais o estudo continua relevante e necessário para o avanço da computação como ciência.
+
+%-------------Bibliografia------------------
+\newpage
+\renewcommand{\refname}{Referências Bibliográficas}
+\addcontentsline{toc}{chapter}{Referências Bibliográficas}
+\bibliography{Bibliografia}
+\nocite{gomes2016, gomes2018, salvador, machado, ramos, carnielli}
+
+
+\end{document}
