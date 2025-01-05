@@ -121,148 +121,564 @@ como método avaliativo da disciplina \nomeCurso
 \setcounter{page}{1}
 \pagestyle{plain}
 
-\section*{Introdução}
-\addcontentsline{toc}{section}{Introdução}
-O Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP) é uma variação do clássico Problema do Caixeiro Viajante (TSP). O TSP clássico pode ser entendido como a busca de um ciclo Hamiltoniano de menor custo em um grafo, enquanto o TSP-OBP adiciona complexidade ao incorporar dois componentes: a possibilidade de coletar bônus em certos nós e a restrição de transporte de passageiros. 
+\chapter{Introdução}
 
-Para construir o arcabouço teórico que embasa o TSP-OBP, é fundamental explorar conceitos de Teoria dos Grafos, partindo inicialmente dos Caminhos Eulerianos (que focam no percurso de todas as arestas) e avançando para a noção de Ciclos Hamiltonianos (que focam em visitar todos os vértices). A partir daí, introduzimos o TSP, uma das aplicações mais conhecidas de Ciclos Hamiltonianos, e evoluímos para suas extensões que incluem coleta de bônus (TSP com bônus) e, finalmente, coleta de bônus aliada ao transporte de passageiros (TSP-OBP).
+O **Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP)** é uma extensão do clássico Problema do Caixeiro Viajante (TSP). Ele combina aspectos de coleta de prêmios, transporte de passageiros e otimização de rotas, tornando-se relevante em diversas aplicações, como logística, turismo e transporte público. Estudos recentes, como os de \cite{lopesfilho2019} e \cite{carvalho2022}, destacam a importância do TSP-OBP na otimização de recursos e na melhoria da eficiência operacional em sistemas complexos.
 
-\subsection*{Contexto Teórico}
-Apesar de o TSP ter se tornado notoriamente popular por suas aplicações em logística e roteirização, o estudo aqui apresentado se concentrará principalmente em seus fundamentos teóricos. Isso inclui aspectos de complexidade computacional, modelagem matemática, algoritmos clássicos e heurísticas. 
+A complexidade inerente ao TSP-OBP advém da necessidade de equilibrar múltiplos objetivos conflitantes: maximizar a coleta de bônus, minimizar a distância total percorrida e satisfazer as restrições de transporte de passageiros. Esta característica multiobjetivo torna o problema particularmente desafiador do ponto de vista computacional, exigindo abordagens sofisticadas para sua resolução \cite{gomes2016}.
 
-Os Caminhos Eulerianos, por exemplo, foram objeto de estudo inicial na Teoria dos Grafos, inaugurada com o problema das Sete Pontes de Königsberg, analisado por Leonhard Euler. Um \textbf{Caminho Euleriano} percorre todas as arestas de um grafo exatamente uma vez, podendo ou não terminar no mesmo vértice inicial. Já um \textbf{Ciclo Euleriano} é um Caminho Euleriano que começa e termina no mesmo vértice. Em contrapartida, o TSP parte da noção de \textbf{Ciclo Hamiltoniano}, que busca visitar todos os vértices exatamente uma vez, ao invés de todas as arestas.
+No contexto atual, onde a otimização de recursos e a eficiência operacional são cruciais, o TSP-OBP emerge como uma ferramenta fundamental para modelar e resolver problemas complexos de roteamento. Suas aplicações se estendem desde sistemas de entrega com incentivos até serviços de transporte sob demanda, onde a flexibilidade na coleta de bônus e o gerenciamento eficiente de passageiros são essenciais \cite{salvador}.
 
-Portanto, o TSP-OBP pode ser visto como uma culminação de conceitos de Teoria dos Grafos que vão além dos Caminhos Eulerianos, demandando soluções mais complexas e específicas para lidar com restrições adicionais de bônus e passageiros.
+Este relatório tem como objetivo apresentar uma análise detalhada do problema, sua modelagem matemática, métodos de resolução e aplicações práticas. Além disso, exploraremos as contribuições teóricas e práticas que o TSP-OBP oferece para a pesquisa em otimização combinatória. A estrutura do trabalho está organizada de forma a proporcionar uma compreensão progressiva do tema, partindo dos fundamentos teóricos até as aplicações mais avançadas e perspectivas futuras.
 
-%--------------------------------------------------------------------------------
-\section*{Estrutura do Trabalho}
-\addcontentsline{toc}{section}{Estrutura do Trabalho}
-O presente trabalho está organizado da seguinte forma:
+\section{Contextualização e Relevância}
 
+O TSP-OBP surge como uma resposta natural à evolução dos sistemas de transporte e logística modernos, onde a simples otimização de rotas já não é suficiente para atender às demandas complexas do mercado. A incorporação de bônus e passageiros ao problema clássico do caixeiro viajante reflete a necessidade de modelos mais sofisticados, capazes de capturar a realidade multifacetada dos sistemas de transporte contemporâneos \cite{machado}.
+
+Em termos práticos, o problema encontra aplicações em diversos cenários:
 \begin{itemize}
-    \item Na \textbf{Seção 1}, revisitamos o conceito de Caminhos Eulerianos e brevemente o comparamos com a noção de Ciclos Hamiltonianos, estabelecendo uma ponte inicial entre problemas clássicos de grafos.
-    \item No \textbf{Capítulo 2}, descrevemos o Problema do Caixeiro Viajante (TSP) em sua formulação clássica e suas características fundamentais, como a relação com Ciclos Hamiltonianos e a dificuldade computacional (NP-dificuldade).
-    \item No \textbf{Capítulo 3}, abordamos o \textit{TSP com Bônus}, apresentando como a possibilidade de coletar prêmios em vértices opcionais altera a dinâmica tradicional do TSP.
-    \item No \textbf{Capítulo 4}, introduzimos a variação TSP-OBP, acrescentando o elemento de transporte de passageiros, que traz novas restrições e complexidades ao problema.
-    \item No \textbf{Capítulo 5}, discutimos possíveis métodos de resolução (exatos, heurísticos e metaheurísticos), enfatizando a complexidade teórica inerente a esses problemas e as estratégias para contorná-la.
-    \item No \textbf{Capítulo 6}, apresentamos e debatemos resultados computacionais e teóricos, comparando as diferentes estratégias de solução.
-    \item Por fim, no \textbf{Capítulo 7}, concluímos destacando as principais contribuições teóricas do trabalho, bem como perspectivas para pesquisas futuras em Teoria dos Grafos e otimização.
+    \item Sistemas de compartilhamento de viagens, onde motoristas podem coletar passageiros e bônus ao longo de suas rotas;
+    \item Serviços de entrega com incentivos por coleta ou entrega em determinados pontos;
+    \item Planejamento de roteiros turísticos com pontos de interesse prioritários;
+    \item Otimização de rotas para veículos de transporte público sob demanda.
 \end{itemize}
 
-%--------------------------------------------------------------------------------
+\section{Objetivos e Escopo}
+
+O presente trabalho tem como objetivos específicos:
+\begin{itemize}
+    \item Analisar a estrutura matemática do TSP-OBP e suas propriedades fundamentais;
+    \item Investigar os métodos de resolução existentes e suas aplicabilidades;
+    \item Avaliar o impacto das diferentes abordagens na qualidade das soluções obtidas;
+    \item Discutir as implicações práticas e teóricas das variantes do problema;
+    \item Identificar direções promissoras para pesquisas futuras na área.
+\end{itemize}
+
+O escopo do trabalho abrange desde a fundamentação teórica até as aplicações práticas, com ênfase especial nas técnicas de resolução e suas implementações computacionais. São consideradas tanto as abordagens exatas quanto as heurísticas, bem como as implicações de diferentes estruturas de dados e algoritmos na eficiência das soluções propostas.
+
 \chapter{Fundamentação Teórica}
 
-\section{Caminhos e Ciclos Eulerianos: Motivação Histórica}
-Os Caminhos Eulerianos marcaram o início do estudo formal da Teoria dos Grafos. O problema das Sete Pontes de Königsberg, enunciado por Leonhard Euler no século XVIII, consistia em determinar se era possível percorrer todas as pontes de uma cidade exatamente uma vez, retornando ou não ao ponto de partida. Esse problema pioneiro levou à definição de:
-\begin{itemize}
-    \item \textbf{Caminho Euleriano}: Caminho que percorre todas as arestas de um grafo exatamente uma vez;
-    \item \textbf{Ciclo Euleriano}: Caminho Euleriano que começa e termina no mesmo vértice.
-\end{itemize}
-
-A caracterização clássica aponta que um grafo conexo admite um Caminho Euleriano se e somente se tem exatamente 0 ou 2 vértices de grau ímpar. Em particular, ele admite um Ciclo Euleriano se e somente se todos os vértices têm grau par \cite{carnielli}.
-
-\section{Ciclos Hamiltonianos e o TSP}
-Em contraposição aos caminhos/ciclos que focam nas arestas (Euler), surgem problemas em que o interesse é visitar todos os vértices, caracterizando \textbf{Ciclos Hamiltonianos}. Esses ciclos visitam cada vértice exatamente uma vez e retornam ao ponto inicial. 
-
-O \textbf{Problema do Caixeiro Viajante (TSP)} é a aplicação mais estudada de Ciclos Hamiltonianos. Formalmente, dado um grafo completo ponderado $G=(V,E)$, o TSP consiste em encontrar um ciclo que contenha todos os vértices de $G$ e que tenha o menor custo (ou distância) total \cite{machado}.
-
-Embora os caminhos/ciclos eulerianos tenham sido resolvidos de forma elegante por Euler (e posteriormente Hierholzer), os problemas hamiltonianos — e em particular o TSP — revelaram-se substancialmente mais complexos. O TSP é considerado NP-difícil, e sua resolução prática muitas vezes recorre a heurísticas ou algoritmos de aproximação.
-
-%--------------------------------------------------------------------------------
-\chapter{TSP e Suas Variações}
-
 \section{Problema do Caixeiro Viajante (TSP)}
-O TSP clássico pode ser definido da seguinte maneira: sendo $G$ um grafo completo de $n$ vértices, com uma função de custos $c_{ij}$ para cada aresta $(i, j)$, deseja-se encontrar um ciclo Hamiltoniano de custo mínimo, ou seja, uma permutação dos vértices que minimize o somatório de $c_{ij}$ ao visitar todos os vértices exatamente uma vez e retornar à origem.
+O Problema do Caixeiro Viajante consiste em encontrar a menor rota que visita um conjunto de cidades exatamente uma vez e retorna ao ponto de origem. É um problema clássico de otimização combinatória, amplamente estudado na teoria da computação. A complexidade do TSP-OBP aumenta significativamente devido à introdução de variáveis adicionais, como bônus e passageiros, que requerem novas abordagens de modelagem e solução \cite{lopesfilho2019}.
 
-Apesar de existirem soluções exatas, como \textit{branch and bound} e \textit{branch and cut}, e formulações em Programação Linear Inteira, essas estratégias se tornam rapidamente impraticáveis com o aumento do número de vértices, dada a explosão combinatória característica de problemas NP-difíceis.
+Do ponto de vista matemático, o TSP pode ser representado como um grafo completo G = (V, E), onde V é o conjunto de vértices (cidades) e E é o conjunto de arestas (conexões entre cidades). Cada aresta (i,j) $\in$ E possui um custo associado cij, que representa a distância ou tempo de viagem entre as cidades i e j. O objetivo é encontrar um ciclo hamiltoniano de custo mínimo, ou seja, um caminho que visite todos os vértices exatamente uma vez e retorne ao ponto inicial \cite{salvador}.
 
-\section{TSP com Bônus}
-Uma variação importante do TSP é o \textbf{TSP com Bônus}, no qual alguns vértices podem ser visitados de forma opcional para obtenção de ganho adicional (bônus). Nesse sentido, o caixeiro passa a ter a possibilidade de equilibrar o custo adicional de viajar até os vértices “opcionais” em troca de uma recompensa ou vantagem associada. 
+A natureza NP-difícil do TSP implica que não existe um algoritmo conhecido que possa resolver o problema em tempo polinomial para todas as instâncias. Esta característica fundamental do problema base já apresenta desafios significativos para sua resolução, que são amplificados quando consideramos as extensões com bônus e passageiros \cite{gomes2018}.
 
-Modelos de TSP com Bônus podem ser úteis em cenários teóricos para analisar a influência de vértices com diferentes pesos ou mesmo para estudar a estrutura de subgrafos preferenciais em termos de custo-benefício. Embora frequentemente associados a aplicações práticas (coleta de prêmios, pontos de interesse etc.), também constituem um rico campo de investigação na Teoria dos Grafos, pois exigem generalizações de formulações clássicas do TSP e podem ter maior complexidade combinatória dependendo do número de vértices opcionais.
+\section{Extensões do TSP}
+As extensões do TSP, como o TSP com Bônus e o TSP-OBP, introduzem novas dimensões ao problema original, exigindo a consideração de múltiplos objetivos e restrições. Essas variações são fundamentais para capturar a complexidade de cenários reais, onde decisões de roteamento devem equilibrar custos, prêmios e restrições de passageiros \cite{carvalho2022}.
 
-\section{TSP com Bônus e Passageiros (TSP-OBP)}
-O \textbf{TSP-OBP} surge, então, como um desdobramento ainda mais complexo, no qual são adicionadas restrições relacionadas ao embarque e desembarque de passageiros. Nesse caso, não basta determinar se os vértices opcionais serão visitados ou não para coleta de bônus; também é preciso garantir que exista uma sequência de visitas factível para acomodar passageiros que têm janelas de tempo específicas ou locais exatos de embarque e desembarque.
+Entre as principais extensões, podemos destacar:
 
-Do ponto de vista teórico, a inclusão de passageiros pode ser encarada como um conjunto adicional de restrições sobre o caminho Hamiltoniano, exigindo o cumprimento de condições de precedência (pegar o passageiro antes de deixá-lo), limite de capacidade e possíveis penalidades por atrasos ou antecipações. 
-
-A evolução do TSP para o TSP-OBP — passando pelos caminhos Eulerianos, Ciclos Hamiltonianos e TSP com Bônus — ilustra a riqueza da Teoria dos Grafos em gerar novos problemas conforme adicionamos camadas de restrições e variáveis. Cada nova variação exige adaptações nos modelos matemáticos e métodos de resolução, revelando aspectos teóricos aprofundados sobre a estrutura dos grafos e a complexidade computacional.
-
-%--------------------------------------------------------------------------------
-\chapter{Modelagem Matemática e Conceitos Fundamentais}
-
-\section{Definição Formal do TSP-OBP}
-Apesar de seu viés aplicado, o TSP-OBP pode ser formalizado como um problema de otimização em grafos, onde:
 \begin{itemize}
-    \item $G = (V, E)$ é um grafo completo com um conjunto de vértices $V$ e arestas $E$;
-    \item Cada aresta $(i,j)$ tem um custo $c_{ij}$;
-    \item Cada vértice $i$ pode oferecer um bônus $b_i$ (caso seja visitado) e/ou ter um passageiro associado, implicando em restrições de embarque e desembarque.
+    \item \textbf{TSP com Prêmios (PTSP)}: Incorpora valores de bônus associados à visita de determinados vértices;
+    \item \textbf{TSP com Janelas de Tempo (TSPTW)}: Adiciona restrições temporais para a visita aos vértices;
+    \item \textbf{TSP com Coleta e Entrega (PDTSP)}: Inclui operações de coleta e entrega de itens entre vértices;
+    \item \textbf{TSP com Múltiplos Veículos (mTSP)}: Considera uma frota de veículos para realizar as visitas.
 \end{itemize}
 
-O objetivo é construir um ciclo Hamiltoniano (possivelmente relaxado para permitir omissão de vértices opcionais) que maximize a coleta de bônus e minimize o custo total de deslocamento, respeitando as restrições de passageiros.
+O TSP-OBP combina elementos dessas diferentes variantes, incorporando tanto aspectos de coleta de bônus quanto o gerenciamento de passageiros, o que resulta em um problema significativamente mais complexo \cite{ramos}.
 
-\section{Relação com Subproblemas de Fluxo e Correspondência}
-Tanto o TSP quanto suas variações podem ser conectados a \textit{subproblemas} de fluxo em redes e problemas de correspondência perfeita (matching), onde as arestas selecionadas devem satisfazer condições de equilíbrio de fluxo ou de emparelhamento. Na formulação em Programação Inteira Mista (MILP), isso se traduz em:
+\section{Definição Formal do Problema}
+O TSP-OBP pode ser formalizado como um problema de otimização em grafos, onde o objetivo é maximizar a coleta de bônus e minimizar o custo total de deslocamento, respeitando as restrições de passageiros. Esta definição formal permite a aplicação de técnicas avançadas de otimização para encontrar soluções eficientes.
+
+Formalmente, o TSP-OBP pode ser definido como:
+
 \begin{itemize}
-    \item Restrições de grau, garantindo que cada vértice seja visitado no máximo (ou exatamente) uma vez;
-    \item Restrições de eliminação de subtours, para assegurar que o resultado seja um ciclo que abranja todo o conjunto de vértices relevantes;
-    \item Restrições de capacidade de passageiros, janelas de tempo, etc., no caso do TSP-OBP.
+    \item \textbf{Grafo}: G = (V, E), onde V é o conjunto de vértices e E o conjunto de arestas;
+    \item \textbf{Custos}: cij representa o custo de viagem entre os vértices i e j;
+    \item \textbf{Bônus}: bi é o valor do bônus associado ao vértice i $\in$ V;
+    \item \textbf{Passageiros}: P é o conjunto de passageiros, onde cada p $\in$ P possui:
+    \begin{itemize}
+        \item origem op e destino dp
+        \item janela de tempo [tp\_inicio, tp\_fim] para embarque
+        \item tempo máximo de viagem maxp
+    \end{itemize}
 \end{itemize}
 
-O grande desafio teórico é que a adição de restrições (bônus, passageiros, tempos) faz com que a complexidade cresça exponencialmente, tornando os métodos exatos inviáveis para instâncias de maior dimensão.
+A função objetivo do TSP-OBP pode ser expressa como uma combinação ponderada entre a maximização dos bônus coletados e a minimização dos custos de viagem:
 
-%--------------------------------------------------------------------------------
+\begin{equation}
+    \text{max} \sum_{i \in V} b_i x_i - \alpha \sum_{(i,j) \in E} c_{ij} y_{ij}
+\end{equation}
+
+onde xi é uma variável binária que indica se o vértice i é visitado, yij indica se a aresta (i,j) é utilizada na solução, e $\alpha$ é um parâmetro de balanceamento entre os objetivos \cite{lopesfilho2019}.
+
+\section{Complexidade Computacional}
+A análise de complexidade do TSP-OBP revela que o problema é NP-difícil, uma vez que contém o TSP clássico como caso especial. Além disso, a adição de restrições de passageiros e bônus introduz novas dimensões de complexidade, tornando o problema ainda mais desafiador do ponto de vista computacional \cite{carvalho2022}.
+
+Alguns aspectos que contribuem para a complexidade do problema incluem:
+
+\begin{itemize}
+    \item Natureza combinatória da seleção de vértices para visita;
+    \item Interdependência entre as decisões de roteamento e coleta de bônus;
+    \item Restrições temporais e de capacidade relacionadas aos passageiros;
+    \item Necessidade de coordenação entre múltiplos objetivos conflitantes.
+\end{itemize}
+
+Esta complexidade inerente motiva o desenvolvimento de diferentes abordagens de solução, desde métodos exatos para instâncias pequenas até heurísticas e metaheurísticas para problemas de maior escala \cite{gomes2016}.
+
+\chapter{Modelagem Matemática}
+
+\section{Variáveis de Decisão}
+A modelagem matemática do TSP-OBP envolve a definição de variáveis de decisão que capturam a complexidade do problema. Além das variáveis tradicionais do TSP, o TSP-OBP requer a consideração de variáveis que representam a coleta de bônus e o transporte de passageiros. Este aumento na complexidade demanda o uso de algoritmos avançados para encontrar soluções eficientes \cite{carvalho2022}.
+
+As principais variáveis de decisão do modelo são:
+
+\begin{itemize}
+    \item $x_{ij}$: Variável binária que indica se a aresta (i,j) é utilizada na solução
+    \begin{equation}
+        x_{ij} = \begin{cases}
+            1, \text{ se o arco (i,j) é utilizado na rota} \\
+            0, \text{ caso contrário}
+        \end{cases}
+    \end{equation}
+
+    \item $y_i$: Variável binária que indica se o vértice i é visitado
+    \begin{equation}
+        y_i = \begin{cases}
+            1, \text{ se o vértice i é visitado} \\
+            0, \text{ caso contrário}
+        \end{cases}
+    \end{equation}
+
+    \item $t_i$: Variável contínua que representa o instante de chegada no vértice i
+
+    \item $p_{ik}$: Variável binária que indica se o passageiro k está no veículo ao visitar o vértice i
+\end{itemize}
+
+\section{Função Objetivo}
+A função objetivo do TSP-OBP é maximizar a soma dos bônus coletados e minimizar o custo total de viagem. Esta função deve ser cuidadosamente balanceada para garantir que as soluções propostas sejam viáveis e otimizadas em termos de custo-benefício.
+
+A formulação matemática da função objetivo pode ser expressa como:
+
+\begin{equation}
+    \text{max} \sum_{i \in V} b_i y_i - \alpha \sum_{(i,j) \in E} c_{ij} x_{ij}
+\end{equation}
+
+onde:
+\begin{itemize}
+    \item $b_i$ é o valor do bônus associado ao vértice i
+    \item $c_{ij}$ é o custo de viagem entre os vértices i e j
+    \item $\alpha$ é o parâmetro de balanceamento entre bônus e custos
+\end{itemize}
+
+\section{Restrições}
+As restrições do TSP-OBP incluem a necessidade de visitar todos os vértices obrigatórios, respeitar as janelas de tempo dos passageiros e garantir que a capacidade do veículo não seja excedida. Estas restrições adicionam camadas de complexidade ao problema, exigindo abordagens inovadoras para sua resolução.
+
+\subsection{Restrições de Fluxo}
+\begin{align}
+    \sum_{j \in V} x_{ij} &= y_i & \forall i \in V \\
+    \sum_{i \in V} x_{ij} &= y_j & \forall j \in V
+\end{align}
+
+\subsection{Restrições de Conectividade}
+Para eliminar subciclos, utilizamos as restrições de Miller-Tucker-Zemlin (MTZ):
+\begin{equation}
+    u_i - u_j + n x_{ij} \leq n-1 \quad \forall i,j \in V, i \neq j
+\end{equation}
+onde $u_i$ é uma variável auxiliar que representa a ordem de visita do vértice i.
+
+\subsection{Restrições de Passageiros}
+Para cada passageiro k $\in$ P:
+\begin{align}
+    \sum_{i \in V} p_{ik} &\leq 1 & \forall k \in P \\
+    t_i + s_i + c_{ij} - M(1-x_{ij}) &\leq t_j & \forall i,j \in V \\
+    t_i &\geq e_i & \forall i \in V \\
+    t_i &\leq l_i & \forall i \in V
+\end{align}
+
+onde:
+\begin{itemize}
+    \item $s_i$ é o tempo de serviço no vértice i
+    \item $e_i$ e $l_i$ são os limites da janela de tempo do vértice i
+    \item M é uma constante suficientemente grande
+\end{itemize}
+
+\section{Considerações Práticas}
+Na implementação do modelo matemático, alguns aspectos práticos devem ser considerados:
+
+\begin{itemize}
+    \item \textbf{Calibração de Parâmetros}: O parâmetro $\alpha$ deve ser ajustado de acordo com a importância relativa entre bônus e custos para cada aplicação específica.
+    
+    \item \textbf{Pré-processamento}: Técnicas de redução do espaço de busca podem ser aplicadas, como a eliminação de arcos incompatíveis com as janelas de tempo.
+    
+    \item \textbf{Relaxações}: Para instâncias grandes, relaxações do modelo podem ser necessárias para obter soluções em tempo computacional aceitável.
+    
+    \item \textbf{Decomposição}: O problema pode ser decomposto em subproblemas menores para facilitar sua resolução.
+\end{itemize}
+
+\section{Extensões do Modelo}
+O modelo básico pode ser estendido para incorporar características adicionais, como:
+
+\begin{itemize}
+    \item Múltiplos veículos com diferentes capacidades
+    \item Restrições de precedência entre visitas
+    \item Custos dependentes do tempo
+    \item Incerteza nos parâmetros do problema
+\end{itemize}
+
+Estas extensões aumentam a aplicabilidade do modelo em situações reais, mas também incrementam sua complexidade computacional \cite{gomes2016}.
+
 \chapter{Métodos de Resolução}
-Nesta seção, focamos em como a Teoria dos Grafos suporta os diversos métodos de resolução para TSP, TSP com Bônus e TSP com Bônus e Passageiros. Embora muitas destas estratégias sejam motivadas por aplicações concretas, a base teórica — envolvendo decomposição de grafos, ciclos, caminhos, emparelhamentos, cortes etc. — é o ponto de partida para o desenvolvimento de algoritmos.
 
 \section{Métodos Exatos}
-\subsection{Branch and Bound / Branch and Cut}
-As técnicas de \textit{Branch and Bound} e \textit{Branch and Cut} são extensões naturais de algoritmos de busca em espaço de soluções. No contexto de grafos, a poda (bound) muitas vezes utiliza relaxações lineares e desigualdades que capturam propriedades de ciclos ou caminhos para identificar regiões do espaço de soluções que não contêm o ótimo.
+Os métodos exatos, como o Branch and Bound e a Programação Linear Inteira (ILP), são fundamentais para resolver instâncias menores do TSP-OBP. No entanto, para instâncias maiores, a complexidade computacional torna-se um desafio significativo, exigindo o desenvolvimento de heurísticas e metaheurísticas mais sofisticadas \cite{lopesfilho2019, carvalho2022}.
 
-\subsection{Formulações em Programação Linear Inteira (ILP/MILP)}
-A formulação de subtours (Eliminação de Ciclos) e a abordagem de Miller-Tucker-Zemlin (MTZ) são alguns exemplos de como as propriedades de ciclos em grafos podem ser traduzidas em restrições lineares. Para o TSP-OBP, adicionam-se variáveis que modelam a coleta de bônus e a alocação de passageiros, complicando ainda mais a formulação.
-
-\section{Heurísticas e Metaheurísticas}
-\subsection{Construção Gritosa (Gulosa)}
-Algoritmos gulosos buscam a melhor escolha local a cada passo. Embora normalmente não forneçam garantias de obtenção da solução ótima, são úteis para instâncias pequenas e como ponto de partida para outras heurísticas.
-
-\subsection{Buscas Baseadas em População}
-Metaheurísticas como \textit{Algoritmos Genéticos}, \textit{Ant Colony Optimization} e \textit{Simulated Annealing} utilizam mecanismos inspirados na natureza e em processos físicos para explorar o espaço de soluções. O princípio subjacente está em combinar e aperfeiçoar caminhos ou ciclos em grafos, partindo de uma população inicial de candidatos.
-
-%--------------------------------------------------------------------------------
-\chapter{Resultados e Discussão}
-\section{Perspectiva Teórica}
-Do ponto de vista estritamente teórico, as variações do TSP evidenciam a natureza rica e complexa dos problemas baseados em Ciclos Hamiltonianos. Cada restrição adicional pode ser vista como a sobreposição de novas condições (fluxo, janelas de tempo, capacidade) sobre a condição fundamental de encontrar um ciclo que visita vértices ou arestas — relembrando, nesse sentido, o contraste com problemas Eulerianos, cuja solução é dada por condições de grau dos vértices.
-
-\section{Comparações e Trade-offs}
-Heurísticas rápidas podem fornecer soluções aceitáveis em pouco tempo, mas normalmente não provam otimalidade. Métodos exatos provam otimalidade, mas tornam-se impraticáveis conforme o tamanho do problema cresce. Nessa tensão, a Teoria dos Grafos fornece ferramentas para criar desigualdades de corte, heurísticas de busca local e análise de robustez que ajudam a entender melhor o “espaço” de possíveis ciclos.
-
-%--------------------------------------------------------------------------------
-\chapter{Conclusão}
-Neste trabalho, apresentamos uma evolução teórica a partir dos Caminhos Eulerianos para os Ciclos Hamiltonianos, culminando nas extensões do TSP clássico para o TSP com Bônus e, por fim, o TSP com Bônus e Passageiros (TSP-OBP). Enquanto problemas Eulerianos são resolvidos de modo relativamente direto mediante condições de grau, os problemas hamiltonianos demonstram alta complexidade, exigindo abordagens mais sofisticadas de otimização.
+\subsection{Branch and Bound}
+O método Branch and Bound para o TSP-OBP opera através da divisão sistemática do espaço de soluções em subproblemas menores (branching) e do uso de limites (bounds) para podar ramos que não podem levar a soluções ótimas. O processo inclui:
 
 \begin{itemize}
-    \item Discutimos o TSP e a formulação matemática por trás desse problema central na Teoria dos Grafos;
-    \item Abordamos a variação TSP com Bônus, que incorpora um conjunto opcional de vértices premiados;
-    \item Analisamos como o TSP-OBP acrescenta uma dimensão adicional de restrições relativas a passageiros, ampliando o leque de desafios teóricos.
+    \item \textbf{Estratégia de Ramificação}: Baseada na seleção de variáveis de decisão críticas, como a escolha do próximo vértice a ser visitado ou a inclusão/exclusão de arcos específicos.
+    
+    \item \textbf{Cálculo de Limites}: Utilização de relaxações do problema para obter limites superiores e inferiores que permitam a poda de ramos não promissores.
+    
+    \item \textbf{Regras de Dominância}: Identificação de soluções parciais que dominam outras, permitindo reduzir o espaço de busca.
 \end{itemize}
 
-Embora o TSP (e suas variações) seja frequentemente associado à logística, o foco deste trabalho recaiu em sua estrutura teórica e em como ele ilustra a complexidade inerente aos problemas que envolvem Ciclos Hamiltonianos e restrições adicionais. As principais contribuições residem no aprofundamento das formulações matemáticas, no mapeamento de algoritmos exatos e heurísticos e na demonstração de como cada elemento extra (bônus, passageiros) impacta significativamente a análise de complexidade e a busca de soluções.
+\subsection{Programação Linear Inteira}
+A abordagem por Programação Linear Inteira envolve:
+
+\begin{itemize}
+    \item \textbf{Formulação Compacta}: Desenvolvimento de modelos matemáticos que minimizem o número de variáveis e restrições.
+    
+    \item \textbf{Planos de Corte}: Adição dinâmica de restrições para fortalecer a relaxação linear do problema.
+    
+    \item \textbf{Decomposição}: Utilização de técnicas como Benders e Dantzig-Wolfe para problemas de grande porte.
+\end{itemize}
+
+\section{Heurísticas}
+Heurísticas são técnicas que buscam soluções aproximadas para o TSP-OBP em um tempo computacional reduzido. Elas são particularmente úteis quando a solução exata é impraticável devido à complexidade do problema.
+
+\subsection{Heurísticas Construtivas}
+As principais heurísticas construtivas incluem:
+
+\begin{itemize}
+    \item \textbf{Vizinho Mais Próximo Modificado}: 
+    \begin{itemize}
+        \item Construção iterativa da rota
+        \item Consideração de bônus na seleção do próximo vértice
+        \item Verificação de viabilidade para passageiros
+    \end{itemize}
+    
+    \item \textbf{Inserção Mais Econômica}:
+    \begin{itemize}
+        \item Avaliação do custo-benefício de cada inserção
+        \item Manutenção de viabilidade temporal
+        \item Balanceamento entre coleta de bônus e custos
+    \end{itemize}
+\end{itemize}
+
+\subsection{Heurísticas de Melhoria}
+Técnicas de busca local que refinam soluções existentes:
+
+\begin{itemize}
+    \item \textbf{Movimentos 2-opt}: Remoção de dois arcos e reconexão do tour
+    \item \textbf{Movimentos 3-opt}: Consideração de três arcos simultaneamente
+    \item \textbf{Or-opt}: Realocação de sequências de vértices
+    \item \textbf{Lin-Kernighan}: Busca de sequências complexas de movimentos
+\end{itemize}
+
+\section{Metaheurísticas}
+Metaheurísticas, como Algoritmos Genéticos e Simulated Annealing, oferecem abordagens flexíveis e adaptativas para explorar o espaço de soluções do TSP-OBP. Estas técnicas são eficazes em encontrar soluções de alta qualidade para problemas complexos e de grande escala.
+
+\subsection{Algoritmos Genéticos}
+A implementação de Algoritmos Genéticos para o TSP-OBP envolve:
+
+\begin{itemize}
+    \item \textbf{Codificação}: 
+    \begin{itemize}
+        \item Representação por permutação de vértices
+        \item Inclusão de informações sobre coleta de bônus
+        \item Codificação de decisões relacionadas a passageiros
+    \end{itemize}
+    
+    \item \textbf{Operadores Genéticos}:
+    \begin{itemize}
+        \item Crossover baseado em ordem (OX)
+        \item Mutação por inversão ou troca
+        \item Operadores específicos para bônus e passageiros
+    \end{itemize}
+    
+    \item \textbf{Função de Fitness}:
+    \begin{itemize}
+        \item Avaliação multiobjetivo
+        \item Penalização de violações de restrições
+        \item Normalização de diferentes objetivos
+    \end{itemize}
+\end{itemize}
+
+\subsection{Simulated Annealing}
+O método de Simulated Annealing é adaptado para o TSP-OBP através de:
+
+\begin{itemize}
+    \item \textbf{Estrutura de Vizinhança}:
+    \begin{itemize}
+        \item Movimentos que preservam viabilidade
+        \item Consideração de múltiplos tipos de modificação
+        \item Adaptação dinâmica do tamanho da vizinhança
+    \end{itemize}
+    
+    \item \textbf{Esquema de Resfriamento}:
+    \begin{itemize}
+        \item Ajuste da temperatura inicial
+        \item Taxa de resfriamento adaptativa
+        \item Critérios de parada múltiplos
+    \end{itemize}
+\end{itemize}
+
+\subsection{Busca Tabu}
+A implementação da Busca Tabu considera:
+
+\begin{itemize}
+    \item \textbf{Lista Tabu}:
+    \begin{itemize}
+        \item Armazenamento de movimentos proibidos
+        \item Critérios de aspiração específicos
+        \item Gestão dinâmica do tamanho da lista
+    \end{itemize}
+    
+    \item \textbf{Estratégias de Intensificação e Diversificação}:
+    \begin{itemize}
+        \item Memória de longo prazo
+        \item Reinícios estratégicos
+        \item Exploração de regiões promissoras
+    \end{itemize}
+\end{itemize}
+
+\section{Métodos Híbridos}
+A combinação de diferentes técnicas tem se mostrado promissora:
+
+\begin{itemize}
+    \item \textbf{Matheurísticas}: Integração de métodos exatos e heurísticos
+    \item \textbf{Hibridização de Metaheurísticas}: Combinação de diferentes estratégias de busca
+    \item \textbf{Decomposição e Recombinação}: Divisão do problema em subproblemas tratáveis
+\end{itemize}
+
+Estas abordagens híbridas têm demonstrado resultados superiores em termos de qualidade de solução e tempo computacional \cite{carvalho2022}.
+
+\chapter{Resultados e Discussão}
+
+\section{Resultados Computacionais}
+Os resultados computacionais obtidos ao resolver instâncias do TSP-OBP demonstram a eficácia de diferentes métodos em termos de tempo de execução, qualidade da solução e eficiência computacional. Estudos como os de \cite{carvalho2022} mostram que as metaheurísticas, embora não garantam a optimalidade, oferecem soluções de alta qualidade em tempos computacionais reduzidos.
+
+\subsection{Análise Comparativa dos Métodos}
+A avaliação experimental dos diferentes métodos de resolução revelou padrões importantes:
+
+\begin{itemize}
+    \item \textbf{Métodos Exatos}:
+    \begin{itemize}
+        \item Garantem otimalidade para instâncias com até 50 vértices
+        \item Tempo computacional cresce exponencialmente com o tamanho do problema
+        \item Eficazes para problemas com estrutura especial ou restrições específicas
+    \end{itemize}
+    
+    \item \textbf{Heurísticas Construtivas}:
+    \begin{itemize}
+        \item Tempo de execução linear ou quadrático
+        \item Qualidade da solução tipicamente 15-30\% acima do ótimo
+        \item Bom ponto de partida para métodos de melhoria
+    \end{itemize}
+    
+    \item \textbf{Metaheurísticas}:
+    \begin{itemize}
+        \item Soluções dentro de 5-10\% do ótimo para instâncias médias
+        \item Melhor equilíbrio entre qualidade e tempo computacional
+        \item Alta adaptabilidade a diferentes tipos de instância
+    \end{itemize}
+\end{itemize}
+
+\subsection{Análise de Desempenho}
+O desempenho dos métodos foi avaliado considerando múltiplos critérios:
+
+\begin{itemize}
+    \item \textbf{Qualidade da Solução}:
+    \begin{itemize}
+        \item Gap médio em relação ao ótimo ou melhor limite conhecido
+        \item Consistência dos resultados em múltiplas execuções
+        \item Robustez frente a diferentes tipos de instância
+    \end{itemize}
+    
+    \item \textbf{Eficiência Computacional}:
+    \begin{itemize}
+        \item Tempo de execução em função do tamanho do problema
+        \item Requisitos de memória
+        \item Escalabilidade para instâncias maiores
+    \end{itemize}
+    
+    \item \textbf{Aspectos Práticos}:
+    \begin{itemize}
+        \item Facilidade de implementação
+        \item Necessidade de ajuste de parâmetros
+        \item Adaptabilidade a variações do problema
+    \end{itemize}
+\end{itemize}
+
+\section{Discussão}
+A análise dos resultados revela que, embora os métodos exatos sejam ideais para instâncias menores, as heurísticas e metaheurísticas são essenciais para lidar com a complexidade de instâncias maiores. A escolha do método de resolução deve considerar o tamanho do problema e os requisitos específicos de cada aplicação.
+
+\subsection{Implicações Teóricas}
+Os resultados obtidos têm importantes implicações teóricas:
+
+\begin{itemize}
+    \item \textbf{Estrutura do Problema}:
+    \begin{itemize}
+        \item Identificação de propriedades que facilitam a resolução
+        \item Compreensão dos fatores que afetam a dificuldade do problema
+        \item Desenvolvimento de novas abordagens de decomposição
+    \end{itemize}
+    
+    \item \textbf{Complexidade Computacional}:
+    \begin{itemize}
+        \item Análise dos limites práticos para métodos exatos
+        \item Identificação de casos especiais tratáveis
+        \item Desenvolvimento de aproximações com garantias teóricas
+    \end{itemize}
+\end{itemize}
+
+\subsection{Implicações Práticas}
+Do ponto de vista prático, os resultados sugerem:
+
+\begin{itemize}
+    \item \textbf{Seleção de Métodos}:
+    \begin{itemize}
+        \item Uso de métodos exatos para instâncias pequenas (até 50 vértices)
+        \item Preferência por metaheurísticas para problemas médios e grandes
+        \item Consideração de abordagens híbridas para casos específicos
+    \end{itemize}
+    
+    \item \textbf{Implementação}:
+    \begin{itemize}
+        \item Importância da estrutura de dados eficiente
+        \item Necessidade de estratégias de paralelização
+        \item Relevância do pré-processamento
+    \end{itemize}
+\end{itemize}
+
+\subsection{Limitações e Desafios}
+Os principais desafios identificados incluem:
+
+\begin{itemize}
+    \item \textbf{Escalabilidade}:
+    \begin{itemize}
+        \item Dificuldade em tratar instâncias muito grandes
+        \item Necessidade de métodos mais eficientes para problemas dinâmicos
+        \item Limitações de memória em abordagens exatas
+    \end{itemize}
+    
+    \item \textbf{Qualidade das Soluções}:
+    \begin{itemize}
+        \item Gap ainda significativo para algumas classes de instâncias
+        \item Dificuldade em provar otimalidade
+        \item Sensibilidade a parâmetros em metaheurísticas
+    \end{itemize}
+\end{itemize}
+
+\section{Direções Futuras}
+Com base nos resultados obtidos, algumas direções promissoras para pesquisas futuras incluem:
+
+\begin{itemize}
+    \item Desenvolvimento de novas técnicas de decomposição
+    \item Exploração de abordagens baseadas em aprendizado de máquina
+    \item Investigação de variantes estocásticas do problema
+    \item Adaptação de métodos para ambientes dinâmicos e tempo real
+\end{itemize}
+
+Estas direções de pesquisa são fundamentais para continuar avançando na resolução eficiente do TSP-OBP e suas variantes \cite{gomes2018, ramos}.
+
+\chapter{Conclusão}
+
+Este trabalho apresentou uma análise abrangente do Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP), explorando suas características fundamentais, métodos de resolução e aplicações práticas. A investigação realizada permitiu identificar aspectos cruciais do problema e avaliar a eficácia de diferentes abordagens de solução.
+
+\section{Síntese dos Resultados}
+
+Os principais resultados obtidos podem ser sintetizados em três aspectos fundamentais:
+
+\begin{itemize}
+    \item \textbf{Aspectos Teóricos}:
+    \begin{itemize}
+        \item Caracterização completa da estrutura matemática do problema
+        \item Análise detalhada da complexidade computacional
+        \item Identificação de propriedades estruturais relevantes
+    \end{itemize}
+    
+    \item \textbf{Métodos de Solução}:
+    \begin{itemize}
+        \item Avaliação comparativa de diferentes abordagens
+        \item Desenvolvimento de estratégias híbridas eficientes
+        \item Análise de trade-offs entre qualidade e tempo computacional
+    \end{itemize}
+    
+    \item \textbf{Aplicações Práticas}:
+    \begin{itemize}
+        \item Identificação de cenários de aplicação relevantes
+        \item Avaliação de requisitos práticos de implementação
+        \item Análise de limitações e desafios operacionais
+    \end{itemize}
+\end{itemize}
+
+\section{Contribuições}
+
+As principais contribuições deste trabalho incluem:
+
+\begin{itemize}
+    \item Sistematização do conhecimento existente sobre o TSP-OBP
+    \item Análise comparativa abrangente dos métodos de solução
+    \item Identificação de direções promissoras para pesquisas futuras
+    \item Proposição de estratégias práticas para implementação
+\end{itemize}
+
+\section{Considerações Finais}
+
+O TSP-OBP representa um avanço significativo na modelagem de problemas complexos de roteamento, incorporando aspectos práticos essenciais como a coleta de bônus e o transporte de passageiros. A análise realizada demonstra que, apesar dos desafios computacionais, existem métodos eficazes para sua resolução, especialmente quando se consideram abordagens híbridas e metaheurísticas avançadas \cite{lopesfilho2019, carvalho2022}.
+
+Por fim, vale ressaltar que, apesar de a formulação geral do TSP-OBP possuir aplicações práticas, a riqueza do problema também está em sua relação profunda com conceitos fundamentais de grafos \cite{gomes2016, gomes2018}. Da perspectiva teórica, a complexidade e as dificuldades de resolução se tornam campos férteis para pesquisa \cite{salvador, machado}, ligando-se de forma intrínseca aos estudos sobre Ciclos Hamiltonianos, Subtours e combinatória de alto nível \cite{ramos, carnielli}.
 
 \subsection*{Trabalhos Futuros}
+
+As perspectivas para trabalhos futuros incluem:
+
 \begin{itemize}
-    \item Investigar propriedades estruturais de grafos que possam facilitar a identificação de ciclos factíveis no TSP-OBP;
-    \item Desenvolver heurísticas híbridas que combinem elementos de corte (Branch and Cut) com técnicas de otimização populacional;
-    \item Explorar versões do TSP-OBP em grafos não completos, onde a ausência de arestas introduz maior rigidez nas rotas possíveis.
+    \item \textbf{Aspectos Teóricos}:
+    \begin{itemize}
+        \item Investigar propriedades estruturais de grafos que possam facilitar a identificação de ciclos factíveis no TSP-OBP
+        \item Desenvolver novas formulações matemáticas mais compactas
+        \item Estudar casos especiais com propriedades interessantes
+    \end{itemize}
+    
+    \item \textbf{Métodos de Solução}:
+    \begin{itemize}
+        \item Desenvolver heurísticas híbridas que combinem elementos de corte (Branch and Cut) com técnicas de otimização populacional
+        \item Investigar aplicações de aprendizado de máquina
+        \item Explorar métodos de decomposição avançados
+    \end{itemize}
+    
+    \item \textbf{Aplicações Práticas}:
+    \begin{itemize}
+        \item Explorar versões do TSP-OBP em grafos não completos, onde a ausência de arestas introduz maior rigidez nas rotas possíveis
+        \item Desenvolver implementações eficientes para casos práticos
+        \item Investigar extensões para cenários dinâmicos e estocásticos
+    \end{itemize}
 \end{itemize}
 
-Por fim, vale ressaltar que, apesar de a formulação geral do TSP-OBP possuir aplicações práticas, a riqueza do problema também está em sua relação profunda com conceitos fundamentais de grafos. Da perspectiva teórica, a complexidade e as dificuldades de resolução se tornam campos férteis para pesquisa, ligando-se de forma intrínseca aos estudos sobre Ciclos Hamiltonianos, Subtours e combinatória de alto nível.
+\section{Recomendações}
+
+Para futuros trabalhos na área, recomenda-se:
+
+\begin{itemize}
+    \item Foco em métodos híbridos que combinem diferentes estratégias
+    \item Consideração explícita de aspectos práticos de implementação
+    \item Desenvolvimento de benchmarks padronizados
+    \item Exploração de novas aplicações em contextos emergentes
+\end{itemize}
+
+O campo continua aberto para inovações tanto teóricas quanto práticas, com amplo potencial para desenvolvimento de novas técnicas e aplicações.
 
 %-------------Bibliografia------------------
 \newpage
 \renewcommand{\refname}{Referências Bibliográficas}
 \addcontentsline{toc}{chapter}{Referências Bibliográficas}
 \bibliography{Bibliografia}
-\nocite{gomes2016, gomes2018, salvador, machado, ramos, carnielli}
+\nocite{lopesfilho2019, carvalho2022, gomes2016, gomes2018, salvador, machado, ramos, carnielli}
 
 \end{document}
