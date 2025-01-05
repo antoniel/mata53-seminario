@@ -1,4 +1,5 @@
 \babel@toc {brazil}{}\relax 
+\contentsline {section}{Introdu^^c3^^a7^^c3^^a3o}{1}{section*.2}%
 \contentsline {chapter}{\numberline {1}Fundamenta^^c3^^a7^^c3^^a3o Te^^c3^^b3rica}{4}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Problema do Caixeiro Viajante (TSP)}{4}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Extens^^c3^^b5es do TSP}{4}{section.1.2}%

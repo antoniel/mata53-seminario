@@ -117,12 +117,11 @@ como método avaliativo da disciplina \nomeCurso
 \thispagestyle{empty}
 % #endregion Índice
 
-
-
-% #endregion Introdução
 \newpage
 \setcounter{page}{1}
+\pagestyle{plain}
 \section*{Introdução}
+\addcontentsline{toc}{section}{Introdução}
 O Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP) é uma variação do clássico Problema do Caixeiro Viajante (TSP). Ele se distingue pela incorporação de coleta de bônus opcionais e pelo transporte de passageiros, adicionando complexidade ao problema original. O TSP clássico busca a rota mais curta para visitar um conjunto de cidades e retornar ao ponto de partida, enquanto o TSP-OBP estende essa ideia, permitindo a coleta de bônus em locais específicos e o transporte de passageiros entre pontos predeterminados.
 \subsection*{Componentes do TSP-OBP}
 \begin{itemize} \item \textbf{Coleta de bônus:} O caixeiro pode escolher visitar nós opcionais para coletar bônus, o que pode aumentar o lucro total, apesar de potencialmente aumentar a distância percorrida. Existe um equilíbrio entre o custo da viagem e o lucro obtido pelos bônus. \item \textbf{Transporte de passageiros:} O problema inclui a restrição de pegar e deixar passageiros em locais predefinidos, adicionando uma camada extra de complexidade ao planejamento da rota. Os passageiros devem ser transportados dentro de janelas de tempo específicas, garantindo que sua inclusão na rota não cause grandes interrupções no itinerário. \end{itemize}
