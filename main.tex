@@ -160,11 +160,11 @@ O escopo do trabalho abrange desde a fundamentação teórica até as aplicaçõ
 \chapter{Fundamentação Teórica}
 
 \section{Problema do Caixeiro Viajante (TSP)}
-O Problema do Caixeiro Viajante consiste em encontrar a menor rota que visita um conjunto de cidades exatamente uma vez e retorna ao ponto de origem. É um problema clássico de otimização combinatória, amplamente estudado na teoria da computação. A complexidade do TSP-OBP aumenta significativamente devido à introdução de variáveis adicionais, como bônus e passageiros, que requerem novas abordagens de modelagem e solução \cite{lopesfilho2019}.
+O \textbf{Problema do Caixeiro Viajante (PCV)}, ou Traveling Salesman Problem (TSP), consiste em encontrar o ciclo hamiltoniano de menor custo em um grafo ponderado, onde o ciclo visita cada vértice (cidade) exatamente uma vez e retorna ao vértice de origem \cite{goldbarg2012}. Este problema é um dos clássicos da otimização combinatória e tem sido amplamente estudado na teoria da computação devido à sua complexidade e aplicabilidade. Como apontam \cite{goldbarg2012, lopesfilho2019}, a introdução de variáveis adicionais como \textbf{bônus} e \textbf{passageiros}, no \textbf{Problema do Caixeiro Viajante com Coleta Opcional de Bônus e Passageiros (TSP-OBP)}, aumenta significativamente a complexidade do problema original, exigindo novas abordagens de modelagem e solução.
 
-Do ponto de vista matemático, o TSP pode ser representado como um grafo completo G = (V, E), onde V é o conjunto de vértices (cidades) e E é o conjunto de arestas (conexões entre cidades). Cada aresta (i,j) $\in$ E possui um custo associado cij, que representa a distância ou tempo de viagem entre as cidades i e j. O objetivo é encontrar um ciclo hamiltoniano de custo mínimo, ou seja, um caminho que visite todos os vértices exatamente uma vez e retorne ao ponto inicial.
+Matematicamente, o TSP pode ser representado como um grafo completo $G = (N, M)$, onde $N$ é o conjunto de vértices (cidades) e $M$ é o conjunto de arestas (conexões entre cidades). Cada aresta $(i, j) \in M$ possui um custo associado $c_{ij}$, que representa a distância ou o tempo de viagem entre as cidades $i$ e $j$ \cite{goldbarg2012}. O objetivo é encontrar um \textbf{ciclo hamiltoniano} de custo mínimo, ou seja, um caminho que visite todos os vértices exatamente uma vez e retorne ao ponto inicial. 
 
-A natureza NP-difícil do TSP implica que não existe um algoritmo conhecido que possa resolver o problema em tempo polinomial para todas as instâncias. Esta característica fundamental do problema base já apresenta desafios significativos para sua resolução, que são amplificados quando consideramos as extensões com bônus e passageiros .
+A natureza \textbf{NP-difícil} do TSP implica que não existe um algoritmo conhecido que possa resolver o problema em tempo polinomial para todas as instâncias \cite{goldbarg2012, carnielli}.  Essa característica fundamental do problema base apresenta desafios significativos para sua resolução, que são amplificados quando consideramos extensões como o TSP-OBP, onde a coleta de bônus e o transporte de passageiros introduzem novas dimensões de complexidade combinatória e decisões a serem tomadas \cite{lopesfilho2019, carvalho2022}. O livro de Goldbarg detalha vários algoritmos para o PCV, incluindo heurísticas e métodos de aproximação, que podem servir como ponto de partida para a compreensão de problemas mais complexos, como o TSP-OBP.
 
 \section{Extensões do TSP}
 As extensões do TSP, como o TSP com Bônus e o TSP-OBP, introduzem novas dimensões ao problema original, exigindo a consideração de múltiplos objetivos e restrições. Essas variações são fundamentais para capturar a complexidade de cenários reais, onde decisões de roteamento devem equilibrar custos, prêmios e restrições de passageiros \cite{carvalho2022}.
@@ -186,14 +186,14 @@ O TSP-OBP pode ser formalizado como um problema de otimização em grafos, onde 
 Formalmente, o TSP-OBP pode ser definido como:
 
 \begin{itemize}
-    \item \textbf{Grafo}: G = (V, E), onde V é o conjunto de vértices e E o conjunto de arestas;
-    \item \textbf{Custos}: cij representa o custo de viagem entre os vértices i e j;
-    \item \textbf{Bônus}: bi é o valor do bônus associado ao vértice i $\in$ V;
+    \item \textbf{Grafo}: $G = (V, E)$, onde $V$ é o conjunto de vértices e $E$ o conjunto de arestas;
+    \item \textbf{Custos}: $c_{ij}$ representa o custo de viagem entre os vértices $i$ e $j$;
+    \item \textbf{Bônus}: $b_i$ é o valor do bônus associado ao vértice $i \in V$;
     \item \textbf{Passageiros}: P é o conjunto de passageiros, onde cada p $\in$ P possui:
     \begin{itemize}
-        \item origem op e destino dp
-        \item janela de tempo [tp\_inicio, tp\_fim] para embarque
-        \item tempo máximo de viagem maxp
+        \item origem $o_p$ e destino $d_p$
+        \item janela de tempo [$t_{p\_inicio}$, $t_{p\_fim}$] para embarque
+        \item tempo máximo de viagem $t_{max\_p}$
     \end{itemize}
 \end{itemize}
 
@@ -203,7 +203,7 @@ A função objetivo do TSP-OBP pode ser expressa como uma combinação ponderada
     \text{max} \sum_{i \in V} b_i x_i - \alpha \sum_{(i,j) \in E} c_{ij} y_{ij}
 \end{equation}
 
-onde xi é uma variável binária que indica se o vértice i é visitado, yij indica se a aresta (i,j) é utilizada na solução, e $\alpha$ é um parâmetro de balanceamento entre os objetivos \cite{lopesfilho2019}.
+onde $x_i$ é uma variável binária que indica se o vértice $i$ é visitado, $y_{ij}$ indica se a aresta $(i,j)$ é utilizada na solução, e $\alpha$ é um parâmetro de balanceamento entre os objetivos \cite{lopesfilho2019}.
 
 \section{Complexidade Computacional}
 A análise de complexidade do TSP-OBP revela que o problema é NP-difícil, uma vez que contém o TSP clássico como caso especial. Além disso, a adição de restrições de passageiros e bônus introduz novas dimensões de complexidade, tornando o problema ainda mais desafiador do ponto de vista computacional \cite{carvalho2022}.
