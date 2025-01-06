@@ -1,45 +1,45 @@
 \babel@toc {brazil}{}\relax 
-\contentsline {chapter}{\numberline {1}Introdução}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Contextualização e Relevância}{2}{section.1.1}%
+\contentsline {chapter}{\numberline {1}Introdu^^c3^^a7^^c3^^a3o}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Contextualiza^^c3^^a7^^c3^^a3o e Relev^^c3^^a2ncia}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Objetivos e Escopo}{2}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Fundamentação Teórica}{3}{chapter.2}%
+\contentsline {chapter}{\numberline {2}Fundamenta^^c3^^a7^^c3^^a3o Te^^c3^^b3rica}{3}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Problema do Caixeiro Viajante (TSP)}{3}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Extensões do TSP}{3}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Definição Formal do Problema}{4}{section.2.3}%
+\contentsline {section}{\numberline {2.2}Extens^^c3^^b5es do TSP}{3}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Defini^^c3^^a7^^c3^^a3o Formal do Problema}{4}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Complexidade Computacional}{5}{section.2.4}%
-\contentsline {chapter}{\numberline {3}Modelagem Matemática}{6}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Variáveis de Decisão}{6}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Função Objetivo}{6}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Restrições}{7}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Restrições de Fluxo}{7}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Restrições de Conectividade}{7}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Restrições de Passageiros}{7}{subsection.3.3.3}%
-\contentsline {section}{\numberline {3.4}Considerações Práticas}{8}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Extensões do Modelo}{8}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Métodos de Resolução}{9}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Métodos Exatos}{9}{section.4.1}%
+\contentsline {chapter}{\numberline {3}Modelagem Matem^^c3^^a1tica}{6}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Vari^^c3^^a1veis de Decis^^c3^^a3o}{6}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Fun^^c3^^a7^^c3^^a3o Objetivo}{6}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Restri^^c3^^a7^^c3^^b5es}{7}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Restri^^c3^^a7^^c3^^b5es de Fluxo}{7}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Restri^^c3^^a7^^c3^^b5es de Conectividade}{7}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Restri^^c3^^a7^^c3^^b5es de Passageiros}{7}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Considera^^c3^^a7^^c3^^b5es Pr^^c3^^a1ticas}{8}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Extens^^c3^^b5es do Modelo}{8}{section.3.5}%
+\contentsline {chapter}{\numberline {4}M^^c3^^a9todos de Resolu^^c3^^a7^^c3^^a3o}{9}{chapter.4}%
+\contentsline {section}{\numberline {4.1}M^^c3^^a9todos Exatos}{9}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Branch and Bound}{9}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Programação Linear Inteira}{9}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Heurísticas}{10}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Heurísticas Construtivas}{10}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Heurísticas de Melhoria}{10}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Metaheurísticas}{11}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Algoritmos Genéticos}{11}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.1.2}Programa^^c3^^a7^^c3^^a3o Linear Inteira}{9}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Heur^^c3^^adsticas}{10}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Heur^^c3^^adsticas Construtivas}{10}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Heur^^c3^^adsticas de Melhoria}{10}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Metaheur^^c3^^adsticas}{11}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Algoritmos Gen^^c3^^a9ticos}{11}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Simulated Annealing}{11}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}Busca Tabu}{12}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}Métodos Híbridos}{12}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Resultados e Discussão}{13}{chapter.5}%
+\contentsline {section}{\numberline {4.4}M^^c3^^a9todos H^^c3^^adbridos}{12}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Resultados e Discuss^^c3^^a3o}{13}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Resultados Computacionais}{13}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Análise Comparativa dos Métodos}{13}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Análise de Desempenho}{14}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}Discussão}{14}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Implicações Teóricas}{14}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Implicações Práticas}{15}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Limitações e Desafios}{15}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Direções Futuras}{16}{section.5.3}%
-\contentsline {chapter}{\numberline {6}Conclusão}{17}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Síntese dos Resultados}{17}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Contribuições}{18}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Considerações Finais}{18}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Recomendações}{19}{section.6.4}%
-\contentsline {chapter}{Referências Bibliográficas}{20}{section.6.4}%
+\contentsline {subsection}{\numberline {5.1.1}An^^c3^^a1lise Comparativa dos M^^c3^^a9todos}{13}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}An^^c3^^a1lise de Desempenho}{14}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Discuss^^c3^^a3o}{14}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Implica^^c3^^a7^^c3^^b5es Te^^c3^^b3ricas}{14}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Implica^^c3^^a7^^c3^^b5es Pr^^c3^^a1ticas}{15}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Limita^^c3^^a7^^c3^^b5es e Desafios}{15}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Dire^^c3^^a7^^c3^^b5es Futuras}{16}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Conclus^^c3^^a3o}{17}{chapter.6}%
+\contentsline {section}{\numberline {6.1}S^^c3^^adntese dos Resultados}{17}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Contribui^^c3^^a7^^c3^^b5es}{18}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Considera^^c3^^a7^^c3^^b5es Finais}{18}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Recomenda^^c3^^a7^^c3^^b5es}{19}{section.6.4}%
+\contentsline {chapter}{Refer^^c3^^aancias Bibliogr^^c3^^a1ficas}{20}{section.6.4}%

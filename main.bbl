@@ -10,34 +10,11 @@ M.~R. Carvalho.
 \newblock Métodos heurísticos para o tsp-obp.
 \newblock {\em Journal of Combinatorial Optimization}, 2022.
 
-\bibitem{gomes2018}
-R.~Gomes.
-\newblock Otimização combinatória em grafos.
-\newblock {\em Revista de Matemática e Computação}, 2018.
-
-\bibitem{gomes2016}
-R.~Gomes and C.~Silva.
-\newblock Algoritmos para problemas de roteamento.
-\newblock {\em Pesquisa Operacional}, 2016.
-
 \bibitem{lopesfilho2019}
-J.~A. Lopes~Filho.
-\newblock O problema do caixeiro viajante com coleta de bônus e passageiros.
-\newblock {\em Revista Brasileira de Otimização}, 2019.
-
-\bibitem{machado}
-A.~Machado.
-\newblock {\em Problemas de Otimização em Grafos}.
-\newblock Atlas, 2019.
-
-\bibitem{ramos}
-J.~Ramos and M.~Santos.
-\newblock Variantes do problema do caixeiro viajante.
-\newblock {\em Tendências em Matemática Aplicada}, 2021.
-
-\bibitem{salvador}
-P.~Salvador and R.~Oliveira.
-\newblock {\em Teoria dos Grafos e Aplicações}.
-\newblock Editora Universitária, 2020.
+José Gomes~Lopes Filho.
+\newblock {\em Problema do Caixeiro Viajante com Coleta Opcional de Bônus,
+  Tempo de Coleta e Passageiros}.
+\newblock Tese de doutorado, Universidade Federal do Rio Grande do Norte,
+  Natal-RN, 2019.
 
 \end{thebibliography}

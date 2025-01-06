@@ -21,6 +21,7 @@
 \usepackage{subfigure}
 \bibliographystyle{plain}
 
+
 \graphicspath{{Figuras/}}
 
 \renewcommand{\theenumii}{\alph{enumii}}
@@ -94,7 +95,7 @@
 
 \begin{flushright}
 \begin{minipage}{8.6cm}
-Estudo dirigido entregue ao professor \nomeProfessor
+Estudo dirigido entregue ao professor \nomeProfessor\ 
 como método avaliativo da disciplina \nomeCurso
 
 
@@ -125,15 +126,15 @@ como método avaliativo da disciplina \nomeCurso
 
 O **Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP)** é uma extensão do clássico Problema do Caixeiro Viajante (TSP). Ele combina aspectos de coleta de prêmios, transporte de passageiros e otimização de rotas, tornando-se relevante em diversas aplicações, como logística, turismo e transporte público. Estudos recentes, como os de \cite{lopesfilho2019} e \cite{carvalho2022}, destacam a importância do TSP-OBP na otimização de recursos e na melhoria da eficiência operacional em sistemas complexos.
 
-A complexidade inerente ao TSP-OBP advém da necessidade de equilibrar múltiplos objetivos conflitantes: maximizar a coleta de bônus, minimizar a distância total percorrida e satisfazer as restrições de transporte de passageiros. Esta característica multiobjetivo torna o problema particularmente desafiador do ponto de vista computacional, exigindo abordagens sofisticadas para sua resolução \cite{gomes2016}.
+A complexidade inerente ao TSP-OBP advém da necessidade de equilibrar múltiplos objetivos conflitantes: maximizar a coleta de bônus, minimizar a distância total percorrida e satisfazer as restrições de transporte de passageiros. Esta característica multiobjetivo torna o problema particularmente desafiador do ponto de vista computacional, exigindo abordagens sofisticadas para sua resolução.
 
-No contexto atual, onde a otimização de recursos e a eficiência operacional são cruciais, o TSP-OBP emerge como uma ferramenta fundamental para modelar e resolver problemas complexos de roteamento. Suas aplicações se estendem desde sistemas de entrega com incentivos até serviços de transporte sob demanda, onde a flexibilidade na coleta de bônus e o gerenciamento eficiente de passageiros são essenciais \cite{salvador}.
+No contexto atual, onde a otimização de recursos e a eficiência operacional são cruciais, o TSP-OBP emerge como uma ferramenta fundamental para modelar e resolver problemas complexos de roteamento. Suas aplicações se estendem desde sistemas de entrega com incentivos até serviços de transporte sob demanda, onde a flexibilidade na coleta de bônus e o gerenciamento eficiente de passageiros são essenciais.
 
 Este relatório tem como objetivo apresentar uma análise detalhada do problema, sua modelagem matemática, métodos de resolução e aplicações práticas. Além disso, exploraremos as contribuições teóricas e práticas que o TSP-OBP oferece para a pesquisa em otimização combinatória. A estrutura do trabalho está organizada de forma a proporcionar uma compreensão progressiva do tema, partindo dos fundamentos teóricos até as aplicações mais avançadas e perspectivas futuras.
 
 \section{Contextualização e Relevância}
 
-O TSP-OBP surge como uma resposta natural à evolução dos sistemas de transporte e logística modernos, onde a simples otimização de rotas já não é suficiente para atender às demandas complexas do mercado. A incorporação de bônus e passageiros ao problema clássico do caixeiro viajante reflete a necessidade de modelos mais sofisticados, capazes de capturar a realidade multifacetada dos sistemas de transporte contemporâneos \cite{machado}.
+O TSP-OBP surge como uma resposta natural à evolução dos sistemas de transporte e logística modernos, onde a simples otimização de rotas já não é suficiente para atender às demandas complexas do mercado. A incorporação de bônus e passageiros ao problema clássico do caixeiro viajante reflete a necessidade de modelos mais sofisticados, capazes de capturar a realidade multifacetada dos sistemas de transporte contemporâneos.
 
 Em termos práticos, o problema encontra aplicações em diversos cenários:
 \begin{itemize}
@@ -161,9 +162,9 @@ O escopo do trabalho abrange desde a fundamentação teórica até as aplicaçõ
 \section{Problema do Caixeiro Viajante (TSP)}
 O Problema do Caixeiro Viajante consiste em encontrar a menor rota que visita um conjunto de cidades exatamente uma vez e retorna ao ponto de origem. É um problema clássico de otimização combinatória, amplamente estudado na teoria da computação. A complexidade do TSP-OBP aumenta significativamente devido à introdução de variáveis adicionais, como bônus e passageiros, que requerem novas abordagens de modelagem e solução \cite{lopesfilho2019}.
 
-Do ponto de vista matemático, o TSP pode ser representado como um grafo completo G = (V, E), onde V é o conjunto de vértices (cidades) e E é o conjunto de arestas (conexões entre cidades). Cada aresta (i,j) $\in$ E possui um custo associado cij, que representa a distância ou tempo de viagem entre as cidades i e j. O objetivo é encontrar um ciclo hamiltoniano de custo mínimo, ou seja, um caminho que visite todos os vértices exatamente uma vez e retorne ao ponto inicial \cite{salvador}.
+Do ponto de vista matemático, o TSP pode ser representado como um grafo completo G = (V, E), onde V é o conjunto de vértices (cidades) e E é o conjunto de arestas (conexões entre cidades). Cada aresta (i,j) $\in$ E possui um custo associado cij, que representa a distância ou tempo de viagem entre as cidades i e j. O objetivo é encontrar um ciclo hamiltoniano de custo mínimo, ou seja, um caminho que visite todos os vértices exatamente uma vez e retorne ao ponto inicial.
 
-A natureza NP-difícil do TSP implica que não existe um algoritmo conhecido que possa resolver o problema em tempo polinomial para todas as instâncias. Esta característica fundamental do problema base já apresenta desafios significativos para sua resolução, que são amplificados quando consideramos as extensões com bônus e passageiros \cite{gomes2018}.
+A natureza NP-difícil do TSP implica que não existe um algoritmo conhecido que possa resolver o problema em tempo polinomial para todas as instâncias. Esta característica fundamental do problema base já apresenta desafios significativos para sua resolução, que são amplificados quando consideramos as extensões com bônus e passageiros .
 
 \section{Extensões do TSP}
 As extensões do TSP, como o TSP com Bônus e o TSP-OBP, introduzem novas dimensões ao problema original, exigindo a consideração de múltiplos objetivos e restrições. Essas variações são fundamentais para capturar a complexidade de cenários reais, onde decisões de roteamento devem equilibrar custos, prêmios e restrições de passageiros \cite{carvalho2022}.
@@ -177,7 +178,7 @@ Entre as principais extensões, podemos destacar:
     \item \textbf{TSP com Múltiplos Veículos (mTSP)}: Considera uma frota de veículos para realizar as visitas.
 \end{itemize}
 
-O TSP-OBP combina elementos dessas diferentes variantes, incorporando tanto aspectos de coleta de bônus quanto o gerenciamento de passageiros, o que resulta em um problema significativamente mais complexo \cite{ramos}.
+O TSP-OBP combina elementos dessas diferentes variantes, incorporando tanto aspectos de coleta de bônus quanto o gerenciamento de passageiros, o que resulta em um problema significativamente mais complexo.
 
 \section{Definição Formal do Problema}
 O TSP-OBP pode ser formalizado como um problema de otimização em grafos, onde o objetivo é maximizar a coleta de bônus e minimizar o custo total de deslocamento, respeitando as restrições de passageiros. Esta definição formal permite a aplicação de técnicas avançadas de otimização para encontrar soluções eficientes.
@@ -216,7 +217,7 @@ Alguns aspectos que contribuem para a complexidade do problema incluem:
     \item Necessidade de coordenação entre múltiplos objetivos conflitantes.
 \end{itemize}
 
-Esta complexidade inerente motiva o desenvolvimento de diferentes abordagens de solução, desde métodos exatos para instâncias pequenas até heurísticas e metaheurísticas para problemas de maior escala \cite{gomes2016}.
+Esta complexidade inerente motiva o desenvolvimento de diferentes abordagens de solução, desde métodos exatos para instâncias pequenas até heurísticas e metaheurísticas para problemas de maior escala.
 
 \chapter{Modelagem Matemática}
 
@@ -318,12 +319,12 @@ O modelo básico pode ser estendido para incorporar características adicionais,
     \item Incerteza nos parâmetros do problema
 \end{itemize}
 
-Estas extensões aumentam a aplicabilidade do modelo em situações reais, mas também incrementam sua complexidade computacional \cite{gomes2016}.
+Estas extensões aumentam a aplicabilidade do modelo em situações reais, mas também incrementam sua complexidade computacional.
 
 \chapter{Métodos de Resolução}
 
 \section{Métodos Exatos}
-Os métodos exatos, como o Branch and Bound e a Programação Linear Inteira (ILP), são fundamentais para resolver instâncias menores do TSP-OBP. No entanto, para instâncias maiores, a complexidade computacional torna-se um desafio significativo, exigindo o desenvolvimento de heurísticas e metaheurísticas mais sofisticadas \cite{lopesfilho2019, carvalho2022}.
+Os métodos exatos, como o Branch and Bound e a Programação Linear Inteira (ILP), são fundamentais para resolver instâncias menores do TSP-OBP. No entanto, para instâncias maiores, a complexidade computacional torna-se um desafio significativo, exigindo o desenvolvimento de heurísticas e meta-heurísticas mais sofisticadas \cite{lopesfilho2019, carvalho2022}.
 
 \subsection{Branch and Bound}
 O método Branch and Bound para o TSP-OBP opera através da divisão sistemática do espaço de soluções em subproblemas menores (branching) e do uso de limites (bounds) para podar ramos que não podem levar a soluções ótimas. O processo inclui:
@@ -584,7 +585,7 @@ Com base nos resultados obtidos, algumas direções promissoras para pesquisas f
     \item Adaptação de métodos para ambientes dinâmicos e tempo real
 \end{itemize}
 
-Estas direções de pesquisa são fundamentais para continuar avançando na resolução eficiente do TSP-OBP e suas variantes \cite{gomes2018, ramos}.
+Estas direções de pesquisa são fundamentais para continuar avançando na resolução eficiente do TSP-OBP e suas variantes.
 
 \chapter{Conclusão}
 
@@ -627,12 +628,11 @@ As principais contribuições deste trabalho incluem:
     \item Identificação de direções promissoras para pesquisas futuras
     \item Proposição de estratégias práticas para implementação
 \end{itemize}
-
 \section{Considerações Finais}
 
 O TSP-OBP representa um avanço significativo na modelagem de problemas complexos de roteamento, incorporando aspectos práticos essenciais como a coleta de bônus e o transporte de passageiros. A análise realizada demonstra que, apesar dos desafios computacionais, existem métodos eficazes para sua resolução, especialmente quando se consideram abordagens híbridas e metaheurísticas avançadas \cite{lopesfilho2019, carvalho2022}.
 
-Por fim, vale ressaltar que, apesar de a formulação geral do TSP-OBP possuir aplicações práticas, a riqueza do problema também está em sua relação profunda com conceitos fundamentais de grafos \cite{gomes2016, gomes2018}. Da perspectiva teórica, a complexidade e as dificuldades de resolução se tornam campos férteis para pesquisa \cite{salvador, machado}, ligando-se de forma intrínseca aos estudos sobre Ciclos Hamiltonianos, Subtours e combinatória de alto nível \cite{ramos, carnielli}.
+Por fim, vale ressaltar que, apesar de a formulação geral do TSP-OBP possuir aplicações práticas, a riqueza do problema também está em sua relação profunda com conceitos fundamentais de grafos. Da perspectiva teórica, a complexidade e as dificuldades de resolução se tornam campos férteis para pesquisa, ligando-se de forma intrínseca aos estudos sobre Ciclos Hamiltonianos, Subtours e combinatória de alto nível \cite{carnielli}.
 
 \subsection*{Trabalhos Futuros}
 
@@ -679,6 +679,6 @@ O campo continua aberto para inovações tanto teóricas quanto práticas, com a
 \renewcommand{\refname}{Referências Bibliográficas}
 \addcontentsline{toc}{chapter}{Referências Bibliográficas}
 \bibliography{Bibliografia}
-\nocite{lopesfilho2019, carvalho2022, gomes2016, gomes2018, salvador, machado, ramos, carnielli}
+\nocite{lopesfilho2019, carvalho2022, carnielli}
 
 \end{document}
