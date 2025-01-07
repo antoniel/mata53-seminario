@@ -1,0 +1,18 @@
+{
+  "workbench.colorCustomizations": {
+    "minimap.errorHighlight": "#ff0000",
+    "terminal.background": "#00000000"
+  },
+  "files.exclude": {
+    "main.aux": true,
+    "main.bbl": true,
+    "main.blg": true,
+    "main.fdb_latexmk": true,
+    "main.fls": true,
+    "main.log": true,
+    "main.out": true,
+    "main.toc": true,
+    "main.synctex.gz": true,
+    ".gitignore": true
+  }
+}

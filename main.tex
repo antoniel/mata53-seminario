@@ -41,7 +41,7 @@
 \newcounter{contar}
 %  #endregion preâmbulo
 
-% Variáveis 
+% #region Variáveis 
 \newcommand{\nomeUniversidade}{Universidade Federal da Bahia}
 \newcommand{\nomeInstituto}{Instituto de Computação}
 \newcommand{\nomeCurso}{MATA53 - Teoria dos grafos}
@@ -50,6 +50,7 @@
 \sc{\large{João Leahy}} \\
 \sc{\large{Luis Felipe}}}
 \newcommand{\titulo}{\sc{\Large{Relatório: Problema do caixeiro viajante com bônus e passageiros}}}
+% #endregion Variáveis 
 
 \begin{document}
 
@@ -116,11 +117,11 @@ como método avaliativo da disciplina \nomeCurso
 \newpage
 \tableofcontents
 \thispagestyle{empty}
-% #endregion Índice
-
 \newpage
 \setcounter{page}{1}
 \pagestyle{plain}
+% #endregion Índice
+
 
 \section*{Introdução}
 
@@ -146,7 +147,6 @@ Em termos práticos, o problema encontra aplicações em diversos cenários:
 \end{itemize}
 
 \section{Objetivos e Escopo}
-
 O presente trabalho tem como objetivos específicos:
 \begin{itemize}
     \item Analisar a estrutura matemática do TSP-OBP e suas propriedades fundamentais;
@@ -264,14 +264,15 @@ onde:
     \item $\alpha$ é o parâmetro de balanceamento entre bônus e custos
 \end{itemize}
 
-\section{Restrições}
-As restrições do TSP-OBP incluem a necessidade de visitar todos os vértices obrigatórios, respeitar as janelas de tempo dos passageiros e garantir que a capacidade do veículo não seja excedida. Estas restrições adicionam camadas de complexidade ao problema, exigindo abordagens inovadoras para sua resolução.
-
-\subsection{Restrições de Fluxo}
+\section{Restrições de Fluxo}
 \begin{align}
-    \sum_{j \in V} x_{ij} &= y_i & \forall i \in V \\
-    \sum_{i \in V} x_{ij} &= y_j & \forall j \in V
+    \sum_{j \in V} x_{ij} &= y_i & \forall i \in V \label{eq:fluxo_saida} \\
+    \sum_{i \in V} x_{ij} &= y_j & \forall j \in V \label{eq:fluxo_entrada}
 \end{align}
+
+A \textbf{Equação \eqref{eq:fluxo_saida}} garante que, para cada vértice $i$, se ele está na solução ($y_i=1$), então existe uma aresta saindo de $i$. Já a \textbf{Equação \eqref{eq:fluxo_entrada}} assegura que, se o vértice $j$ está na solução ($y_j=1$), então há uma aresta chegando em $j$. Essas restrições são fundamentais para garantir a continuidade da rota.
+
+Essas restrições são chamadas de \textbf{restrições de atribuição} \cite{lopesfilho2019,carvalho2022}. As variáveis $x_{ij}$ são \textbf{binárias}, indicando se a aresta $(i,j)$ faz parte da rota. As variáveis $y_i$ também são \textbf{binárias}, representando se o vértice $i$ está na rota ou não.
 
 \subsection{Restrições de Conectividade}
 Para eliminar subciclos, utilizamos as restrições de Miller-Tucker-Zemlin (MTZ):
