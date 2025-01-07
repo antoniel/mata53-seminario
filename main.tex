@@ -274,53 +274,78 @@ A \textbf{Equação \eqref{eq:fluxo_saida}} garante que, para cada vértice $i$,
 
 Essas restrições são chamadas de \textbf{restrições de atribuição} \cite{lopesfilho2019,carvalho2022}. As variáveis $x_{ij}$ são \textbf{binárias}, indicando se a aresta $(i,j)$ faz parte da rota. As variáveis $y_i$ também são \textbf{binárias}, representando se o vértice $i$ está na rota ou não.
 
-\subsection{Restrições de Conectividade}
-Para eliminar subciclos, utilizamos as restrições de Miller-Tucker-Zemlin (MTZ):
+% #region restricao_conectividade
+\section{Restrições de Conectividade}
+
+\subsection*{Eliminação de Subciclos com Miller-Tucker-Zemlin (MTZ)}
+Para garantir que a solução seja um único ciclo Hamiltoniano, e não múltiplos subciclos desconexos, utilizamos as restrições propostas por Miller, Tucker e Zemlin (MTZ). Estas restrições são formuladas como:
 \begin{equation}
     u_i - u_j + n x_{ij} \leq n-1 \quad \forall i,j \in V, i \neq j
 \end{equation}
-onde $u_i$ é uma variável auxiliar que representa a ordem de visita do vértice i.
-
-\subsection{Restrições de Passageiros}
-Para cada passageiro k $\in$ P:
-\begin{align}
-    \sum_{i \in V} p_{ik} &\leq 1 & \forall k \in P \\
-    t_i + s_i + c_{ij} - M(1-x_{ij}) &\leq t_j & \forall i,j \in V \\
-    t_i &\geq e_i & \forall i \in V \\
-    t_i &\leq l_i & \forall i \in V
-\end{align}
-
 onde:
 \begin{itemize}
-    \item $s_i$ é o tempo de serviço no vértice i
-    \item $e_i$ e $l_i$ são os limites da janela de tempo do vértice i
-    \item M é uma constante suficientemente grande
+    \item $u_i$ é uma variável auxiliar \textbf{inteira} que representa a ordem de visita do vértice $i$ na rota.
+    \item $n$ representa o número total de vértices no grafo.
+     \item $x_{ij}$ é uma variável \textbf{binária} que indica se a aresta que conecta diretamente o vértice $i$ ao vértice $j$ faz parte da solução. Se $x_{ij} = 1$, a aresta está na rota; caso contrário, $x_{ij} = 0$.
+    \item $V$ representa o conjunto de todos os vértices no grafo.
 \end{itemize}
 
-\section{Considerações Práticas}
-Na implementação do modelo matemático, alguns aspectos práticos devem ser considerados:
+\subsection*{Explicação Detalhada}
+\noindent O objetivo principal dessas restrições é \textbf{eliminar a formação de subciclos} que não incluem todos os vértices do grafo. A ideia central é que, se um ciclo Hamiltoniano é formado, os valores de $u_i$ devem representar uma sequência coerente de visitas aos vértices.
+
+% #endregion restricao_conectividade
+
+\subsection{Restrições de Passageiros}
+As restrições de passageiros visam garantir a viabilidade e a conformidade do roteiro em relação aos passageiros e suas demandas.
 
 \begin{itemize}
-    \item \textbf{Calibração de Parâmetros}: O parâmetro $\alpha$ deve ser ajustado de acordo com a importância relativa entre bônus e custos para cada aplicação específica.
-    
-    \item \textbf{Pré-processamento}: Técnicas de redução do espaço de busca podem ser aplicadas, como a eliminação de arcos incompatíveis com as janelas de tempo.
-    
-    \item \textbf{Relaxações}: Para instâncias grandes, relaxações do modelo podem ser necessárias para obter soluções em tempo computacional aceitável.
-    
-    \item \textbf{Decomposição}: O problema pode ser decomposto em subproblemas menores para facilitar sua resolução.
+    \item \textbf{Restrição de Atendimento Único:}
+    \begin{equation}
+        \sum_{i \in V} p_{ik} \leq 1 \quad \forall k \in P
+    \end{equation}
+    Essa restrição garante que cada passageiro $k$ no conjunto de passageiros $P$ seja atendido no máximo uma vez. A variável binária $p_{ik}$ indica se o passageiro $k$ foi embarcado no vértice $i$. A soma de todas as localizações de embarque de um passageiro deve ser menor ou igual a 1, garantindo que um passageiro não será embarcado em mais de um vértice.
+
+    \item \textbf{Restrição de Tempo de Chegada (Sequência Temporal):}
+    \begin{equation}
+        t_i + s_i + c_{ij} - M(1-x_{ij}) \leq t_j \quad \forall i,j \in V
+    \end{equation}
+    Essa restrição assegura a \textbf{sequência temporal} da rota, onde:
+    \begin{itemize}
+        \item $t_i$ é o tempo de chegada no vértice $i$.
+        \item $s_i$ é o tempo de serviço ou coleta no vértice $i$.
+        \item $c_{ij}$ é o tempo de deslocamento da aresta entre o vértice $i$ e o vértice $j$.
+        \item $x_{ij}$ é uma variável binária que indica se a aresta $(i, j)$ faz parte da rota.
+         \item $M$ é uma constante suficientemente grande.
+    \end{itemize}
+    Se a aresta $(i, j)$ é utilizada ($x_{ij} = 1$), a restrição garante que o tempo de chegada no vértice $j$ ($t_j$) seja maior ou igual ao tempo de chegada no vértice $i$ ($t_i$), somado ao tempo de serviço em $i$ ($s_i$) e ao tempo de deslocamento de $i$ para $j$ ($c_{ij}$).  O termo $M(1-x_{ij})$ desativa a restrição caso a aresta ($i,j$) não seja utilizada ($x_{ij} = 0$). Essa restrição é similar à utilizada para eliminar subciclos.
+
+     \item \textbf{Restrição de Janela de Tempo - Limite Inferior:}
+    \begin{equation}
+        t_i \geq e_i \quad \forall i \in V
+    \end{equation}
+    Essa restrição garante que o tempo de chegada no vértice $i$ ($t_i$) deve ser maior ou igual ao limite inferior da janela de tempo do vértice $i$ ($e_i$). Ela assegura que o serviço em um vértice ou embarque de um passageiro ocorra depois de um determinado tempo limite.
+
+    \item \textbf{Restrição de Janela de Tempo - Limite Superior:}
+     \begin{equation}
+        t_i \leq l_i \quad \forall i \in V
+    \end{equation}
+    Essa restrição garante que o tempo de chegada no vértice $i$ ($t_i$) não deve ultrapassar o limite superior da janela de tempo do vértice $i$ ($l_i$). Ela assegura que o serviço em um vértice ou embarque de um passageiro em um vértice ocorra antes de um determinado tempo limite. Combinadas, as restrições de janela de tempo (limite inferior e superior) garantem que o serviço ou embarque ocorram dentro de um intervalo de tempo aceitável para o vértice $i$.
 \end{itemize}
 
-\section{Extensões do Modelo}
-O modelo básico pode ser estendido para incorporar características adicionais, como:
+\textbf{Variáveis e Parâmetros:}
 
 \begin{itemize}
-    \item Múltiplos veículos com diferentes capacidades
-    \item Restrições de precedência entre visitas
-    \item Custos dependentes do tempo
-    \item Incerteza nos parâmetros do problema
+    \item  $s_i$: Tempo de serviço/coleta no vértice $i$.
+    \item $e_i$: Limite inferior da janela de tempo para o vértice $i$.
+    \item  $l_i$: Limite superior da janela de tempo para o vértice $i$.
+    \item  $M$: Constante suficientemente grande.
+     \item $p_{ik}$: Variável binária que indica se o passageiro $k$ foi embarcado no vértice $i$.
+    \item $t_i$: Tempo de chegada no vértice $i$.
+      \item $c_{ij}$: Custo ou tempo de deslocamento entre os vértices $i$ e $j$.
+    \item $x_{ij}$: Variável binária que indica se a aresta $(i, j)$ faz parte da rota.
+      \item $P$: Conjunto de passageiros.
+    \item $V$: Conjunto de vértices.
 \end{itemize}
-
-Estas extensões aumentam a aplicabilidade do modelo em situações reais, mas também incrementam sua complexidade computacional.
 
 \chapter{Métodos de Resolução}
 
