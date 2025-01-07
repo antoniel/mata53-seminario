@@ -20,6 +20,9 @@
 \usepackage[pdfstartview=FitH]{hyperref}
 \usepackage{subfigure}
 \bibliographystyle{plain}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{float}
 
 
 \graphicspath{{Figuras/}}
@@ -349,140 +352,79 @@ As restrições de passageiros visam garantir a viabilidade e a conformidade do 
 
 \chapter{Métodos de Resolução}
 
-\section{Métodos Exatos}
-Os métodos exatos, como o Branch and Bound e a Programação Linear Inteira (ILP), são fundamentais para resolver instâncias menores do TSP-OBP. No entanto, para instâncias maiores, a complexidade computacional torna-se um desafio significativo, exigindo o desenvolvimento de heurísticas e meta-heurísticas mais sofisticadas \cite{lopesfilho2019, carvalho2022}.
+\section{Introdução}
+Para abordar o problema de forma acessível e eficaz, optou-se por utilizar dois métodos principais: \textbf{GRASP (Greedy Randomized Adaptive Search Procedure)} e \textbf{Atribuição Heurística de Passageiros}. Estes métodos foram escolhidos por sua simplicidade conceitual e capacidade de gerar soluções de alta qualidade em tempo computacional reduzido.
 
-\subsection{Branch and Bound}
-O método Branch and Bound para o TSP-OBP opera através da divisão sistemática do espaço de soluções em subproblemas menores (branching) e do uso de limites (bounds) para podar ramos que não podem levar a soluções ótimas. O processo inclui:
+\section{Métodos Utilizados}
 
+\subsection*{GRASP (Greedy Randomized Adaptive Search Procedure)}
+O GRASP combina construção semi-gulosa e busca local para encontrar soluções aproximadas. Ele é composto por duas fases principais:
+
+\subsubsection*{Fase de Construção}
+Nesta fase, é construída uma solução inicial utilizando uma abordagem semi-gulosa:
 \begin{itemize}
-    \item \textbf{Estratégia de Ramificação}: Baseada na seleção de variáveis de decisão críticas, como a escolha do próximo vértice a ser visitado ou a inclusão/exclusão de arcos específicos.
-    
-    \item \textbf{Cálculo de Limites}: Utilização de relaxações do problema para obter limites superiores e inferiores que permitam a poda de ramos não promissores.
-    
-    \item \textbf{Regras de Dominância}: Identificação de soluções parciais que dominam outras, permitindo reduzir o espaço de busca.
+    \item \textbf{Lista Restrita de Candidatos (LRC)}: São selecionados vértices candidatos com base em uma função gulosa que considera o custo e o bônus disponíveis.
+    \item \textbf{Seleção Aleatória Controlada}: Um vértice é escolhido aleatoriamente a partir da LRC, introduzindo diversidade nas soluções.
+    \item \textbf{Viabilidade}: A rota é ajustada para garantir a viabilidade em relação às restrições de tempo e de passageiros.
 \end{itemize}
 
-\subsection{Programação Linear Inteira}
-A abordagem por Programação Linear Inteira envolve:
-
+\subsubsection*{Fase de Busca Local}
+Após a construção inicial, aplica-se a busca local para melhorar a solução:
 \begin{itemize}
-    \item \textbf{Formulação Compacta}: Desenvolvimento de modelos matemáticos que minimizem o número de variáveis e restrições.
-    
-    \item \textbf{Planos de Corte}: Adição dinâmica de restrições para fortalecer a relaxação linear do problema.
-    
-    \item \textbf{Decomposição}: Utilização de técnicas como Benders e Dantzig-Wolfe para problemas de grande porte.
+    \item \textbf{Método VND (Variable Neighborhood Descent)}:
+    \begin{itemize}
+        \item Exploração de diferentes estruturas de vizinhança, como trocas de vértices e realocações.
+        \item Prioridade para vizinhanças que apresentam maior potencial de melhoria.
+    \end{itemize}
+    \item \textbf{Critérios de Parada}: O processo continua até que não sejam encontradas melhorias ou que um limite de iterações seja atingido.
 \end{itemize}
 
-\section{Heurísticas}
-Heurísticas são técnicas que buscam soluções aproximadas para o TSP-OBP em um tempo computacional reduzido. Elas são particularmente úteis quando a solução exata é impraticável devido à complexidade do problema.
+\begin{algorithm}[H]
+    \caption{GRASP Genérico}
+    \begin{algorithmic}[1]
+        \Require nomeInstancia, maxFc, maxConv
+        \State $G \gets leituraInst(nomeInstancia)$
+        \State $S \gets \emptyset$ \Comment{Solução inicial vazia}
+        \State $f(S) \gets \infty$ \Comment{Valor da solução inicial}
+        \State $numCh \gets 0$ \Comment{Contador de chamadas à função objetivo}
+        \State $conv \gets 0$ \Comment{Contador de iterações sem melhoria}
+        \While{$(numCh \leq maxFc)$ \textbf{e} $(conv \leq maxConv)$}
+            \State $S^* \gets constrSolucao()$ \Comment{Constrói solução semi-gulosa}
+            \State $S^* \gets VND(S^*)$ \Comment{Aplica busca local VND}
+            \If{$f(S^*) < f(S)$}
+                \State $S \gets S^*$ \Comment{Atualiza melhor solução}
+                \State $conv \gets -1$ \Comment{Reseta contador sem melhoria}
+            \EndIf
+            \State $conv \gets conv + 1$ \Comment{Incrementa contador sem melhoria}
+        \EndWhile
+        \State \textbf{return} $S$ \Comment{Retorna melhor solução encontrada}
+    \end{algorithmic}
+    \end{algorithm}
 
-\subsection{Heurísticas Construtivas}
-As principais heurísticas construtivas incluem:
+\section*{Atribuição Heurística de Passageiros}
 
-\begin{itemize}
-    \item \textbf{Vizinho Mais Próximo Modificado}: 
-    \begin{itemize}
-        \item Construção iterativa da rota
-        \item Consideração de bônus na seleção do próximo vértice
-        \item Verificação de viabilidade para passageiros
-    \end{itemize}
-    
-    \item \textbf{Inserção Mais Econômica}:
-    \begin{itemize}
-        \item Avaliação do custo-benefício de cada inserção
-        \item Manutenção de viabilidade temporal
-        \item Balanceamento entre coleta de bônus e custos
-    \end{itemize}
-\end{itemize}
+Este método aborda a alocação de passageiros a rotas de maneira eficiente e intuitiva. A heurística emprega critérios simples que garantem a viabilidade e otimizam o uso do veículo.
 
-\subsection{Heurísticas de Melhoria}
-Técnicas de busca local que refinam soluções existentes:
-
-\begin{itemize}
-    \item \textbf{Movimentos 2-opt}: Remoção de dois arcos e reconexão do tour
-    \item \textbf{Movimentos 3-opt}: Consideração de três arcos simultaneamente
-    \item \textbf{Or-opt}: Realocação de sequências de vértices
-    \item \textbf{Lin-Kernighan}: Busca de sequências complexas de movimentos
-\end{itemize}
-
-\section{Metaheurísticas}
-Metaheurísticas, como Algoritmos Genéticos e Simulated Annealing, oferecem abordagens flexíveis e adaptativas para explorar o espaço de soluções do TSP-OBP. Estas técnicas são eficazes em encontrar soluções de alta qualidade para problemas complexos e de grande escala.
-
-\subsection{Algoritmos Genéticos}
-A implementação de Algoritmos Genéticos para o TSP-OBP envolve:
+\subsection*{Etapas da Atribuição}
 
 \begin{itemize}
-    \item \textbf{Codificação}: 
+    \item \textbf{Classificação dos Passageiros:}
     \begin{itemize}
-        \item Representação por permutação de vértices
-        \item Inclusão de informações sobre coleta de bônus
-        \item Codificação de decisões relacionadas a passageiros
+        \item \textbf{Ordenação com base na relação custo-tempo:} Os passageiros são organizados considerando o equilíbrio entre o custo (tarifa) que eles pagam e o tempo que adicionam à rota. O objetivo é priorizar aqueles que oferecem um bom balanço entre receita e impacto na duração da rota.
+        \item \textbf{Priorização de passageiros com menor impacto no tempo total:} A heurística prioriza a inclusão de passageiros que causem o menor aumento no tempo total de viagem, evitando desvios longos ou janelas de tempo restritivas que possam prejudicar a eficiência da rota.
     \end{itemize}
-    
-    \item \textbf{Operadores Genéticos}:
+    \item \textbf{Atribuição Gulosa:}
     \begin{itemize}
-        \item Crossover baseado em ordem (OX)
-        \item Mutação por inversão ou troca
-        \item Operadores específicos para bônus e passageiros
-    \end{itemize}
-    
-    \item \textbf{Função de Fitness}:
-    \begin{itemize}
-        \item Avaliação multiobjetivo
-        \item Penalização de violações de restrições
-        \item Normalização de diferentes objetivos
+        \item \textbf{Alocação à rota com menor custo adicional:} Os passageiros são alocados à rota de forma "gulosa", buscando o menor aumento possível no custo total da rota, considerando o compartilhamento de custos e as tarifas.
+        \item \textbf{Respeito às restrições temporais:} A alocação de passageiros deve sempre respeitar as janelas de tempo individuais, garantindo que o início da viagem ocorra dentro do intervalo aceitável.
+        \item \textbf{Verificação de viabilidade:} Após cada alocação, a heurística verifica se a rota continua viável, considerando a capacidade do veículo, o tempo máximo de permanência dos passageiros e as restrições de tempo de embarque.
     \end{itemize}
 \end{itemize}
 
-\subsection{Simulated Annealing}
-O método de Simulated Annealing é adaptado para o TSP-OBP através de:
+\noindent Em resumo, a heurística de atribuição busca equilibrar a utilização da capacidade do veículo, a minimização do custo da rota e o respeito às restrições de tempo. A decisão de alocar um passageiro é tomada de forma imediata, visando o melhor resultado local.
 
-\begin{itemize}
-    \item \textbf{Estrutura de Vizinhança}:
-    \begin{itemize}
-        \item Movimentos que preservam viabilidade
-        \item Consideração de múltiplos tipos de modificação
-        \item Adaptação dinâmica do tamanho da vizinhança
-    \end{itemize}
-    
-    \item \textbf{Esquema de Resfriamento}:
-    \begin{itemize}
-        \item Ajuste da temperatura inicial
-        \item Taxa de resfriamento adaptativa
-        \item Critérios de parada múltiplos
-    \end{itemize}
-\end{itemize}
+\noindent Essa heurística não garante a solução ótima, mas oferece uma forma eficiente de gerar soluções razoavelmente boas. Técnicas de busca local, como o VND, podem ser aplicadas para refinar as soluções obtidas.
 
-\subsection{Busca Tabu}
-A implementação da Busca Tabu considera:
-
-\begin{itemize}
-    \item \textbf{Lista Tabu}:
-    \begin{itemize}
-        \item Armazenamento de movimentos proibidos
-        \item Critérios de aspiração específicos
-        \item Gestão dinâmica do tamanho da lista
-    \end{itemize}
-    
-    \item \textbf{Estratégias de Intensificação e Diversificação}:
-    \begin{itemize}
-        \item Memória de longo prazo
-        \item Reinícios estratégicos
-        \item Exploração de regiões promissoras
-    \end{itemize}
-\end{itemize}
-
-\section{Métodos Híbridos}
-A combinação de diferentes técnicas tem se mostrado promissora:
-
-\begin{itemize}
-    \item \textbf{Matheurísticas}: Integração de métodos exatos e heurísticos
-    \item \textbf{Hibridização de Metaheurísticas}: Combinação de diferentes estratégias de busca
-    \item \textbf{Decomposição e Recombinação}: Divisão do problema em subproblemas tratáveis
-\end{itemize}
-
-Estas abordagens híbridas têm demonstrado resultados superiores em termos de qualidade de solução e tempo computacional \cite{carvalho2022}.
 
 \chapter{Resultados e Discussão}
 
