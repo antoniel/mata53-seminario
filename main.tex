@@ -357,27 +357,70 @@ Para abordar o problema de forma acessível e eficaz, optou-se por utilizar dois
 
 \section{Métodos Utilizados}
 
-\subsection*{GRASP (Greedy Randomized Adaptive Search Procedure)}
-O GRASP combina construção semi-gulosa e busca local para encontrar soluções aproximadas. Ele é composto por duas fases principais:
+\section*{GRASP (Greedy Randomized Adaptive Search Procedure)}
+O GRASP é uma meta-heurística que combina uma fase de construção semi-gulosa com uma fase de busca local para encontrar soluções aproximadas para problemas de otimização combinatória. O objetivo é equilibrar a exploração do espaço de soluções com a intensificação da busca em regiões promissoras.
 
-\subsubsection*{Fase de Construção}
-Nesta fase, é construída uma solução inicial utilizando uma abordagem semi-gulosa:
+\subsection*{Fase de Construção Semi-Gulosa}
+
+A fase de construção do GRASP é projetada para gerar uma solução inicial de alta qualidade de forma eficiente, sem, no entanto, ser excessivamente determinística.  Isso é alcançado através de uma abordagem que mistura elementos gulosos com aleatoriedade controlada.
+
+\subsubsection*{Lista de Candidatos (LCD)}
+Inicialmente, para construir uma rota, uma lista de candidatos (LCD) é criada. Essa lista contém todos os vértices que podem ser adicionados à solução atual, considerando as restrições do problema. Cada vértice candidato é avaliado com base em seu potencial para melhorar a solução, como o custo de inserção e o bônus obtido. A avaliação de um vértice candidato \textbf{j} a partir de um vértice atual \textbf{i} considera duas opções:
 \begin{itemize}
-    \item \textbf{Lista Restrita de Candidatos (LRC)}: São selecionados vértices candidatos com base em uma função gulosa que considera o custo e o bônus disponíveis.
-    \item \textbf{Seleção Aleatória Controlada}: Um vértice é escolhido aleatoriamente a partir da LRC, introduzindo diversidade nas soluções.
-    \item \textbf{Viabilidade}: A rota é ajustada para garantir a viabilidade em relação às restrições de tempo e de passageiros.
+    \item \textbf{Opção 1}: A distância do vértice \textbf{i} para \textbf{j}, somada com a distância de \textbf{j} até o ponto inicial da rota, menos o bônus coletado em \textbf{j}:
+    $$ D1_{ij} = c_{ij} + c_{j1} - b_j $$
+    onde $c_{ij}$ é o custo da aresta entre \textbf{i} e \textbf{j}, $c_{j1}$ é o custo da aresta entre \textbf{j} e o ponto inicial e $b_j$ é o bônus coletado em \textbf{j}.
+    \item \textbf{Opção 2}: A distância do vértice \textbf{i} para \textbf{j}, somada com a distância de \textbf{j} até o ponto inicial da rota:
+    $$ D2_{ij} = c_{ij} + c_{j1} $$
+    Esta opção representa a passagem pelo vértice \textbf{j} sem a coleta do bônus.
 \end{itemize}
 
-\subsubsection*{Fase de Busca Local}
-Após a construção inicial, aplica-se a busca local para melhorar a solução:
+\subsubsection*{Lista Restrita de Candidatos (LRC)}
 \begin{itemize}
-    \item \textbf{Método VND (Variable Neighborhood Descent)}:
-    \begin{itemize}
-        \item Exploração de diferentes estruturas de vizinhança, como trocas de vértices e realocações.
-        \item Prioridade para vizinhanças que apresentam maior potencial de melhoria.
-    \end{itemize}
-    \item \textbf{Critérios de Parada}: O processo continua até que não sejam encontradas melhorias ou que um limite de iterações seja atingido.
+    \item \textbf{Seleção de Melhores Candidatos}: A lista restrita de candidatos (LRC) é formada pelos melhores elementos da LCD.  O tamanho da LRC é definido pelo parâmetro $\alpha$, que controla o nível de ganância e aleatoriedade. Apenas os candidatos com economias maiores ou iguais a um limite calculado são incluídos na LRC. Esse limite é dado por:
+    $$ e_{limite} = e_{max} - \alpha (e_{max} - e_{min}) $$
+     onde $e_{max}$ e $e_{min}$ são os valores de economia para o melhor e o pior candidato na lista, respectivamente.
+
+    \item \textbf{Seleção Aleatória}: Em vez de escolher sempre o melhor candidato, um elemento é selecionado aleatoriamente da LRC. Esta aleatoriedade introduz diversidade na construção das soluções iniciais, permitindo que o algoritmo explore diferentes regiões do espaço de busca.
 \end{itemize}
+
+\subsubsection*{Construção Iterativa da Solução}
+O processo de construção é iterativo:
+\begin{itemize}
+    \item Um vértice é adicionado à solução a cada iteração, com a opção de coleta ou não do bônus.
+     \item A rota é ajustada para garantir a viabilidade em relação às restrições de tempo e de passageiros, com a função embarcarPass() para alocar passageiros a nova rota.
+    \item As listas LCD e LRC são atualizadas e o processo continua até que uma solução completa seja formada.
+\end{itemize}
+
+\subsection*{Fase de Busca Local com VND}
+
+Após a construção da solução inicial, o GRASP emprega uma fase de busca local para refinar a solução. A busca local é crucial para explorar o espaço de soluções em torno da solução construída, intensificando a busca em regiões promissoras.
+
+\subsubsection*{Variable Neighborhood Descent (VND)}
+
+O VND é um método de busca local que explora o espaço de soluções através da utilização sistemática de diferentes estruturas de vizinhança.
+
+\begin{itemize}
+     \item \textbf{Exploração Gradual}: O VND explora as vizinhanças em ordem crescente de complexidade ou custo computacional.  As estruturas de vizinhança são priorizadas, com foco nas vizinhanças que têm maior probabilidade de produzir melhorias.
+     \item \textbf{Movimentos na Vizinhança}: As vizinhanças podem envolver a remoção ou adição de passageiros e a troca de posições dos vértices na rota. As vizinhanças aplicadas são:
+       \begin{itemize}
+            \item \textbf{Pass1}: Seleciona um passageiro que não possui origem ou destino de maior bônus e tenta reinseri-lo.
+            \item \textbf{Pass2}: Remove um passageiro que não possui um destino/origem com maior bônus.
+            \item \textbf{Pass3}: Tenta trocar a posição de dois passageiros.
+        \end{itemize}
+       \item \textbf{Reinício da Busca}: Caso uma melhoria seja encontrada em uma dada vizinhança, a busca é reiniciada na primeira vizinhança da lista, explorando novamente a região da solução atual.
+\end{itemize}
+\subsubsection*{Critérios de Parada}
+O processo de busca local continua até que um dos seguintes critérios de parada seja atingido:
+
+\begin{itemize}
+     \item  O número máximo de chamadas à função objetivo é atingido.
+     \item  O número máximo de iterações sem melhoria é atingido.
+\end{itemize}
+
+\subsection*{Integração com o GVND}
+Em particular, o GRASP pode ser combinado com o GVND (Greedy Variable Neighborhood Descent). O GVND é uma versão adaptada do VND que é utilizada para refinar ainda mais as soluções obtidas pelo GRASP. Essa combinação visa aproveitar os benefícios de ambas as abordagens: a diversidade proporcionada pelo GRASP e a intensificação do GVND.
+
 
 \begin{algorithm}[H]
     \caption{GRASP Genérico}
@@ -403,28 +446,22 @@ Após a construção inicial, aplica-se a busca local para melhorar a solução:
 
 \section*{Atribuição Heurística de Passageiros}
 
-Este método aborda a alocação de passageiros a rotas de maneira eficiente e intuitiva. A heurística emprega critérios simples que garantem a viabilidade e otimizam o uso do veículo.
+No PCVP-BoTc, o objetivo é otimizar a receita de um motorista, que decide seletivamente quais tarefas de entrega ou coleta serão realizadas em sua rota. Cada tarefa de coleta/entrega está associada a um bônus e um tempo de coleta. A decisão de incluir um passageiro na rota envolve avaliar se o bônus adicional compensa o custo (tempo e distância) de desviá-lo da rota. A atribuição de passageiros deve levar em conta, portanto, a capacidade do veículo e se o tempo de atendimento não viola as restrições de tempo.
 
-\subsection*{Etapas da Atribuição}
+A atribuição heurística de passageiros visa encontrar uma boa solução para este problema de forma rápida, sacrificando a garantia de otimalidade. As heurísticas são procedimentos que buscam uma "boa" solução para um problema, mas não necessariamente a melhor solução, dentro de um tempo computacional razoável, como discutido em \cite{carnielli}. Em muitos casos, as soluções heurísticas são suficientes na prática, especialmente quando as soluções exatas são impossíveis.
+
+\subsubsection*{Passos da Atribuição Heurística}
 
 \begin{itemize}
-    \item \textbf{Classificação dos Passageiros:}
+    \item \textbf{Avaliação de Passageiros}: Cada passageiro é avaliado em relação ao seu potencial para aumentar a receita da rota. Esta avaliação considera:
     \begin{itemize}
-        \item \textbf{Ordenação com base na relação custo-tempo:} Os passageiros são organizados considerando o equilíbrio entre o custo (tarifa) que eles pagam e o tempo que adicionam à rota. O objetivo é priorizar aqueles que oferecem um bom balanço entre receita e impacto na duração da rota.
-        \item \textbf{Priorização de passageiros com menor impacto no tempo total:} A heurística prioriza a inclusão de passageiros que causem o menor aumento no tempo total de viagem, evitando desvios longos ou janelas de tempo restritivas que possam prejudicar a eficiência da rota.
+        \item O bônus associado ao passageiro.
+        \item O custo adicional (distância e tempo) de inserir o passageiro na rota.
+        \item A viabilidade de inclusão do passageiro, dado o limite de capacidade do veículo e de tempo.
     \end{itemize}
-    \item \textbf{Atribuição Gulosa:}
-    \begin{itemize}
-        \item \textbf{Alocação à rota com menor custo adicional:} Os passageiros são alocados à rota de forma "gulosa", buscando o menor aumento possível no custo total da rota, considerando o compartilhamento de custos e as tarifas.
-        \item \textbf{Respeito às restrições temporais:} A alocação de passageiros deve sempre respeitar as janelas de tempo individuais, garantindo que o início da viagem ocorra dentro do intervalo aceitável.
-        \item \textbf{Verificação de viabilidade:} Após cada alocação, a heurística verifica se a rota continua viável, considerando a capacidade do veículo, o tempo máximo de permanência dos passageiros e as restrições de tempo de embarque.
-    \end{itemize}
+    \item \textbf{Seleção de Passageiros}: A seleção de passageiros para a rota pode seguir uma abordagem gulosa, em que os passageiros com maior potencial de melhoria são adicionados primeiro. Alternativamente, uma abordagem aleatória controlada pode ser usada para aumentar a diversidade das soluções.
+    \item \textbf{Atualização da Rota}: Após a adição de um passageiro, a rota é ajustada para garantir a viabilidade, respeitando as restrições de capacidade e tempo. Isso pode envolver reordenação dos vértices na rota para minimizar o custo total.
 \end{itemize}
-
-\noindent Em resumo, a heurística de atribuição busca equilibrar a utilização da capacidade do veículo, a minimização do custo da rota e o respeito às restrições de tempo. A decisão de alocar um passageiro é tomada de forma imediata, visando o melhor resultado local.
-
-\noindent Essa heurística não garante a solução ótima, mas oferece uma forma eficiente de gerar soluções razoavelmente boas. Técnicas de busca local, como o VND, podem ser aplicadas para refinar as soluções obtidas.
-
 
 \chapter{Resultados e Discussão}
 
