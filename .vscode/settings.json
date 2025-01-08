@@ -4,15 +4,15 @@
     "terminal.background": "#00000000"
   },
   "files.exclude": {
-    "main.aux": true,
-    "main.bbl": true,
-    "main.blg": true,
-    "main.fdb_latexmk": true,
-    "main.fls": true,
-    "main.log": true,
-    "main.out": true,
-    "main.toc": true,
-    "main.synctex.gz": true,
-    ".gitignore": true
+    "main.aux": false,
+    "main.bbl": false,
+    "main.blg": false,
+    "main.fdb_latexmk": false,
+    "main.fls": false,
+    "main.log": false,
+    "main.out": false,
+    "main.toc": false,
+    "main.synctex.gz": false,
+    ".gitignore": false
   }
 }
