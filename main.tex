@@ -128,9 +128,9 @@ como método avaliativo da disciplina \nomeCurso
 
 \section*{Introdução}
 
-O \textbf{Problema do Caixeiro Viajante com Coleta Opcional de Bônus e Passageiros (TSP-OBP)}, também referenciado na literatura como \textbf{Problema do Caixeiro Viajante com Coleta de Prêmios (PCVCP)}, é uma extensão do clássico Problema do Caixeiro Viajante (PCV). Este problema combina a necessidade de coletar **bônus ou prêmios** em determinados locais, o transporte de **passageiros** e a otimização de rotas, excluindo o tempo de coleta, o que o torna relevante para aplicações como **logística, sistemas de entrega e serviços de transporte compartilhado**. Estudos como o de \textbf{Lopes Filho \cite{lopesfilho2019}} e \textbf{Carvalho \cite{carvalho2022}} destacam a importância do TSP-OBP e suas variantes na otimização de recursos e melhoria da eficiência operacional em sistemas complexos. Embora a tese de Lopes Filho \cite{lopesfilho2019} inclua o tempo de coleta, o presente trabalho foca na variante sem esta restrição.
+O \textbf{Problema do Caixeiro Viajante com Coleta Opcional de Bônus e Passageiros (TSP-OBP)}, também referenciado na literatura como \textbf{Problema do Caixeiro Viajante com Coleta de Prêmios (PCVCP)}, é uma extensão do clássico Problema do Caixeiro Viajante (PCV). Este problema combina a necessidade de coletar \textbf{bônus ou prêmios} em determinados locais, o transporte de \textbf{passageiros} e a otimização de rotas, excluindo o tempo de coleta, o que o torna relevante para aplicações como \textbf{logística, sistemas de entrega e serviços de transporte compartilhado}. Estudos como o de \textbf{Lopes Filho \cite{lopesfilho2019}} e \textbf{Carvalho \cite{carvalho2022}} destacam a importância do TSP-OBP e suas variantes na otimização de recursos e melhoria da eficiência operacional em sistemas complexos. Embora a tese de Lopes Filho \cite{lopesfilho2019} inclua o tempo de coleta, o presente trabalho foca na variante sem esta restrição.
 
-A complexidade inerente ao TSP-OBP advém da necessidade de equilibrar objetivos conflitantes: **maximizar a coleta de bônus ou prêmios, minimizar a distância total percorrida e satisfazer as restrições de transporte de passageiros**, tais como a capacidade do veículo. Esta natureza multiobjetivo, juntamente com as restrições combinatórias, torna o problema \textbf{NP-difícil}, requerendo abordagens computacionais sofisticadas para sua resolução.
+A complexidade inerente ao TSP-OBP advém da necessidade de equilibrar objetivos conflitantes: \textbf{maximizar a coleta de bônus ou prêmios, minimizar a distância total percorrida e satisfazer as restrições de transporte de passageiros}, tais como a capacidade do veículo. Esta natureza multiobjetivo, juntamente com as restrições combinatórias, torna o problema \textbf{NP-difícil}, requerendo abordagens computacionais sofisticadas para sua resolução.
 
 No contexto atual, onde a otimização de recursos e a eficiência operacional são cruciais, o TSP-OBP emerge como uma ferramenta essencial para modelar e resolver problemas complexos de roteamento. As aplicações do TSP-OBP abrangem desde sistemas de entrega com incentivos até serviços de transporte sob demanda, onde a flexibilidade na coleta de bônus e a gestão eficiente de passageiros são fundamentais. Esta modelagem é relevante em situações de logística, transporte de pessoas,  e outros sistemas de roteamento que necessitem de coleta seletiva com passageiros.
 
@@ -358,326 +358,147 @@ Para abordar o problema de forma acessível e eficaz, optou-se por utilizar dois
 \section{Métodos Utilizados}
 
 \section*{GRASP (Greedy Randomized Adaptive Search Procedure)}
-O GRASP é uma meta-heurística que combina uma fase de construção semi-gulosa com uma fase de busca local para encontrar soluções aproximadas para problemas de otimização combinatória. O objetivo é equilibrar a exploração do espaço de soluções com a intensificação da busca em regiões promissoras.
+O GRASP é uma meta-heurística com duas fases principais: uma fase de construção semi-gulosa e uma fase de busca local. Seu objetivo é equilibrar a \textbf{exploração} (buscar soluções diversas) e a \textbf{intensificação} (refinar as soluções mais promissoras), de modo a produzir boas soluções para problemas de otimização combinatória em um tempo razoável.
 
 \subsection*{Fase de Construção Semi-Gulosa}
 
-A fase de construção do GRASP é projetada para gerar uma solução inicial de alta qualidade de forma eficiente, sem, no entanto, ser excessivamente determinística.  Isso é alcançado através de uma abordagem que mistura elementos gulosos com aleatoriedade controlada.
+A fase de construção do GRASP gera uma solução inicial de forma rápida, misturando elementos gulosos e aleatoriedade controlada. No contexto do problema de roteamento com bônus (PCVP-BoTc), isso envolve decidir em cada passo como construir uma rota que considere (ou não) passageiros em função do ganho (bônus) e do custo (distância e tempo) para inseri-los.
 
 \subsubsection*{Lista de Candidatos (LCD)}
-Inicialmente, para construir uma rota, uma lista de candidatos (LCD) é criada. Essa lista contém todos os vértices que podem ser adicionados à solução atual, considerando as restrições do problema. Cada vértice candidato é avaliado com base em seu potencial para melhorar a solução, como o custo de inserção e o bônus obtido. A avaliação de um vértice candidato \textbf{j} a partir de um vértice atual \textbf{i} considera duas opções:
 \begin{itemize}
-    \item \textbf{Opção 1}: A distância do vértice \textbf{i} para \textbf{j}, somada com a distância de \textbf{j} até o ponto inicial da rota, menos o bônus coletado em \textbf{j}:
-    $$ D1_{ij} = c_{ij} + c_{j1} - b_j $$
-    onde $c_{ij}$ é o custo da aresta entre \textbf{i} e \textbf{j}, $c_{j1}$ é o custo da aresta entre \textbf{j} e o ponto inicial e $b_j$ é o bônus coletado em \textbf{j}.
-    \item \textbf{Opção 2}: A distância do vértice \textbf{i} para \textbf{j}, somada com a distância de \textbf{j} até o ponto inicial da rota:
-    $$ D2_{ij} = c_{ij} + c_{j1} $$
-    Esta opção representa a passagem pelo vértice \textbf{j} sem a coleta do bônus.
+\item \textbf{Composição}: A LCD é formada por todos os vértices que podem ser adicionados à rota sem violar restrições de capacidade e tempo, incluindo passageiros (para coleta/entrega) e pontos obrigatórios (por exemplo, ponto inicial).
+\item \textbf{Avaliação de cada vértice candidato}: Para cada vértice $i$ que pode seguir o vértice atual $j$, definem-se duas opções de custo:
+\begin{align*}
+D1_{ij} &= c_{ij} + c_{j1} - b_j \quad &\text{(incluindo o bônus)},\
+D2_{ij} &= c_{ij} + c_{j1} \quad &\text{(sem considerar o bônus)}.
+\end{align*}
+Aqui, $c_{ij}$ é o custo de ir de $i$ a $j$, $c_{j1}$ o custo de ir de $j$ de volta ao ponto inicial, e $b_j$ o bônus do vértice $j$.
 \end{itemize}
 
 \subsubsection*{Lista Restrita de Candidatos (LRC)}
 \begin{itemize}
-    \item \textbf{Seleção de Melhores Candidatos}: A lista restrita de candidatos (LRC) é formada pelos melhores elementos da LCD.  O tamanho da LRC é definido pelo parâmetro $\alpha$, que controla o nível de ganância e aleatoriedade. Apenas os candidatos com economias maiores ou iguais a um limite calculado são incluídos na LRC. Esse limite é dado por:
-    $$ e_{limite} = e_{max} - \alpha (e_{max} - e_{min}) $$
-     onde $e_{max}$ e $e_{min}$ são os valores de economia para o melhor e o pior candidato na lista, respectivamente.
-
-    \item \textbf{Seleção Aleatória}: Em vez de escolher sempre o melhor candidato, um elemento é selecionado aleatoriamente da LRC. Esta aleatoriedade introduz diversidade na construção das soluções iniciais, permitindo que o algoritmo explore diferentes regiões do espaço de busca.
+\item \textbf{Seleção de Melhores Candidatos}: A LRC é formada pelos vértices mais promissores da LCD, filtrados por um parâmetro $\alpha$. Define-se um valor-limite
+\begin{equation}
+e_{\text{limite}} = e_{\max} - \alpha (e_{\max} - e_{\min}),
+\end{equation}
+onde $e_{\max}$ e $e_{\min}$ são os valores de "economia" (ou potencial de melhoria) do melhor e do pior candidato, respectivamente.
+\item \textbf{Seleção Aleatória}: Dentro dessa LRC, escolhe-se um vértice de forma aleatória. Essa etapa adiciona diversidade ao processo, pois nem sempre o "melhor" candidato é selecionado.
 \end{itemize}
 
 \subsubsection*{Construção Iterativa da Solução}
-O processo de construção é iterativo:
 \begin{itemize}
-    \item Um vértice é adicionado à solução a cada iteração, com a opção de coleta ou não do bônus.
-     \item A rota é ajustada para garantir a viabilidade em relação às restrições de tempo e de passageiros, com a função embarcarPass() para alocar passageiros a nova rota.
-    \item As listas LCD e LRC são atualizadas e o processo continua até que uma solução completa seja formada.
+\item \textbf{Inserção de Vértices}: Em cada iteração, um vértice é escolhido da LRC e adicionado à solução, decidindo também se a coleta do bônus será aproveitada (opção 1) ou não (opção 2).
+\item \textbf{Viabilidade da Rota}: A função \texttt{embarcarPass()} atualiza a rota, garantindo que as restrições de capacidade e tempo sejam respeitadas.
+\item \textbf{Atualização das Listas}: Tanto a LCD quanto a LRC são atualizadas a cada inserção, até que a rota não possa receber mais vértices ou seja concluída.
 \end{itemize}
 
 \subsection*{Fase de Busca Local com VND}
 
-Após a construção da solução inicial, o GRASP emprega uma fase de busca local para refinar a solução. A busca local é crucial para explorar o espaço de soluções em torno da solução construída, intensificando a busca em regiões promissoras.
+Após construída a solução inicial, o GRASP faz a \textbf{intensificação} por meio de uma busca local, aqui realizada pelo \emph{Variable Neighborhood Descent} (VND). O foco dessa fase é refinar a solução, explorando diferentes vizinhanças.
 
 \subsubsection*{Variable Neighborhood Descent (VND)}
 
-O VND é um método de busca local que explora o espaço de soluções através da utilização sistemática de diferentes estruturas de vizinhança.
-
 \begin{itemize}
-     \item \textbf{Exploração Gradual}: O VND explora as vizinhanças em ordem crescente de complexidade ou custo computacional.  As estruturas de vizinhança são priorizadas, com foco nas vizinhanças que têm maior probabilidade de produzir melhorias.
-     \item \textbf{Movimentos na Vizinhança}: As vizinhanças podem envolver a remoção ou adição de passageiros e a troca de posições dos vértices na rota. As vizinhanças aplicadas são:
-       \begin{itemize}
-            \item \textbf{Pass1}: Seleciona um passageiro que não possui origem ou destino de maior bônus e tenta reinseri-lo.
-            \item \textbf{Pass2}: Remove um passageiro que não possui um destino/origem com maior bônus.
-            \item \textbf{Pass3}: Tenta trocar a posição de dois passageiros.
-        \end{itemize}
-       \item \textbf{Reinício da Busca}: Caso uma melhoria seja encontrada em uma dada vizinhança, a busca é reiniciada na primeira vizinhança da lista, explorando novamente a região da solução atual.
+\item \textbf{Exploração Gradual}: O VND utiliza diferentes estruturas de vizinhança, ordenadas por complexidade (ou custo computacional). Ele inicia na vizinhança mais simples e só avança para a seguinte caso não encontre melhoria.
+\item \textbf{Movimentos na Vizinhança}: Exemplos de movimentos incluem:
+\begin{itemize}
+\item \textbf{Pass1}: Seleciona um passageiro sem origem/destino de maior bônus e tenta reinseri-lo em outro local da rota.
+\item \textbf{Pass2}: Remove um passageiro sem destino/origem de maior bônus, se isso puder gerar economia de custo.
+\item \textbf{Pass3}: Tenta trocar a posição de dois passageiros, buscando melhorar o custo total (ou aumentar a coleta de bônus).
 \end{itemize}
-\subsubsection*{Critérios de Parada}
-O processo de busca local continua até que um dos seguintes critérios de parada seja atingido:
+\item \textbf{Reinício da Busca}: Sempre que ocorre melhoria em alguma vizinhança, o processo retorna à primeira vizinhança. Isso permite uma “exploração fina” ao redor da nova solução encontrada.
+\end{itemize}
 
+\subsubsection*{Critérios de Parada}
+A busca local termina quando:
 \begin{itemize}
-     \item  O número máximo de chamadas à função objetivo é atingido.
-     \item  O número máximo de iterações sem melhoria é atingido.
+\item \textbf{Número máximo de avaliações da função objetivo} é atingido ($maxFc$).
+\item \textbf{Número máximo de iterações sem melhoria} é atingido ($maxConv$).
 \end{itemize}
 
 \subsection*{Integração com o GVND}
-Em particular, o GRASP pode ser combinado com o GVND (Greedy Variable Neighborhood Descent). O GVND é uma versão adaptada do VND que é utilizada para refinar ainda mais as soluções obtidas pelo GRASP. Essa combinação visa aproveitar os benefícios de ambas as abordagens: a diversidade proporcionada pelo GRASP e a intensificação do GVND.
-
+O GRASP pode ser combinado com o \emph{Greedy Variable Neighborhood Descent} (GVND), uma versão adaptada do VND que explora múltiplas vizinhanças de forma gulosa. Essa integração alia a \textbf{diversidade} do GRASP à \textbf{intensificação} do GVND, resultando em soluções potencialmente mais robustas.
 
 \begin{algorithm}[H]
-    \caption{GRASP Genérico}
-    \begin{algorithmic}[1]
-        \Require nomeInstancia, maxFc, maxConv
-        \State $G \gets leituraInst(nomeInstancia)$
-        \State $S \gets \emptyset$ \Comment{Solução inicial vazia}
-        \State $f(S) \gets \infty$ \Comment{Valor da solução inicial}
-        \State $numCh \gets 0$ \Comment{Contador de chamadas à função objetivo}
-        \State $conv \gets 0$ \Comment{Contador de iterações sem melhoria}
-        \While{$(numCh \leq maxFc)$ \textbf{e} $(conv \leq maxConv)$}
-            \State $S^* \gets constrSolucao()$ \Comment{Constrói solução semi-gulosa}
-            \State $S^* \gets VND(S^*)$ \Comment{Aplica busca local VND}
-            \If{$f(S^*) < f(S)$}
-                \State $S \gets S^*$ \Comment{Atualiza melhor solução}
-                \State $conv \gets -1$ \Comment{Reseta contador sem melhoria}
-            \EndIf
-            \State $conv \gets conv + 1$ \Comment{Incrementa contador sem melhoria}
-        \EndWhile
-        \State \textbf{return} $S$ \Comment{Retorna melhor solução encontrada}
-    \end{algorithmic}
-    \end{algorithm}
-
-\section*{Atribuição Heurística de Passageiros}
-
-No PCVP-BoTc, o objetivo é otimizar a receita de um motorista, que decide seletivamente quais tarefas de entrega ou coleta serão realizadas em sua rota. Cada tarefa de coleta/entrega está associada a um bônus e um tempo de coleta. A decisão de incluir um passageiro na rota envolve avaliar se o bônus adicional compensa o custo (tempo e distância) de desviá-lo da rota. A atribuição de passageiros deve levar em conta, portanto, a capacidade do veículo e se o tempo de atendimento não viola as restrições de tempo.
-
-A atribuição heurística de passageiros visa encontrar uma boa solução para este problema de forma rápida, sacrificando a garantia de otimalidade. As heurísticas são procedimentos que buscam uma "boa" solução para um problema, mas não necessariamente a melhor solução, dentro de um tempo computacional razoável, como discutido em \cite{carnielli}. Em muitos casos, as soluções heurísticas são suficientes na prática, especialmente quando as soluções exatas são impossíveis.
-
-\subsubsection*{Passos da Atribuição Heurística}
-
-\begin{itemize}
-    \item \textbf{Avaliação de Passageiros}: Cada passageiro é avaliado em relação ao seu potencial para aumentar a receita da rota. Esta avaliação considera:
-    \begin{itemize}
-        \item O bônus associado ao passageiro.
-        \item O custo adicional (distância e tempo) de inserir o passageiro na rota.
-        \item A viabilidade de inclusão do passageiro, dado o limite de capacidade do veículo e de tempo.
-    \end{itemize}
-    \item \textbf{Seleção de Passageiros}: A seleção de passageiros para a rota pode seguir uma abordagem gulosa, em que os passageiros com maior potencial de melhoria são adicionados primeiro. Alternativamente, uma abordagem aleatória controlada pode ser usada para aumentar a diversidade das soluções.
-    \item \textbf{Atualização da Rota}: Após a adição de um passageiro, a rota é ajustada para garantir a viabilidade, respeitando as restrições de capacidade e tempo. Isso pode envolver reordenação dos vértices na rota para minimizar o custo total.
-\end{itemize}
+\caption{GRASP Genérico}
+\begin{algorithmic}[1]
+\Require nomeInstancia, maxFc, maxConv
+\State $G \gets leituraInst(nomeInstancia)$
+\State $S \gets \emptyset$ \Comment{Solução inicial vazia}
+\State $f(S) \gets \infty$ \Comment{Valor da solução inicial}
+\State $numCh \gets 0$ \Comment{Contador de chamadas à função objetivo}
+\State $conv \gets 0$ \Comment{Contador de iterações sem melhoria}
+\While{$(numCh \leq maxFc)$ \textbf{e} $(conv \leq maxConv)$}
+\State $S^* \gets constrSolucao()$ \Comment{Constrói solução semi-gulosa}
+\State $S^* \gets VND(S^)$ \Comment{Aplica busca local VND}
+\If{$f(S^) < f(S)$}
+\State $S \gets S^*$ \Comment{Atualiza melhor solução}
+\State $conv \gets -1$ \Comment{Reseta contador sem melhoria}
+\EndIf
+\State $conv \gets conv + 1$ \Comment{Incrementa contador sem melhoria}
+\EndWhile
+\State \textbf{return} $S$ \Comment{Retorna melhor solução encontrada}
+\end{algorithmic}
+\end{algorithm}
 
 \chapter{Resultados e Discussão}
 
 \section{Resultados Computacionais}
-Os resultados computacionais obtidos ao resolver instâncias do TSP-OBP demonstram a eficácia de diferentes métodos em termos de tempo de execução, qualidade da solução e eficiência computacional. Estudos como os de \cite{carvalho2022} mostram que as metaheurísticas, embora não garantam a optimalidade, oferecem soluções de alta qualidade em tempos computacionais reduzidos.
 
-\subsection{Análise Comparativa dos Métodos}
-A avaliação experimental dos diferentes métodos de resolução revelou padrões importantes:
+A partir da implementação do \emph{GRASP} com busca local via \emph{VND} (Variable Neighborhood Descent), foi possível gerar soluções de forma relativamente rápida e com boa qualidade para instâncias de pequeno e médio porte do TSP-OBP. Vale ressaltar, entretanto, que, no âmbito deste trabalho, \textbf{não foi realizada uma análise comparativa detalhada com outros métodos}, em função de o foco ter permanecido na implementação e experimentação de \emph{apenas uma abordagem meta-heurística}.
 
-\begin{itemize}
-    \item \textbf{Métodos Exatos}:
-    \begin{itemize}
-        \item Garantem otimalidade para instâncias com até 50 vértices
-        \item Tempo computacional cresce exponencialmente com o tamanho do problema
-        \item Eficazes para problemas com estrutura especial ou restrições específicas
-    \end{itemize}
-    
-    \item \textbf{Heurísticas Construtivas}:
-    \begin{itemize}
-        \item Tempo de execução linear ou quadrático
-        \item Qualidade da solução tipicamente 15-30\% acima do ótimo
-        \item Bom ponto de partida para métodos de melhoria
-    \end{itemize}
-    
-    \item \textbf{Metaheurísticas}:
-    \begin{itemize}
-        \item Soluções dentro de 5-10\% do ótimo para instâncias médias
-        \item Melhor equilíbrio entre qualidade e tempo computacional
-        \item Alta adaptabilidade a diferentes tipos de instância
-    \end{itemize}
-\end{itemize}
+O código-fonte referente à implementação deste método encontra-se disponível em: 
+\[
+\texttt{https://github.com/antoniel/mata53-seminario}
+\]
+Neste repositório, pode-se observar todo o processo de construção da solução, abrangendo a fase de construção gulosa (com elementos de aleatoriedade controlada), a etapa de busca local e o modo como passageiros e bônus foram tratados no contexto do TSP-OBP.
 
-\subsection{Análise de Desempenho}
-O desempenho dos métodos foi avaliado considerando múltiplos critérios:
+\subsection{Processo de Construção da Solução}
 
-\begin{itemize}
-    \item \textbf{Qualidade da Solução}:
-    \begin{itemize}
-        \item Gap médio em relação ao ótimo ou melhor limite conhecido
-        \item Consistência dos resultados em múltiplas execuções
-        \item Robustez frente a diferentes tipos de instância
-    \end{itemize}
-    
-    \item \textbf{Eficiência Computacional}:
-    \begin{itemize}
-        \item Tempo de execução em função do tamanho do problema
-        \item Requisitos de memória
-        \item Escalabilidade para instâncias maiores
-    \end{itemize}
-    
-    \item \textbf{Aspectos Práticos}:
-    \begin{itemize}
-        \item Facilidade de implementação
-        \item Necessidade de ajuste de parâmetros
-        \item Adaptabilidade a variações do problema
-    \end{itemize}
-\end{itemize}
+A construção inicial segue o paradigma do \textbf{GRASP}, compondo:
+\begin{enumerate}
+    \item \textbf{Fase de Construção Semi-Gulosa}: Gera uma rota inicial ao escolher iterativamente vértices e passageiros segundo um critério de ganho líquido (bônus menos custo), com pequena aleatoriedade para aumentar a diversidade das soluções.
+    \item \textbf{Fase de Busca Local (VND)}: Explora vizinhanças específicas, como \emph{remoção}, \emph{reinserção} e \emph{troca} de passageiros na rota, visando reduzir a função objetivo (distância total subtraída do bônus coletado).
+\end{enumerate}
+
+Embora essa abordagem seja efetiva em \emph{práticas} de prototipação rápida, \textbf{não realizamos} a calibração aprofundada de parâmetros nem a comparação rigorosa com outros métodos (por exemplo, \emph{Branch \& Cut}, \emph{Heurísticas Construtivas} ou variações de \emph{GRASP} e \emph{VND}). Ainda assim, os experimentos iniciais evidenciam que a meta-heurística implementada consegue resolver instâncias de tamanho moderado em tempo razoável, produzindo soluções com qualidade satisfatória em termos de distância percorrida e bônus coletado.
 
 \section{Discussão}
-A análise dos resultados revela que, embora os métodos exatos sejam ideais para instâncias menores, as heurísticas e metaheurísticas são essenciais para lidar com a complexidade de instâncias maiores. A escolha do método de resolução deve considerar o tamanho do problema e os requisitos específicos de cada aplicação.
 
-\subsection{Implicações Teóricas}
-Os resultados obtidos têm importantes implicações teóricas:
+A análise dos resultados indica que a implementação do \emph{GRASP + VND} funciona como \textbf{prova de conceito} para aplicação de meta-heurísticas ao TSP-OBP. Em particular, pudemos verificar:
 
 \begin{itemize}
-    \item \textbf{Estrutura do Problema}:
-    \begin{itemize}
-        \item Identificação de propriedades que facilitam a resolução
-        \item Compreensão dos fatores que afetam a dificuldade do problema
-        \item Desenvolvimento de novas abordagens de decomposição
-    \end{itemize}
-    
-    \item \textbf{Complexidade Computacional}:
-    \begin{itemize}
-        \item Análise dos limites práticos para métodos exatos
-        \item Identificação de casos especiais tratáveis
-        \item Desenvolvimento de aproximações com garantias teóricas
-    \end{itemize}
+    \item \textbf{Simplicidade de Extensão}: A inclusão de novos passageiros ou bônus é acomodada pela fase de construção gulosa, ajustando o critério de seleção de vértices.
+    \item \textbf{Limitação na Exploração de Vizinhanças}: Como não há uma etapa de reordenação completa da rota (por exemplo, via \emph{2-opt} ou \emph{3-opt}), certas instâncias podem estagnar em soluções subótimas.
+    \item \textbf{Potencial de Melhoria}: A adoção de estruturas de vizinhança mais complexas (inserção de pares origem–destino em diferentes posições, inversões de subcaminhos etc.) pode aumentar a capacidade de explorar o espaço de soluções.
 \end{itemize}
 
-\subsection{Implicações Práticas}
-Do ponto de vista prático, os resultados sugerem:
-
-\begin{itemize}
-    \item \textbf{Seleção de Métodos}:
-    \begin{itemize}
-        \item Uso de métodos exatos para instâncias pequenas (até 50 vértices)
-        \item Preferência por metaheurísticas para problemas médios e grandes
-        \item Consideração de abordagens híbridas para casos específicos
-    \end{itemize}
-    
-    \item \textbf{Implementação}:
-    \begin{itemize}
-        \item Importância da estrutura de dados eficiente
-        \item Necessidade de estratégias de paralelização
-        \item Relevância do pré-processamento
-    \end{itemize}
-\end{itemize}
+Futuramente, \textbf{uma análise comparativa} com heurísticas construtivas básicas ou com métodos exatos para instâncias pequenas possibilitará quantificar o desempenho do algoritmo. Além disso, \textbf{parâmetros} como a intensidade da aleatoriedade na construção ou o número de vizinhanças no \emph{VND} podem ser ajustados para buscar melhores equilíbrios entre tempo de execução e qualidade da solução.
 
 \subsection{Limitações e Desafios}
-Os principais desafios identificados incluem:
 
+Em linha com as considerações gerais do problema, destacam-se:
 \begin{itemize}
-    \item \textbf{Escalabilidade}:
-    \begin{itemize}
-        \item Dificuldade em tratar instâncias muito grandes
-        \item Necessidade de métodos mais eficientes para problemas dinâmicos
-        \item Limitações de memória em abordagens exatas
-    \end{itemize}
-    
-    \item \textbf{Qualidade das Soluções}:
-    \begin{itemize}
-        \item Gap ainda significativo para algumas classes de instâncias
-        \item Dificuldade em provar otimalidade
-        \item Sensibilidade a parâmetros em metaheurísticas
-    \end{itemize}
+    \item \textbf{Escalabilidade}: Apesar de a heurística lidar bem com instâncias moderadas, problemas de maior escala requerem estratégias mais elaboradas para a busca local.
+    \item \textbf{Qualidade das Soluções}: Sem uma etapa de reordenação mais agressiva (\emph{2-opt}, \emph{3-opt}, \emph{K-opt}), a rota resultante pode permanecer distante do ótimo.
+    \item \textbf{Integração de Passageiros e Janelas de Tempo}: Em cenários mais complexos, a checagem e a simulação do horário de embarque/desembarque podem demandar modificações adicionais no modelo.
 \end{itemize}
 
-\section{Direções Futuras}
-Com base nos resultados obtidos, algumas direções promissoras para pesquisas futuras incluem:
-
-\begin{itemize}
-    \item Desenvolvimento de novas técnicas de decomposição
-    \item Exploração de abordagens baseadas em aprendizado de máquina
-    \item Investigação de variantes estocásticas do problema
-    \item Adaptação de métodos para ambientes dinâmicos e tempo real
-\end{itemize}
-
-Estas direções de pesquisa são fundamentais para continuar avançando na resolução eficiente do TSP-OBP e suas variantes.
+\noindent Em suma, embora o método desenvolvido cumpra o papel de apresentar uma meta-heurística funcional, \textbf{não constitui} uma comparação exaustiva entre diferentes algoritmos, ficando evidente a necessidade de testes adicionais e melhorias de vizinhanças para ampliar o espectro de soluções viáveis.
 
 \chapter{Conclusão}
 
-Este trabalho apresentou uma análise abrangente do Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP), explorando suas características fundamentais, métodos de resolução e aplicações práticas. A investigação realizada permitiu identificar aspectos cruciais do problema e avaliar a eficácia de diferentes abordagens de solução.
+Este trabalho apresentou uma análise abrangente do Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP), evidenciando sua relevância prática em cenários de transporte e logística. A incorporação de restrições como a coleta de bônus e o transporte de passageiros ampliou significativamente a complexidade do problema em relação ao TSP clássico, exigindo abordagens mais robustas para produzir soluções de qualidade em tempo factível. 
 
-\section{Síntese dos Resultados}
+Ao longo do texto, foram discutidos desde os aspectos teóricos e a modelagem matemática até os desafios de implementação e a escolha de métodos de resolução. A explanação de heurísticas e metaheurísticas, em particular a abordagem baseada em \emph{GRASP} e \emph{VND}, demonstrou como é possível combinar fases de construção gulosa com busca local para lidar com esse tipo de problema de maneira eficiente.
 
-Os principais resultados obtidos podem ser sintetizados em três aspectos fundamentais:
-
-\begin{itemize}
-    \item \textbf{Aspectos Teóricos}:
-    \begin{itemize}
-        \item Caracterização completa da estrutura matemática do problema
-        \item Análise detalhada da complexidade computacional
-        \item Identificação de propriedades estruturais relevantes
-    \end{itemize}
-    
-    \item \textbf{Métodos de Solução}:
-    \begin{itemize}
-        \item Avaliação comparativa de diferentes abordagens
-        \item Desenvolvimento de estratégias híbridas eficientes
-        \item Análise de trade-offs entre qualidade e tempo computacional
-    \end{itemize}
-    
-    \item \textbf{Aplicações Práticas}:
-    \begin{itemize}
-        \item Identificação de cenários de aplicação relevantes
-        \item Avaliação de requisitos práticos de implementação
-        \item Análise de limitações e desafios operacionais
-    \end{itemize}
-\end{itemize}
-
-\section{Contribuições}
-
-As principais contribuições deste trabalho incluem:
-
-\begin{itemize}
-    \item Sistematização do conhecimento existente sobre o TSP-OBP
-    \item Análise comparativa abrangente dos métodos de solução
-    \item Identificação de direções promissoras para pesquisas futuras
-    \item Proposição de estratégias práticas para implementação
-\end{itemize}
 \section{Considerações Finais}
 
 O TSP-OBP representa um avanço significativo na modelagem de problemas complexos de roteamento, incorporando aspectos práticos essenciais como a coleta de bônus e o transporte de passageiros. A análise realizada demonstra que, apesar dos desafios computacionais, existem métodos eficazes para sua resolução, especialmente quando se consideram abordagens híbridas e metaheurísticas avançadas \cite{lopesfilho2019, carvalho2022}.
 
-Por fim, vale ressaltar que, apesar de a formulação geral do TSP-OBP possuir aplicações práticas, a riqueza do problema também está em sua relação profunda com conceitos fundamentais de grafos. Da perspectiva teórica, a complexidade e as dificuldades de resolução se tornam campos férteis para pesquisa, ligando-se de forma intrínseca aos estudos sobre Ciclos Hamiltonianos, Subtours e combinatória de alto nível \cite{carnielli}.
+Em termos de aplicações, a variedade de cenários em que o TSP-OBP pode ser empregado — como logística urbana ou roteirização de veículos com incentivos — ressalta a importância de investir em técnicas de otimização capazes de equilibrar múltiplos objetivos, como minimização de custo, maximização de bônus e respeito a restrições de capacidade e tempo.
 
-\subsection*{Trabalhos Futuros}
-
-As perspectivas para trabalhos futuros incluem:
-
-\begin{itemize}
-    \item \textbf{Aspectos Teóricos}:
-    \begin{itemize}
-        \item Investigar propriedades estruturais de grafos que possam facilitar a identificação de ciclos factíveis no TSP-OBP
-        \item Desenvolver novas formulações matemáticas mais compactas
-        \item Estudar casos especiais com propriedades interessantes
-    \end{itemize}
-    
-    \item \textbf{Métodos de Solução}:
-    \begin{itemize}
-        \item Desenvolver heurísticas híbridas que combinem elementos de corte (Branch and Cut) com técnicas de otimização populacional
-        \item Investigar aplicações de aprendizado de máquina
-        \item Explorar métodos de decomposição avançados
-    \end{itemize}
-    
-    \item \textbf{Aplicações Práticas}:
-    \begin{itemize}
-        \item Explorar versões do TSP-OBP em grafos não completos, onde a ausência de arestas introduz maior rigidez nas rotas possíveis
-        \item Desenvolver implementações eficientes para casos práticos
-        \item Investigar extensões para cenários dinâmicos e estocásticos
-    \end{itemize}
-\end{itemize}
-
-\section{Recomendações}
-
-Para futuros trabalhos na área, recomenda-se:
-
-\begin{itemize}
-    \item Foco em métodos híbridos que combinem diferentes estratégias
-    \item Consideração explícita de aspectos práticos de implementação
-    \item Desenvolvimento de benchmarks padronizados
-    \item Exploração de novas aplicações em contextos emergentes
-\end{itemize}
-
-O campo continua aberto para inovações tanto teóricas quanto práticas, com amplo potencial para desenvolvimento de novas técnicas e aplicações.
+Por fim, vale ressaltar que, apesar de a formulação geral do TSP-OBP possuir aplicações práticas, a riqueza do problema também está em sua relação profunda com conceitos fundamentais de grafos. Da perspectiva teórica, a complexidade e as dificuldades de resolução se tornam campos férteis para pesquisa, ligando-se de forma intrínseca aos estudos sobre ciclos hamiltonianos. Pesquisas futuras podem investigar melhorias nas estruturas de vizinhança, heurísticas híbridas e a aplicação de técnicas de aprendizado de máquina para aprimorar a seleção e o ajuste de parâmetros em meta-heurísticas, tornando o TSP-OBP cada vez mais relevante no cenário de otimização combinatória e operações. 
 
 %-------------Bibliografia------------------
 \newpage
