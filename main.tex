@@ -222,6 +222,48 @@ Alguns aspectos que contribuem para a complexidade do problema incluem:
 
 Esta complexidade inerente motiva o desenvolvimento de diferentes abordagens de solução, desde métodos exatos para instâncias pequenas até heurísticas e metaheurísticas para problemas de maior escala.
 
+\section{Prova de NP-Dificuldade do TSP-OBP}
+
+O \textbf{Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP)} é uma extensão do clássico Problema do Caixeiro Viajante (TSP), que é conhecido por ser NP-difícil \cite{goldbarg2012}. Nesta seção, apresentamos uma prova de que o TSP-OBP também pertence à classe dos problemas NP-difíceis, utilizando uma redução do TSP clássico para o TSP-OBP.
+
+\subsection{Definição do Problema}
+O TSP-OBP pode ser formalizado como o problema de determinar uma rota em um grafo completo $G = (V, E)$, onde:
+\begin{itemize}
+    \item Cada vértice $v \in V$ possui um bônus associado $b_v \geq 0$.
+    \item As arestas $(i, j) \in E$ possuem custos $c_{ij}$ que representam a distância ou o tempo de viagem.
+    \item Existem restrições relacionadas ao transporte de passageiros e janelas de tempo.
+\end{itemize}
+
+O objetivo do TSP-OBP é maximizar a coleta de bônus e minimizar os custos de viagem, respeitando as restrições de capacidade e tempo.
+
+\subsection{Redução do TSP Clássico para o TSP-OBP}
+Para provar que o TSP-OBP é NP-difícil, mostramos que o TSP clássico é um caso particular do TSP-OBP. Consideremos a seguinte construção:
+\begin{itemize}
+    \item Seja uma instância do TSP definida por um grafo completo $G = (V, E)$ com custos $c_{ij}$ associados às arestas.
+    \item Definimos uma instância equivalente do TSP-OBP como segue:
+    \begin{itemize}
+        \item Para cada vértice $v \in V$, atribuímos $b_v = 0$ (nenhum bônus é coletado).
+        \item Não consideramos passageiros ($P = \emptyset$) e janelas de tempo ($t_{v\_min} = -\infty$, $t_{v\_max} = \infty$).
+        \item O objetivo é minimizar os custos de viagem $\sum_{(i, j) \in E} c_{ij} x_{ij}$.
+    \end{itemize}
+\end{itemize}
+
+Nesta configuração, o TSP-OBP reduz-se ao problema clássico do TSP, onde buscamos o ciclo hamiltoniano de menor custo. Como o TSP clássico é NP-difícil \cite{goldbarg2012}, segue que o TSP-OBP, que generaliza o TSP, também é NP-difícil.
+
+\subsection{Pertinência à Classe NP}
+O TSP-OBP pertence à classe NP porque:
+\begin{itemize}
+    \item Dada uma solução candidata (uma rota e decisões de coleta de bônus e transporte de passageiros), é possível verificar em tempo polinomial se a solução é válida e calcular seu custo total.
+    \item A verificação envolve:
+    \begin{itemize}
+        \item Checar se a rota visita todos os vértices obrigatórios e respeita as restrições de janelas de tempo e capacidade.
+        \item Calcular a soma dos bônus coletados e dos custos de viagem.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Conclusão}
+Como o TSP-OBP é uma generalização do TSP, que é NP-difícil, e pertence à classe NP, concluímos que o TSP-OBP é NP-difícil. Esta complexidade reforça a necessidade de métodos heurísticos e metaheurísticos para sua resolução prática, conforme explorado neste trabalho.
+
 \chapter{Modelagem Matemática}
 
 \section{Variáveis de Decisão}
