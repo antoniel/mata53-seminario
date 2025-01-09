@@ -224,45 +224,39 @@ Esta complexidade inerente motiva o desenvolvimento de diferentes abordagens de 
 
 \section{Prova de NP-Dificuldade do TSP-OBP}
 
-O \textbf{Problema do Caixeiro Viajante com Coleta de Bônus e Passageiros (TSP-OBP)} é uma extensão do clássico Problema do Caixeiro Viajante (TSP), que é conhecido por ser NP-difícil \cite{goldbarg2012}. Nesta seção, apresentamos uma prova de que o TSP-OBP também pertence à classe dos problemas NP-difíceis, utilizando uma redução do TSP clássico para o TSP-OBP.
+Demonstra-se que o problema \textbf{TSP-OBP (Traveling Salesman Problem with Onboard Passengers)} é NP-difícil por meio de uma redução polinomial a partir do \textbf{Problema do Caixeiro Viajante (PCV)}, que já é conhecido por ser NP-difícil.
 
-\subsection{Definição do Problema}
-O TSP-OBP pode ser formalizado como o problema de determinar uma rota em um grafo completo $G = (V, E)$, onde:
+
+\subsection{Instância do PCV}
+
+Considere uma instância qualquer do PCV com um grafo \(G = (V, A)\), onde \(V\) é o conjunto de vértices e \(A\) é o conjunto de arestas. Suponha que \(H\) é uma solução ótima para esta instância do PCV.
+
+\subsection{Transformação para o TSP-OBP}
+
+Cria-se uma nova instância do TSP-OBP, \(G' = (V, A, P)\), baseada em \(G\), da seguinte forma:
+
 \begin{itemize}
-    \item Cada vértice $v \in V$ possui um bônus associado $b_v \geq 0$.
-    \item As arestas $(i, j) \in E$ possuem custos $c_{ij}$ que representam a distância ou o tempo de viagem.
-    \item Existem restrições relacionadas ao transporte de passageiros e janelas de tempo.
+    \item Cada vértice em \(G'\), exceto o vértice de origem em \(H\), recebe um bônus duas vezes maior do que o custo da maior aresta em \(G\).
+    \item O tempo de coleta em cada vértice é zero.
+    \item O tempo para percorrer qualquer aresta e a capacidade do veículo são zero.
+    \item Não existem passageiros disponíveis para embarque, ou seja, o conjunto \(P\) é vazio.
 \end{itemize}
 
-O objetivo do TSP-OBP é maximizar a coleta de bônus e minimizar os custos de viagem, respeitando as restrições de capacidade e tempo.
+\section{Análise da Redução}
 
-\subsection{Redução do TSP Clássico para o TSP-OBP}
-Para provar que o TSP-OBP é NP-difícil, mostramos que o TSP clássico é um caso particular do TSP-OBP. Consideremos a seguinte construção:
+\subsection{Tempo Polinomial}
+
+A transformação de \(G\) para \(G'\) pode ser feita em tempo polinomial.
+
+\subsection{Relação entre Soluções}
+
 \begin{itemize}
-    \item Seja uma instância do TSP definida por um grafo completo $G = (V, E)$ com custos $c_{ij}$ associados às arestas.
-    \item Definimos uma instância equivalente do TSP-OBP como segue:
-    \begin{itemize}
-        \item Para cada vértice $v \in V$, atribuímos $b_v = 0$ (nenhum bônus é coletado).
-        \item Não consideramos passageiros ($P = \emptyset$) e janelas de tempo ($t_{v\_min} = -\infty$, $t_{v\_max} = \infty$).
-        \item O objetivo é minimizar os custos de viagem $\sum_{(i, j) \in E} c_{ij} x_{ij}$.
-    \end{itemize}
+    \item Se existe uma solução ótima \(H\) para o PCV em \(G\), então esta mesma solução também é uma solução válida para o TSP-OBP em \(G'\), uma vez que a solução ótima do PCV é um ciclo hamiltoniano que visita todos os vértices, e neste caso específico os custos de coleta e transporte de passageiros não impactam o resultado.
+    \item Por outro lado, se existisse uma solução para o TSP-OBP em \(G'\) melhor do que a solução do PCV em \(G\), isso significaria que o PCV não era NP-difícil.
 \end{itemize}
 
-Nesta configuração, o TSP-OBP reduz-se ao problema clássico do TSP, onde buscamos o ciclo hamiltoniano de menor custo. Como o TSP clássico é NP-difícil \cite{goldbarg2012}, segue que o TSP-OBP, que generaliza o TSP, também é NP-difícil.
-
-\subsection{Pertinência à Classe NP}
-O TSP-OBP pertence à classe NP porque:
-\begin{itemize}
-    \item Dada uma solução candidata (uma rota e decisões de coleta de bônus e transporte de passageiros), é possível verificar em tempo polinomial se a solução é válida e calcular seu custo total.
-    \item A verificação envolve:
-    \begin{itemize}
-        \item Checar se a rota visita todos os vértices obrigatórios e respeita as restrições de janelas de tempo e capacidade.
-        \item Calcular a soma dos bônus coletados e dos custos de viagem.
-    \end{itemize}
-\end{itemize}
-
-\subsection{Conclusão}
-Como o TSP-OBP é uma generalização do TSP, que é NP-difícil, e pertence à classe NP, concluímos que o TSP-OBP é NP-difícil. Esta complexidade reforça a necessidade de métodos heurísticos e metaheurísticos para sua resolução prática, conforme explorado neste trabalho.
+\subsection{Complexidade}
+Dado que o PCV é NP-difícil e que o TSP-OBP pode ser reduzido polinomialmente ao PCV , o TSP-OBP também é NP-difícil. Esta prova estabelece que o TSP-OBP herda a complexidade do PCV, o que significa que encontrar uma solução ótima para o TSP-OBP em tempo polinomial é improvável.
 
 \chapter{Modelagem Matemática}
 
