@@ -1,0 +1,217 @@
+\documentclass[aspectratio=169,xcolor=table]{beamer}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lipsum, lmodern}
+\usepackage{csquotes}
+\usepackage{xcolor}
+\usepackage[portuguese]{babel}
+\usetheme{DCC}
+\graphicspath{{imgs/}}
+
+\author{Antoniel Magalhães, João Leahy, Luis Felipe}
+\title{Problema do Caixeiro Viajante com Bônus e Passageiros (TSP-OBP)}
+\institute{Universidade Federal da Bahia}
+\date{\today}
+
+\begin{document}
+
+% Slide inicial: Título
+\begin{frame}[plain,noframenumbering]
+    \titlepage
+\end{frame}
+
+% Agenda
+\begin{frame}{Agenda}
+    \tableofcontents
+\end{frame}
+
+\section{Introdução}
+
+% Introdução ao Problema
+\begin{frame}{O que é o TSP-OBP e suas Variações}
+    \begin{itemize}
+        \item \textbf{O que é o TSP-OBP?}
+        \begin{itemize}
+            \item Extensão do clássico Problema do Caixeiro Viajante (TSP).
+            \item Combina:
+            \begin{itemize}
+                \item Coleta de bônus em vértices específicos.
+                \item Transporte de passageiros com restrições (capacidade, tempo, origem-destino).
+            \end{itemize}
+            \item Aplicações: 
+            \begin{itemize}
+                \item Logística e transporte sob demanda.
+                \item Roteirização de veículos com incentivos.
+            \end{itemize}
+        \end{itemize}
+        \item \textbf{Variações do Problema:}
+        \begin{itemize}
+            \item \textbf{PCV-CB (Coleta de Bônus)}:  
+            Visitam-se locais para coletar bônus, equilibrando custos e prêmios.
+            \item \textbf{PCV-P (Passageiros)}:  
+            Integra transporte de passageiros, compartilhando custos da viagem.
+            \item \textbf{Problema do Orienteering (OP)}:  
+            Maximização de prêmios coletados dentro de um limite de tempo.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Fundamentação Teórica}
+
+
+% Complexidade NP-difícil
+\begin{frame}{Complexidade NP-difícil}
+    \begin{itemize}
+        \item O TSP-OBP é um problema \textbf{NP-difícil}, o que implica que:
+        \begin{itemize}
+            \item Não existe algoritmo conhecido que garanta a solução ótima em tempo polinomial para todas as instâncias.
+            \item A inclusão de bônus e passageiros adiciona novas dimensões de complexidade combinatória.
+        \end{itemize}
+        \item Consequências da complexidade:
+        \begin{itemize}
+            \item Soluções exatas são inviáveis para instâncias grandes.
+            \item É necessário o uso de \textbf{heurísticas e meta-heurísticas}, que buscam soluções boas em tempo razoável.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Função Objetivo
+\begin{frame}{Função Objetivo no TSP-OBP}
+    \begin{itemize}
+        \item A função objetivo busca equilibrar dois objetivos principais:
+        \begin{itemize}
+            \item \textbf{Maximizar bônus coletados:} Incentiva visitar vértices com prêmios adicionais.
+            \item \textbf{Minimizar custos de deslocamento:} Reduz distâncias percorridas e custos operacionais.
+        \end{itemize}
+        \item Formulação matemática:
+        \[
+        \text{max} \, \sum_{i \in V} b_i y_i - \alpha \sum_{(i,j) \in E} c_{ij} x_{ij}
+        \]
+        \item Importância em otimização multiobjetivo:
+        \begin{itemize}
+            \item Permite modelar conflitos entre diferentes metas, como eficiência e rentabilidade.
+            \item Essencial para resolver problemas com múltiplas prioridades, como logística e transporte.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Metodologia}
+% Métodos Considerados
+\begin{frame}{Métodos Considerados e Não Selecionados}
+    \begin{itemize}
+        \item \textbf{Heurística de Carregamento (HC)}:
+        \begin{itemize}
+            \item Verifica a disponibilidade de assentos para passageiros em um determinado trecho.
+            \item Usada para determinar se um passageiro pode ser embarcado em um trecho da rota.
+        \end{itemize}
+        \item \textbf{NVH (Neighborhood Variable Heuristic)}:
+        \begin{itemize}
+            \item Busca a melhor solução explorando diferentes vizinhanças de uma solução inicial.
+        \end{itemize}
+        \item \textbf{VND (Variable Neighborhood Descent)}:
+        \begin{itemize}
+            \item Utiliza diferentes estruturas de vizinhança para explorar o espaço de soluções.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Algoritmos Selecionados}
+
+% Algoritmo GRASP
+\begin{frame}{Abordagem Baseada em GRASP}
+    \begin{itemize}
+        \item \textbf{Fase de Construção Semi-Gulosa}:
+        \begin{itemize}
+            \item Seleção de vértices com base em custos e bônus.
+            \item Adição iterativa à rota.
+        \end{itemize}
+        \item \textbf{Fase de Busca Local com VND}:
+        \begin{itemize}
+            \item Troca, remoção e reinserção de passageiros.
+            \item Refinamento da solução inicial.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Pseudocódigo}
+
+% Pseudocódigo GRASP
+\begin{frame}{Pseudocódigo do GRASP para o TSP-OBP}
+    \begin{algorithm}[H]
+        \caption{GRASP para o TSP-OBP}
+        \begin{algorithmic}
+            \Require Parâmetros: $max\_iter$, $max\_no\_improve$
+            \Ensure Melhor solução encontrada
+            \State $best\_solution \gets \emptyset$
+            \State $best\_cost \gets \infty$
+            \For{$i \gets 1$ até $max\_iter$}
+                \State $solution \gets ConstructSolution()$
+                \State $solution \gets LocalSearch(solution)$
+                \If{$Cost(solution) < best\_cost$}
+                    \State $best\_solution \gets solution$
+                    \State $best\_cost \gets Cost(solution)$
+                \EndIf
+            \EndFor
+            \State \Return $best\_solution$
+        \end{algorithmic}
+    \end{algorithm}
+\end{frame}
+
+\section{Outras Perspectivas Algorítmicas}
+
+% Heurísticas e Meta-Heurísticas
+\begin{frame}{Heurísticas e Meta-Heurísticas Adicionais}
+    \begin{itemize}
+        \item \textbf{Heurística Gulosa}:
+        \begin{itemize}
+            \item Simplicidade, mas frequentemente limitada a soluções subótimas.
+        \end{itemize}
+        \item \textbf{Simulated Annealing (SA)}:
+        \begin{itemize}
+            \item Baseado no recozimento metálico.
+            \item Equilibra exploração e intensificação com alto custo computacional.
+        \end{itemize}
+        \item \textbf{Algoritmos Genéticos (GA)}:
+        \begin{itemize}
+            \item Usa evolução natural para buscar soluções.
+            \item Requer ajuste fino de parâmetros.
+        \end{itemize}
+        \item \textbf{Ant Colony Optimization (ACO)}:
+        \begin{itemize}
+            \item Baseado no comportamento de formigas reais.
+            \item Eficiente em problemas combinatórios, como roteamento e escalonamento.
+            \item Requer ajustes de parâmetros para equilíbrio entre exploração e intensificação.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Conclusão}
+
+% Conclusão e Próximos Passos
+\begin{frame}{Conclusão}
+    \begin{itemize}
+        \item O TSP-OBP é uma extensão relevante do TSP clássico, combinando desafios adicionais como a coleta de bônus e transporte de passageiros.
+        \item A complexidade do problema exige o uso de algoritmos híbridos e meta-heurísticas, como GRASP e VND, que demonstram eficiência prática.
+        \item Aplicações em logística, transporte sob demanda e roteirização tornam o problema altamente relevante em contextos reais.
+        \item A abordagem discutida ilustra como é possível equilibrar múltiplos objetivos, como custos, prêmios e restrições de transporte.
+    \end{itemize}
+\end{frame}
+
+\section{Referências}
+
+% Referências
+\begin{frame}{Referências}
+    \begin{itemize}
+        \item Lopes Filho, J. G. (2019). Problema do Caixeiro Viajante com Coleta Opcional de Bônus, Tempo de Coleta e Passageiros. Tese de Doutorado, Universidade Federal do Rio Grande do Norte, Natal-RN.
+        
+        \item Carvalho, M. R. (2022). Métodos Heurísticos para o TSP-OBP. Journal of Combinatorial Optimization.
+        
+        \item Carnielli, W. and Epstein, R. (2017). Computabilidade e Funções Computáveis. UNESP.
+        
+        \item Goldbarg, M. and Goldbarg, E. (2012). Grafos: Conceitos, algoritmos e aplicações. Elsevier.
+    \end{itemize}
+\end{frame}
+
+\end{document}
