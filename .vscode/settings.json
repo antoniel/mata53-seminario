@@ -4,15 +4,26 @@
     "terminal.background": "#00000000"
   },
   "files.exclude": {
-    "main.aux": false,
-    "main.bbl": false,
-    "main.blg": false,
-    "main.fdb_latexmk": false,
-    "main.fls": false,
-    "main.log": false,
-    "main.out": false,
-    "main.toc": false,
-    "main.synctex.gz": false,
-    ".gitignore": false
+    "main.aux": true,
+    "main.bbl": true,
+    "main.blg": true,
+    "main.fdb_latexmk": true,
+    "main.fls": true,
+    "main.log": true,
+    "main.out": true,
+    "main.toc": true,
+    "main.synctex.gz": true,
+    ".gitignore": true,
+    "slides/main.aux": true,
+    "slides/main.bbl": true,
+    "slides/main.blg": true,
+    "slides/main.fdb_latexmk": true,
+    "slides/main.fls": true,
+    "slides/main.log": true,
+    "slides/main.nav": true,
+    "slides/main.out": true,
+    "slides/main.snm": true,
+    "slides/main.synctex.gz": true,
+    "slides/main.toc": true
   }
 }
